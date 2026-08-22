@@ -2144,14 +2144,31 @@ function sendChat() {
   }, 1200 + Math.random() * 800);
 }
 
+/* ===== إرسال الاستمارات إلى البريد (FormSubmit) ===== */
+const MAIL_ENDPOINT = 'https://formsubmit.co/ajax/bytelaman257@gmail.com';
+function sendMail(subject, form) {
+  const data = { _subject: subject, _template: 'table', _captcha: 'false' };
+  form.querySelectorAll('input:not([type=hidden]),select,textarea').forEach(function(el){
+    const key = el.getAttribute('aria-label') || el.placeholder || el.type;
+    if (el.value) data[key] = el.value;
+  });
+  return fetch(MAIL_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(data)
+  }).then(r => r.json()).catch(() => {});
+}
+
 /* ===== نموذج التواصل ===== */
 function handleContact(e) {
   e.preventDefault();
-  document.getElementById('contactForm').style.display = 'none';
+  const f = document.getElementById('contactForm');
+  sendMail('رسالة جديدة من نموذج التواصل – بيت الأمان', f);
+  f.style.display = 'none';
   document.getElementById('contactSuccess').classList.remove('hidden');
   setTimeout(() => {
-    document.getElementById('contactForm').style.display = '';
-    document.getElementById('contactForm').reset();
+    f.style.display = '';
+    f.reset();
     document.getElementById('contactSuccess').classList.add('hidden');
   }, 5000);
 }
@@ -2159,7 +2176,9 @@ function handleContact(e) {
 /* ===== نموذج طلب دليل المستثمر ===== */
 function handleGuide(e) {
   e.preventDefault();
-  e.target.reset();
+  const f = e.target;
+  sendMail('طلب جديد لدليل المستثمر الأجنبي', f);
+  f.reset();
   showToast(tt('guide'));
   window.open('guide.html', '_blank');
 }
@@ -2195,12 +2214,14 @@ document.addEventListener('keydown', e => {
 });
 function handleForeign(e) {
   e.preventDefault();
-  document.getElementById('foreignForm').classList.add('hidden');
+  const f = document.getElementById('foreignForm');
+  sendMail('طلب تملك / استشارة من مستثمر أجنبي', f);
+  f.classList.add('hidden');
   document.getElementById('foreignSuccess').classList.remove('hidden');
   showToast(tt('foreign'));
   setTimeout(() => {
-    document.getElementById('foreignForm').classList.remove('hidden');
-    document.getElementById('foreignForm').reset();
+    f.classList.remove('hidden');
+    f.reset();
     document.getElementById('foreignSuccess').classList.add('hidden');
     closeForeignModal();
   }, 4500);

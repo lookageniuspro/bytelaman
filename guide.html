@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>دليل المستثمر الأجنبي للتملك العقاري والاستثماري – BYTELAMAN بيت الأمان</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
 :root{
   --gold:#A07C2A;--gold-l:#C9A84C;--gold-xl:#E8D48B;--ink:#1F2430;--muted:#5B6472;
@@ -64,22 +65,42 @@ ul.tick li::before{content:'\2713';position:absolute;right:0;top:0;width:19px;he
 footer.end{background:#14100A;color:#CBBE97;text-align:center;padding:30px 24px;font-size:.82rem}
 footer.end b{color:var(--gold-l)}
 
-/* ===== زر الطباعة ===== */
-.print-bar{position:fixed;top:18px;left:18px;z-index:50}
+/* ===== زر الطباعة وشريط اللغات ===== */
+.print-bar{position:fixed;top:18px;left:18px;z-index:50;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .print-btn{
   display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border:none;border-radius:30px;
   background:linear-gradient(135deg,#A07C2A,#C9A84C,#E8D48B);color:#14100A;font-family:'Cairo';
   font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 6px 22px rgba(160,124,42,.35);
 }
 .print-btn:hover{transform:translateY(-1px)}
+.lang-bar{display:flex;background:#14100A;border:1px solid rgba(201,168,76,.45);border-radius:30px;padding:4px;gap:2px}
+.lang-b{
+  border:none;border-radius:20px;padding:7px 14px;font-family:'Cairo';font-weight:700;font-size:12px;
+  background:transparent;color:#D8CBA8;cursor:pointer;transition:all .25s;
+}
+.lang-b:hover{color:var(--gold-xl)}
+.lang-b.active{background:linear-gradient(135deg,#A07C2A,#C9A84C);color:#14100A}
+
+/* ===== ضبط الاتجاه LTR ===== */
+html[dir="ltr"] .note{border-right:none;border-left:4px solid var(--gold-l)}
+html[dir="ltr"] ul.tick li{padding-right:0;padding-left:28px}
+html[dir="ltr"] ul.tick li::before{right:auto;left:0}
+html[dir="ltr"] .step{padding-right:0;padding-left:56px}
+html[dir="ltr"] .step::before{right:auto;left:0}
+html[dir="ltr"] th,html[dir="ltr"] td{text-align:left}
 
 @media print{
-  @page{size:A4;margin:14mm}
-  body{background:#fff}
+  @page{size:A4;margin:12mm}
+  body{background:#fff;font-size:.95rem;line-height:1.7}
   .print-bar{display:none!important}
-  header.cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  section{page-break-inside:avoid;padding:20px 0}
+  header.cover{-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:42px 22px}
+  header.cover .key-mark{width:42px;margin-bottom:12px}
+  .wrap{max-width:none;padding:10px 0 0}
+  th,td,.step::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  /* تقسيم ذكي: نسمح للنص بالتدفق الطبيعي عبر الصفحات، ونمنع القطع داخل العناصر الصغيرة فقط */
+  h2,h3{break-after:avoid-page;page-break-after:avoid}
+  table,.card,.note,.contact-item,.step,tr,li{break-inside:avoid;page-break-inside:avoid}
+  section{padding:16px 0}
   a{text-decoration:none;color:inherit}
 }
 </style>
@@ -87,6 +108,12 @@ footer.end b{color:var(--gold-l)}
 <body>
 
 <div class="print-bar no-print">
+  <div class="lang-bar" id="guideLangBar">
+    <button type="button" class="lang-b" data-lang="ar" onclick="setLang('ar')">عربي</button>
+    <button type="button" class="lang-b" data-lang="en" onclick="setLang('en')">EN</button>
+    <button type="button" class="lang-b" data-lang="fr" onclick="setLang('fr')">FR</button>
+    <button type="button" class="lang-b" data-lang="de" onclick="setLang('de')">DE</button>
+  </div>
   <button class="print-btn" onclick="window.print()"><i class="fas fa-file-pdf"></i> طباعة / حفظ كـ PDF</button>
 </div>
 
@@ -251,5 +278,147 @@ footer.end b{color:var(--gold-l)}
   Your Key to Tomorrow's Wealth
 </footer>
 
+<script>
+/* ===== نظام اللغات الأربع لدليل المستثمر ===== */
+var LANG = 'ar';
+try { LANG = localStorage.getItem('bl_lang') || 'ar'; } catch (e) {}
+if (!['ar','en','fr','de'].includes(LANG)) LANG = 'ar';
+
+var TITLES = {
+  ar:'دليل المستثمر الأجنبي للتملك العقاري والاستثماري – BYTELAMAN بيت الأمان',
+  en:'Foreign Investor Guide – Real Estate Ownership & Investment | BYTELAMAN',
+  fr:'Guide de l’investisseur étranger – Propriété & investissement immobilier | BYTELAMAN',
+  de:'Auslandsinvestoren-Leitfaden – Immobilienbesitz & Investitionen | BYTELAMAN'
+};
+
+/* القاموس: [en, fr, de] — العربية هي أصل الصفحة */
+var D = {
+'دليل المستثمر الأجنبي':['The Foreign Investor Guide','Le Guide de l’investisseur étranger','Der Leitfaden für ausländische Investoren'],
+'للتملك العقاري والاستثماري':['to Real Estate Ownership & Investment','de propriété et d’investissement immobilier','für Immobilientum und Investitionen'],
+'صادر عن شركة بيت الأمان للاستثمار العقاري والسياحي':['Issued by Bayt Al-Aman for Real Estate & Tourism Investment','Publié par Bayt Al-Aman, investissements immobiliers et touristiques','Herausgegeben von Bayt Al-Aman für Immobilien- und Tourismusinvestitionen'],
+'الإصدار 2026':['Edition 2026','Édition 2026','Ausgabe 2026'],
+'مصر · الخليج العربي · أوروبا':['Egypt · Arab Gulf · Europe','Égypte · Golfe arabe · Europe','Ägypten · Arabischer Golf · Europa'],
+'نسخة مجانية للمستثمرين':['Free copy for investors','Exemplaire gratuit pour les investisseurs','Kostenlose Ausgabe für Investoren'],
+
+'المقدمة والرسالة الترحيبية':['Introduction & Welcome Message','Introduction et message de bienvenue','Einleitung und Willkommensbotschaft'],
+'نرحب بكم في دليلكم الموثوق للتملك والاستثمار العقاري. تم إعداد هذا الدليل ليكون مرجعاً قانونياً وإجرائياً محايداً للأجانب والمغتربين الراغبين في امتلاك وتطوير وإدارة العقارات السكنية والتجارية والمنتجعات داخل جمهورية مصر العربية ودول الخليج العربي والدول الأوروبية بأمان تام.':['Welcome to your trusted guide to real estate ownership and investment. This guide has been prepared as a neutral legal and procedural reference for foreigners and expatriates wishing to own, develop and manage residential, commercial and resort properties within the Arab Republic of Egypt, the Arab Gulf states and European countries — with complete peace of mind.','Bienvenue dans votre guide de confiance pour l’acquisition et l’investissement immobilier. Ce guide a été conçu comme une référence juridique et procédurale neutre pour les étrangers et les expatriés souhaitant posséder, développer et gérer des biens résidentiels, commerciaux et balnéaires en République arabe d’Égypte, dans les pays du Golfe et en Europe — en toute sérénité.','Willkommen zu Ihrem verlässlichen Leitfaden rund um Immobilientum und Investitionen. Dieser Leitfaden wurde als neutrale rechtliche und prozedurale Referenz für Ausländer und Expatriates erstellt, die Wohn-, Gewerbe- und Ferienimmobilien in der Arabischen Republik Ägypten, den Golfstaaten und Europa sicher besitzen, entwickeln und verwalten möchten.'],
+'في بيت الأمان لا نلتزم بحدود معارضنا أو مشاريعنا فقط — إذا كان لديك عقار معيّن في ذهنك في أي مكان، أو ترغب في البحث عن فرصة بمواصفات خاصة في السوق المفتوح: أنت تختار العقار (أو نحدده معاً)، ونحن نتولى الفحص والشراء والتسجيل والإدارة والتطوير.':['At Bayt Al-Aman we are not limited to our own showrooms or projects only — if you have a specific property in mind anywhere, or wish to search for an opportunity with special specifications on the open market: you choose the property (or we identify it together), and we handle inspection, purchase, registration, management and development.','Chez Bayt Al-Aman, nous ne nous limitons pas à nos showrooms ou à nos projets — si vous avez un bien précis en tête où que ce soit, ou si vous cherchez une opportunité aux caractéristiques particulières sur le marché ouvert : vous choisissez le bien (ou nous l’identifions ensemble), et nous prenons en charge l’inspection, l’achat, l’enregistrement, la gestion et le développement.','Bei Bayt Al-Aman beschränken wir uns nicht auf unsere eigenen Projekte — wenn Sie eine bestimmte Immobilie im Kopf haben oder eine Gelegenheit mit besonderen Merkmalen am offenen Markt suchen: Sie wählen die Immobilie (oder wir finden sie gemeinsam), und wir übernehmen Prüfung, Kauf, Registrierung, Verwaltung und Entwicklung.'],
+'هام:':['Important:','Important :','Wichtig:'],
+'هذا الدليل لأغراض إرشادية عامة. تختلف النسب والحدود القانونية بين الدول وتخضع للتغيير؛ يُرجى اعتماد الاستشارة القانونية المخصصة قبل أي التزام مالي.':['This guide is for general guidance only. Legal ratios and limits differ between countries and are subject to change; please rely on dedicated legal advice before any financial commitment.','Ce guide est fourni à titre indicatif général. Les ratios et limites légales varient selon les pays et peuvent évoluer ; veuillez vous appuyer sur un conseil juridique dédié avant tout engagement financier.','Dieser Leitfaden dient nur der allgemeinen Orientierung. Rechtliche Quoten und Grenzen unterscheiden sich je nach Land und können sich ändern; verlassen Sie sich vor jeder finanziellen Zusage auf eine individuelle Rechtsberatung.'],
+
+'الإطار القانوني والضمانات الدولية':['Legal Framework & International Guarantees','Cadre juridique et garanties internationales','Rechtsrahmen und internationale Garantien'],
+'المجال':['Area','Domaine','Bereich'],
+'الحماية الممنوحة للمستثمر':['Protection granted to the investor','Protection accordée à l’investisseur','Schutz, der dem Investor gewährt wird'],
+'التملك والتوثيق الرسمي':['Ownership & Official Documentation','Propriété et documentation officielle','Eigentum & offizielle Dokumentation'],
+'تسجيل العقار بأسماء الأشخاص الطبيعيين أو الاعتباريين (الشركات) بشكل موثق لدى الجهات الحكومية الرسمية (الشهر العقاري / هيئات الاستثمار).':['Registering the property in the names of natural or legal persons (companies), officially documented with government authorities (Real Estate Registry / Investment Authorities).','Enregistrement du bien au nom de personnes physiques ou morales (sociétés), documenté officiellement auprès des autorités gouvernementales (registre foncier / autorités d’investissement).','Registrierung der Immobilie auf natürliche oder juristische Personen (Gesellschaften), offiziell dokumentiert bei den Regierungsbehörden (Grundbuchamt / Investitionsbehörden).'],
+'حرية تحويل الأموال':['Freedom of Funds Transfer','Liberté de transfert des fonds','Freier Kapitaltransfer'],
+'ضمان تحويل رؤوس الأموال والعوائد الإيجارية وأرباح إعادة البيع إلى الحسابات البنكية الخارجية بالعملات الأجنبية وفق القوانين المحلية.':['Guaranteed transfer of capital, rental income and resale profits to foreign bank accounts in foreign currencies in accordance with local laws.','Transfert garanti du capital, des revenus locatifs et des bénéfices de revente vers des comptes bancaires étrangers en devises, conformément aux lois locales.','Garantierter Transfer von Kapital, Mieteinnahmen und Wiederverkaufsgewinnen auf ausländische Bankkonten in Fremdwährungen gemäß den örtlichen Gesetzen.'],
+'الحماية التعاقدية':['Contractual Protection','Protection contractuelle','Vertraglicher Schutz'],
+'صياغة عقود بيع وشراء محكمة تعتمد أحدث المعايير الدولية وبنود الضمان، مع خيار التحكيم التجاري لحفظ الحقوق.':['Drafting rigorous sale and purchase contracts based on the latest international standards and warranty clauses, with the option of commercial arbitration to preserve rights.','Rédaction de contrats de vente rigoureux fondés sur les normes internationales les plus récentes et des clauses de garantie, avec possibilité d’arbitrage commercial pour préserver vos droits.','Erstellung solider Kauf- und Verkaufsverträge nach neuesten internationalen Standards mit Garantieklauseln sowie optionaler Handelsarbitration zur Wahrung der Rechte.'],
+'المعاملة الوطنية':['National Treatment','Traitement national','Inländergleichbehandlung'],
+'ضمان حقوق التملك والتصرف والمساواة الإجرائية أمام كافة الهيئات والمؤسسات الرسمية في نطاق ما تسمح به تشريعات كل دولة.':['Guaranteed ownership and disposal rights and procedural equality before all official bodies and institutions within what each country’s legislation allows.','Garantie des droits de propriété et de disposition et égalité procédurale devant tous les organismes officiels, dans la limite permise par la législation de chaque pays.','Garantierte Eigentums- und Verfügungsrechte sowie Gleichbehandlung im Verfahren vor allen offiziellen Stellen, im Rahmen der Gesetzgebung jedes Landes.'],
+'أبرز المحطات التشريعية':['Key Legislative Milestones','Principales étapes législatives','Wichtige gesetzliche Meilensteine'],
+'قوانين تملك غير المواطنين في مصر (بما يشمل مناطق التملك الحر Freehold والحدود القصوى للمساحات).':['Non-citizens ownership laws in Egypt (including freehold zones and maximum area limits).','Lois égyptiennes sur la propriété des non-ressortissants (zones en pleine propriété et limites maximales de superficie incluses).','Ägyptische Gesetze zum Immobilienerwerb durch Ausländer (einschließlich Freehold-Zonen und maximaler Flächenbegrenzungen).'],
+'أنظمة التملك في دول الخليج (مناطق محددة بالتملك الكامل للأجانب في الإمارات والسعودية وقطر وعُمان والبحرين والكويت).':['Ownership systems in Gulf countries (designated areas with full foreign ownership in the UAE, Saudi Arabia, Qatar, Oman, Bahrain and Kuwait).','Régimes de propriété dans les pays du Golfe (zones désignées en pleine propriété étrangère aux Émirats, en Arabie saoudite, au Qatar, à Oman, à Bahreïn et au Koweït).','Eigentumsregelungen in den Golfstaaten (ausgewiesene Zonen mit vollem Ausländereigentum in den VAE, in Saudi-Arabien, Katar, Oman, Bahrain und Kuwait).'],
+'أنظمة الإقامة الذهبية مقابل العقار في أوروبا (إسبانيا، اليونان، وغيرها) وتركيا.':['Golden residency programs in exchange for real estate in Europe (Spain, Greece and others) and Turkey.','Programmes de résidence dorée contre immobilier en Europe (Espagne, Grèce, etc.) et en Turquie.','Goldene Aufenthaltsprogramme gegen Immobilien in Europa (Spanien, Griechenland u.a.) und in der Türkei.'],
+
+'خطوات التملك الاستثماري — رحلة المستثمر خطوة بخطوة':['Investment Ownership Steps — The Investor Journey Step by Step','Étapes de l’acquisition immobilière — le parcours de l’investisseur pas à pas','Schritte zum Immobilienerwerb — die Reise des Investors Schritt für Schritt'],
+'التحديد والتدقيق القانوني (Due Diligence)':['Selection & Legal Due Diligence','Sélection et vérification juridique (Due Diligence)','Auswahl & rechtliche Prüfung (Due Diligence)'],
+'فحص الوضع القانوني للعقار وتسلسل الملكية والتأكد من خلوه من أي نزاعات أو رهونات بنكية.':['Examining the property’s legal status and chain of title and confirming it is free of disputes or bank mortgages.','Examen de la situation juridique du bien et de la chaîne de titularité, et confirmation de l’absence de litiges ou d’hypothèques bancaires.','Prüfung des rechtlichen Status der Immobilie und der Eigentumskette sowie Bestätigung, dass keine Streitigkeiten oder Bankhypotheken bestehen.'],
+'التأكد من التراخيص الصادرة ومطابقتها للمخططات العمرانية والرسمية.':['Verifying issued licenses and their compliance with official urban plans.','Vérification des licences délivrées et de leur conformité aux plans d’urbanisme officiels.','Prüfung der erteilten Genehmigungen und deren Übereinstimmung mit den offiziellen Bebauungsplänen.'],
+'تقييم السوق والتفاوض وسيطاً محايداً للوصول إلى أفضل سعر عادل.':['Market valuation and negotiation as a neutral broker to reach the best fair price.','Évaluation du marché et négociation en intermédiaire neutre pour obtenir le meilleur prix juste.','Marktbewertung und Verhandlung als neutraler Makler, um den besten fairen Preis zu erzielen.'],
+'المعاملات المالية والمصرفية':['Financial & Banking Transactions','Transactions financières et bancaires','Finanz- und Banktransaktionen'],
+'فتح حساب بنكي استثماري مخصص باسم العميل.':['Opening a dedicated investment bank account in the client’s name.','Ouverture d’un compte bancaire d’investissement dédié au nom du client.','Eröffnung eines eigenen Investmentbankkontos auf den Namen des Kunden.'],
+'تحويل المبالغ عبر الجهاز المصرفي المعتمد رسمياً لضمان توثيق مصدر الأموال وإثبات الجدية.':['Transferring amounts through the officially licensed banking system to document the source of funds and prove seriousness.','Transfert des montants via le système bancaire officiellement agréé pour documenter la provenance des fonds et prouver le sérieux.','Überweisung der Beträge über das offiziell zugelassene Bankensystem zur Dokumentation der Geldherkunft und zum Nachweis der Seriosität.'],
+'التعاقد والشهر العقاري':['Contracting & Real Estate Registry','Contractualisation et registre foncier','Vertragsabschluss & Grundbuchamt'],
+'صياغة وتوقيع عقود البيع الابتدائية والنهائية مع إدراج بنود الضمانات والصيانة.':['Drafting and signing preliminary and final sale contracts including warranty and maintenance clauses.','Rédaction et signature des contrats de vente préliminaires et définitifs, clauses de garantie et d’entretien incluses.','Erstellung und Unterzeichnung der Vorverträge und Endverträge einschließlich Garantie- und Wartungsklauseln.'],
+'إتمام إجراءات التسجيل والتوثيق لدى مكاتب الشهر العقاري أو هيئات الاستثمار المعنية.':['Completing registration and documentation procedures at real estate registry offices or investment authorities.','Accomplissement des formalités d’enregistrement et de documentation auprès des bureaux fonciers ou des autorités d’investissement compétents.','Abschluss der Registrierungs- und Dokumentationsverfahren bei den Grundbuchämtern oder zuständigen Investitionsbehörden.'],
+'الإقامة الاستثمارية (حسب الدولة)':['Investment Residency (per country)','Résidence investisseur (selon le pays)','Investorenaufenthalt (je nach Land)'],
+'استيفاء شروط الحد الأدنى لتملك العقار للحصول على الإقامة الاستثمارية للمستثمر وأسرته.':['Meeting minimum ownership requirements to obtain investment residency for the investor and their family.','Remplir les conditions de seuil minimal d’acquisition pour obtenir la résidence investisseur pour l’investisseur et sa famille.','Erfüllung der Mindesterwerbsbedingungen, um den Investorenaufenthalt für den Investor und seine Familie zu erhalten.'],
+'إعداد الملف والأوراق المطلوبة وتقديم الطلب بالتنسيق مع الجهات والمختصين المعتمدين.':['Preparing the file and required documents and submitting the application in coordination with accredited specialists.','Préparation du dossier et des documents requis et dépôt de la demande en coordination avec les spécialistes agréés.','Vorbereitung der Unterlagen und Einreichung des Antrags in Abstimmung mit zugelassenen Fachstellen.'],
+
+'خيارات الاستثمار المتنوعة عبر «بيت الأمان»':['Diverse Investment Options via Bayt Al-Aman','Options d’investissement variées via Bayt Al-Aman','Vielfältige Anlageoptionen über Bayt Al-Aman'],
+'العقارات السكنية':['Residential Properties','Biens résidentiels','Wohnimmobilien'],
+'شقق وفيلل وشاليهات سكنية في مواقع حيوية داخل مصر ودول الخليج وأوروبا.':['Apartments, villas and chalets in prime locations across Egypt, the Gulf and Europe.','Appartements, villas et chalets dans des emplacements de premier ordre en Égypte, dans le Golfe et en Europe.','Wohnungen, Villen und Chalets in Top-Lagen in Ägypten, den Golfstaaten und Europa.'],
+'العقارات التجارية':['Commercial Properties','Biens commerciaux','Gewerbeimmobilien'],
+'مكاتب إدارية ومحلات تجارية ومراكز أعمال ذات عوائد تشغيلية مستمرة.':['Administrative offices, retail shops and business hubs with continuous operating returns.','Bureaux administratifs, commerces et centres d’affaires offrant des revenus d’exploitation continus.','Büros, Ladengeschäfte und Businesscenter mit laufenden Betriebserträgen.'],
+'المنتجعات والمشاريع السياحية':['Resorts & Tourist Projects','Stations balnéaires et projets touristiques','Resorts & Tourismusprojekte'],
+'أصول سياحية وفندقية مخصصة للإدارة والتشغيل السياحي بأعلى نسب إشغال.':['Tourism and hospitality assets managed and operated at the highest occupancy rates.','Actifs touristiques et hôteliers gérés et exploités aux meilleurs taux d’occupation.','Tourismus- und Hotellerieobjekte, die mit höchsten Auslastungsraten verwaltet und betrieben werden.'],
+'وتشمل الخدمة أيضاً شراء أي عقار يعجبك في السوق المفتوح خارج قائمة مشاريعنا — نتولى تدقيقه والوساطة القانونية لحماية أموالك.':['The service also includes purchasing any property you like on the open market outside our projects list — we handle its inspection and legal brokerage to protect your money.','Le service comprend également l’achat de tout bien qui vous plaît sur le marché ouvert, hors de notre liste de projets — nous assurons son inspection et l’intermédiation juridique pour protéger votre argent.','Der Service umfasst auch den Kauf jeder beliebigen Immobilie am offenen Markt außerhalb unserer Projektliste — wir übernehmen Prüfung und rechtliche Vermittlung zum Schutz Ihres Kapitals.'],
+
+'خدمات إدارة الأملاك والتطوير بعد الشراء (Property & Asset Management)':['Property & Asset Management Services After Purchase','Services de gestion des actifs et de valorisation après l’achat','Verwaltungs- und Entwicklungsdienstleistungen nach dem Kauf'],
+'نحن لا نتوقف عند خطوة تسليم المفتاح، بل نوفر لك منظومة تشغيلية كاملة:':['We don’t stop at handing over the keys — we provide you with a complete operating system:','Nous ne nous arrêtons pas à la remise des clés — nous vous offrons une véritable chaîne d’exploitation complète :','Wir hören bei der Schlüsselübergabe nicht auf — wir bieten Ihnen ein komplettes Betreuungssystem:'],
+'إدارة والتأجير الفندقي/السياحي:':['Hotel/Tourist Management & Leasing:','Gestion et location hôtelière/touristique :','Hotel-/Tourismusverwaltung & Vermietung:'],
+'تشغيل الوحدة وتأجيرها لضمان تدفق نقدي وعائد استثماري مستمر.':['Operating and leasing the unit to ensure continuous cash flow and investment return.','Exploitation et location de l’unité pour garantir un flux de trésorerie et un rendement continus.','Betrieb und Vermietung der Einheit für kontinuierlichen Cashflow und Rendite.'],
+'التطوير ورفع القيمة (Asset Value Addition):':['Development & Value Addition:','Développement et ajout de valeur :','Entwicklung & Mehrwert:'],
+'إعادة التجهيز والتصميم الداخلي لمضاعفة القيمة السوقية عند التأجير أو البيع.':['Refurbishment and interior design to double the market value upon leasing or sale.','Rénovation et design intérieur pour doubler la valeur marchande lors de la location ou de la vente.','Sanierung und Innenausstattung zur Verdopplung des Marktwerts bei Vermietung oder Verkauf.'],
+'الصيانة والخدمات اللوجستية:':['Maintenance & Logistics Services:','Entretien et services logistiques :','Wartung & Logistikdienste:'],
+'متابعة حالة العقار وتحصيل المستحقات وسداد الفواتير والضرائب الدورية نيابةً عنك.':['Monitoring the property’s condition, collecting dues and paying periodic bills and taxes on your behalf.','Suivi de l’état du bien, recouvrement des sommes dues et paiement des factures et impôts périodiques en votre nom.','Überwachung des Objektzustands, Eintreiben der Forderungen und Bezahlung periodischer Rechnungen und Steuern in Ihrem Namen.'],
+'تحويل العوائد إلى الخارج:':['Transferring Returns Abroad:','Transfert des revenus vers l’étranger :','Transfer der Erträge ins Ausland:'],
+'آلية نظامية لتحويل العوائد الإيجارية وأصل رأس المال عند إعادة البيع إلى حسابك الخارجي.':['A systematic mechanism to transfer rental income and capital principal upon resale to your foreign account.','Un mécanisme systématique de transfert des revenus locatifs et du capital lors de la revente vers votre compte étranger.','Ein systematischer Mechanismus zur Überweisung von Mieteinnahmen und Kapital beim Wiederverkauf auf Ihr Auslandskonto.'],
+
+'جدول الضرائب والرسوم التقديرية':['Estimated Taxes & Fees Schedule','Tableau estimatif des impôts et frais','Übersicht der geschätzten Steuern und Gebühren'],
+'نوع الرسم / الضريبة':['Fee / Tax Type','Type de frais / impôt','Gebühren- / Steuerart'],
+'النسبة التقديرية / الوصف':['Estimated Ratio / Description','Taux estimatif / description','Geschätzter Satz / Beschreibung'],
+'رسوم التسجيل والتوثيق':['Registration & Documentation Fees','Frais d’enregistrement et de documentation','Registrierungs- und Dokumentationsgebühren'],
+'رسوم حكومية مقطوعة أو بنسبة محددة حسب القوانين المحلية لكل دولة.':['Fixed government fees or a defined percentage according to each country’s local laws.','Frais gouvernementaux forfaitaires ou pourcentage défini selon les lois locales de chaque pays.','Pauschale staatliche Gebühren oder ein festgelegter Prozentsatz gemäß den örtlichen Gesetzen jedes Landes.'],
+'ضريبة التصرفات العقارية':['Real Estate Disposal Tax','Taxe sur les transactions immobilières','Steuer auf Immobilienveräußerungen'],
+'تُحدد وفق التشريعات الضريبية المعمول بها عند بيع العقار.':['Determined according to the tax legislation in force when selling the property.','Déterminée selon la législation fiscale en vigueur lors de la vente du bien.','Bestimmt nach den geltenden Steuergesetzen beim Verkauf der Immobilie.'],
+'رسوم ودمغة التعاقدات':['Contract Fees & Stamp Duty','Frais contractuels et droit de timbre','Vertragsgebühren & Stempelsteuer'],
+'نسب رموية على العقود والشهادات حسب قيمة التصرف.':['Nominal percentages on contracts and certificates according to transaction value.','Pourcentages symboliques sur les contrats et certificats selon la valeur de la transaction.','Geringe Prozentsätze auf Verträge und Zertifikate je nach Transaktionswert.'],
+'الضريبة العقارية الدورية':['Periodic Property Tax','Taxe foncière périodique','Periodische Grundsteuer'],
+'ضريبة سنوية على المنشآت المبنية تُسدد للجهات الضريبية المختصة.':['An annual tax on built facilities paid to the competent tax authorities.','Une taxe annuelle sur les bâtiments versée aux autorités fiscales compétentes.','Eine jährliche Steuer auf bebaute Anlagen, gezahlt an die zuständigen Steuerbehörden.'],
+'رسوم الإدارة والتشغيل':['Management & Operation Fees','Frais de gestion et d’exploitation','Verwaltungs- & Betriebsgebühren'],
+'نسبة مئوية متفق عليها من العوائد الإيجارية المحققة للعميل.':['An agreed percentage of the rental income actually achieved for the client.','Un pourcentage convenu des revenus locatifs réellement réalisés pour le client.','Ein vereinbarter Prozentsatz der tatsächlich erzielten Mieteinnahmen des Kunden.'],
+'نلتزم بالشفافية المطلقة: نزودك قبل أي تعاقد بكشف تفصيلي بجميع التكاليف الجانبية المباشرة وغير المباشرة الخاصة بالصفقة المقترحة.':['We commit to absolute transparency: before any contract we provide you with a detailed statement of all direct and indirect side costs of the proposed deal.','Nous nous engageons à une transparence absolue : avant tout contrat, nous vous fournissons un état détaillé de tous les coûts annexes directs et indirects de la transaction proposée.','Wir verpflichten uns zu absoluter Transparenz: Vor jedem Vertrag erhalten Sie eine detaillierte Aufstellung aller direkten und indirekten Nebenkosten der vorgeschlagenen Transaktion.'],
+
+'التواصل وحجز استشارتك القانونية':['Contact & Booking Your Legal Consultation','Contact et réservation de votre consultation juridique','Kontakt & Buchung Ihrer Rechtsberatung'],
+'لحجز استشارة عقارية وقانونية مخصصة لتملك عقارك المقبل، أو لتكليفنا بفحص عقار معيّن في السوق:':['To book a customized real estate and legal consultation for your upcoming property purchase, or to assign us to inspect a specific property on the market:','Pour réserver une consultation immobilière et juridique personnalisée pour votre prochain achat, ou pour nous confier l’inspection d’un bien précis sur le marché :','Um eine maßgeschneiderte Immobilien- und Rechtsberatung für Ihren bevorstehenden Kauf zu buchen oder uns mit der Prüfung einer bestimmten Immobilie zu beauftragen:'],
+'البريد الإلكتروني':['Email','Adresse e-mail','E-Mail'],
+'واتساب / هاتف مباشر':['WhatsApp / Direct Phone','WhatsApp / Téléphone direct','WhatsApp / Direkttelefon'],
+'المقر الرئيسي':['Headquarters','Siège social','Hauptsitz'],
+'القاهرة الجديدة – العاصمة الإدارية – برج بيت الأمان':['New Cairo – New Administrative Capital – Bayt Al-Aman Tower','Nouveau Caire – Capitale administrative – Tour Bayt Al-Aman','New Kairo – Neue Verwaltungshauptstadt – Bayt-Al-Aman-Turm'],
+'«لا تدع الحدود تعيق استثمارك.. نحن ذراعك الموثوقة وحمايتك القانونية لتملك عقارك الصحيح.»':['“Don’t let borders hinder your investment.. we are your trusted arm and legal protection to own the right property.”','« Ne laissez pas les frontières entraver votre investissement.. nous sommes votre bras de confiance et votre protection juridique pour acquérir le bon bien. »','„Lassen Sie Grenzen Ihre Investition nicht bremsen.. wir sind Ihr verlässlicher Arm und Ihr rechtlicher Schutz, um die richtige Immobilie zu erwerben.“'],
+'· دليل المستثمر الأجنبي للتملك العقاري والاستثماري · الإصدار 2026':['· Foreign Investor Guide to Real Estate Ownership & Investment · Edition 2026','· Guide de l’investisseur étranger pour la propriété et l’investissement immobilier · Édition 2026','· Auslandsinvestoren-Leitfaden für Immobilientum und Investitionen · Ausgabe 2026'],
+'طباعة / حفظ كـ PDF':['Print / Save as PDF','Imprimer / Enregistrer en PDF','Drucken / Als PDF speichern']
+};
+
+/* ذاكرة النص العربي الأصلي — تبديل ثنائي الاتجاه */
+var ORIG = new WeakMap();
+
+function applyLang() {
+  var ti = {en:0, fr:1, de:2}[LANG];
+  document.documentElement.lang = LANG;
+  document.documentElement.dir = ti === undefined ? 'rtl' : 'ltr';
+  document.title = TITLES[LANG] || TITLES.ar;
+  try {
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    var n;
+    while ((n = walker.nextNode())) {
+      var cur = n.nodeValue;
+      if (!cur || !cur.trim()) continue;
+      var orig = ORIG.get(n);
+      if (orig === undefined) { orig = cur; ORIG.set(n, orig); }
+      var o = orig.trim();
+      if (!o) continue;
+      if (ti === undefined) { if (cur !== orig) n.nodeValue = orig; continue; }
+      var v = D[o];
+      if (v && v[ti]) n.nodeValue = orig.replace(o, v[ti]);
+    }
+  } catch (err) {}
+  document.querySelectorAll('.lang-b').forEach(function(el){
+    el.classList.toggle('active', el.dataset.lang === LANG);
+  });
+}
+
+function setLang(l) {
+  if (!TITLES[l]) return;
+  LANG = l;
+  try { localStorage.setItem('bl_lang', l); } catch (e) {}
+  applyLang();
+}
+
+applyLang();
+</script>
 </body>
 </html>
