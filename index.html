@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BYTELAMAN – بيت الأمان</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script>
+tailwind.config={darkMode:'class',theme:{extend:{colors:{gold:'#C9A84C','gold-light':'#E8D48B','gold-dark':'#A07C2A','neon-blue':'#1A8CFF','deep-blue':'#0D47A1',emerald:'#10B981','abs-black':'#050508','icy-white':'#F0F4F8'},fontFamily:{cairo:['Cairo','sans-serif'],orbitron:['Orbitron','sans-serif'],exo:['Exo 2','sans-serif']}}}}
+</script>
+<style>
+/* ===== متغيرات التصميم ===== */
+:root{
+  --bg:#050508;--bg2:#0A0A14;--bg-card:rgba(255,255,255,0.035);
+  --border:rgba(201,168,76,0.15);--text:#F0F0F0;--text2:#8A8A9A;
+  --gold:#C9A84C;--gold-l:#E8D48B;--gold-d:#A07C2A;
+  --gold-glow:rgba(201,168,76,0.35);--blue:#1A8CFF;
+  --emerald:#10B981;--blur:22px;
+  --glass-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+.light-mode{
+  --bg:#F0F4F8;--bg2:#FFFFFF;--bg-card:rgba(255,255,255,0.55);
+  --border:rgba(160,124,42,0.22);--text:#1A1A2E;--text2:#6B7280;
+  --gold:#A07C2A;--gold-l:#C9A84C;--gold-d:#7A5E1A;
+  --gold-glow:rgba(160,124,42,0.25);--glass-shadow:0 8px 32px rgba(0,0,0,0.08);
+}
+
+/* ===== أساسيات ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);
+  overflow-x:hidden;transition:background .6s,color .6s;
+}
+::selection{background:var(--gold);color:#000}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* ===== مشهد الافتتاح – المنزل والمفتاح ===== */
+#intro{
+  position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 42%,#0B0B18 0%,#050508 72%);
+  transition:opacity .9s ease,visibility .9s;
+}
+#intro.done{opacity:0;visibility:hidden;pointer-events:none}
+body.no-scroll{overflow:hidden;height:100vh}
+
+.intro-brand{
+  position:absolute;top:34px;left:50%;transform:translateX(-50%);
+  font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:7px;
+  color:var(--gold);opacity:.85;white-space:nowrap;
+}
+#houseScene{width:min(92vw,720px);height:auto;overflow:visible}
+
+/* رسم الخطوط تدريجياً */
+.draw{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+#intro.play .draw{animation:drawPath 1s ease forwards}
+@keyframes drawPath{to{stroke-dashoffset:0}}
+
+/* الحالة المخفية الافتراضية */
+#introKey,#innerGlow,#lightRay,.intro-flash,.iw,#panelL,#panelR,#skipIntro{opacity:0}
+
+/* المفتاح الفريد */
+#introKey{
+  transform:translate(640px,435px);
+  transform-box:fill-box;transform-origin:center;
+}
+#intro.play #introKey{
+  animation:
+    keyMat .8s ease 2.4s forwards,
+    keyMove 1.5s cubic-bezier(.6,.05,.3,1) 3.4s forwards,
+    keyTurn .45s ease-in-out 5.05s forwards,
+    keyAway .7s ease 6.1s forwards;
+}
+@keyframes keyMat{to{opacity:1}}
+@keyframes keyMove{
+  0%{transform:translate(640px,435px)}
+  50%{transform:translate(585px,405px)}
+  100%{transform:translate(524px,435px)}
+}
+@keyframes keyTurn{
+  0%{transform:translate(524px,435px) rotate(0deg)}
+  100%{transform:translate(524px,435px) rotate(-16deg)}
+}
+@keyframes keyAway{
+  0%{opacity:1;transform:translate(524px,435px) rotate(-16deg)}
+  100%{opacity:0;transform:translate(524px,470px) rotate(-26deg) scale(.92)}
+}
+
+/* ضلفا الباب */
+#intro.play #panelL{animation:panelIn .5s ease 1.95s forwards,panelLOpen 1.1s cubic-bezier(.7,0,.25,1) 5.55s forwards}
+#intro.play #panelR{animation:panelIn .5s ease 2s forwards,panelROpen 1.1s cubic-bezier(.7,0,.25,1) 5.55s forwards}
+@keyframes panelIn{to{opacity:1}}
+@keyframes panelLOpen{to{transform:translateX(-64px);opacity:.12}}
+@keyframes panelROpen{to{transform:translateX(64px);opacity:.12}}
+
+/* التوهج الداخلي والشعاع */
+#intro.play #innerGlow{animation:glowIn 1.6s ease 5.5s forwards}
+@keyframes glowIn{to{opacity:1}}
+#lightRay{transform-box:fill-box;transform-origin:center bottom}
+#intro.play #lightRay{animation:rayIn 2s ease 6.2s forwards}
+@keyframes rayIn{0%{opacity:0;transform:scaleY(.15)}100%{opacity:.9;transform:scaleY(1)}}
+
+/* انفجار ضوئي عند فتح الباب */
+.intro-flash{
+  position:absolute;left:50%;top:45%;width:60vmax;height:60vmax;border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(circle,rgba(255,236,180,.95),rgba(201,168,76,.5) 35%,transparent 70%);
+}
+#intro.play .intro-flash{animation:flashOut 1.2s ease-out 5.5s forwards}
+@keyframes flashOut{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}
+  18%{opacity:.95}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(2.6)}
+}
+
+/* الكلمات المضيئة */
+.intro-words{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:10px;text-align:center;padding:0 16px}
+.iw{font-weight:800;color:var(--gold-l);text-shadow:0 0 24px rgba(201,168,76,.45);transform:translateY(16px)}
+.iw.ar{font-size:clamp(1.15rem,3.6vw,1.9rem)}
+.iw.ar2{font-size:clamp(.95rem,2.8vw,1.4rem);color:#EAD9A8}
+.iw.en{font-family:'Orbitron',sans-serif;font-weight:600;font-size:clamp(.62rem,2vw,.95rem);letter-spacing:5px;color:#CFD6E4;text-shadow:0 0 18px rgba(26,140,255,.45)}
+#intro.play .iw{animation:iwIn .7s cubic-bezier(.2,.9,.3,1.15) forwards}
+#intro.play .iw:nth-child(1){animation-delay:6.55s}
+#intro.play .iw:nth-child(2){animation-delay:7s}
+#intro.play .iw:nth-child(3){animation-delay:7.5s}
+@keyframes iwIn{to{opacity:1;transform:translateY(0)}}
+
+/* شريط التقدم */
+.intro-progress{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  width:min(60vw,280px);height:2px;background:rgba(201,168,76,.15);
+  border-radius:2px;overflow:hidden;
+}
+.intro-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold-d),var(--gold-l))}
+#intro.play .intro-progress i{animation:introLoad 8.3s linear forwards}
+@keyframes introLoad{to{width:100%}}
+
+/* زر التخطي */
+#skipIntro{
+  position:absolute;top:28px;left:28px;display:inline-flex;align-items:center;gap:8px;
+  padding:8px 18px;border-radius:30px;background:rgba(255,255,255,.04);
+  border:1px solid var(--border);color:var(--text2);
+  font-family:'Cairo',sans-serif;font-size:13px;font-weight:600;cursor:pointer;
+  backdrop-filter:blur(8px);transition:border-color .3s,color .3s;
+}
+#intro.play #skipIntro{animation:iwIn .6s ease 1.2s forwards}
+#skipIntro:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ===== كانفاس الجزيئات ===== */
+#particles-canvas{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+}
+
+/* ===== توهج الماوس ===== */
+#mouse-glow{
+  position:fixed;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.06),transparent 70%);
+  pointer-events:none;z-index:1;transform:translate(-50%,-50%);
+  transition:opacity .3s;
+}
+
+/* ===== التنقل ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:var(--bg-card);backdrop-filter:blur(var(--blur));
+  border-bottom:1px solid var(--border);
+  transition:all .4s;
+}
+nav.scrolled{box-shadow:var(--glass-shadow)}
+.nav-link{
+  position:relative;color:var(--text2);font-size:14px;font-weight:500;
+  transition:color .3s;padding:4px 0;
+}
+.nav-link:hover,.nav-link.active{color:var(--gold)}
+.nav-link::after{
+  content:'';position:absolute;bottom:-2px;right:0;width:0;height:2px;
+  background:var(--gold);transition:width .3s;
+}
+.nav-link:hover::after,.nav-link.active::after{width:100%}
+
+/* ===== البطل ===== */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;position:relative;z-index:2;
+  padding:120px 20px 60px;
+}
+.hero-key{
+  width:120px;height:auto;animation:heroFloat 6s ease-in-out infinite;
+  filter:drop-shadow(0 0 30px rgba(201,168,76,0.5));
+  cursor:pointer;transition:filter .3s;
+}
+.hero-key:hover{filter:drop-shadow(0 0 50px rgba(201,168,76,0.9))}
+@keyframes heroFloat{
+  0%,100%{transform:translateY(0) rotate(-3deg)}
+  50%{transform:translateY(-20px) rotate(3deg)}
+}
+.hero-title{
+  font-size:clamp(2rem,6vw,4rem);font-weight:900;
+  background:linear-gradient(135deg,var(--gold-l),var(--gold),var(--gold-d));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;margin-top:24px;text-align:center;
+}
+.hero-subtitle{
+  font-family:'Orbitron',sans-serif;font-size:clamp(.7rem,2vw,1.1rem);
+  letter-spacing:6px;color:var(--text2);margin-top:8px;
+}
+.hero-tagline{
+  font-size:clamp(1rem,2.5vw,1.3rem);color:var(--text2);
+  max-width:600px;text-align:center;margin-top:20px;line-height:1.8;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .8s ease .15s,transform .8s ease .15s;
+}
+body.ready .hero-tagline{opacity:1;transform:translateY(0)}
+.hero-actions{opacity:0;transform:translateY(20px);transition:opacity .8s ease .4s,transform .8s ease .4s}
+body.ready .hero-actions{opacity:1;transform:translateY(0)}
+.hero-scroll{color:var(--text2);opacity:0;transition:opacity .8s ease .7s}
+body.ready .hero-scroll{opacity:1;animation:softBounce 2s ease-in-out .7s infinite}
+@keyframes softBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* ===== الأزرار ===== */
+.btn-gold{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 36px;background:linear-gradient(135deg,var(--gold-d),var(--gold),var(--gold-l));
+  color:#050508;font-weight:700;font-size:15px;border-radius:50px;
+  border:none;cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.btn-gold:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px var(--gold-glow);
+}
+.btn-gold::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+  transform:translateX(-100%);transition:transform .6s;
+}
+.btn-gold:hover::before{transform:translateX(100%)}
+.btn-glass{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 36px;background:var(--bg-card);
+  backdrop-filter:blur(12px);border:1px solid var(--border);
+  color:var(--text);font-weight:600;font-size:15px;border-radius:50px;
+  cursor:pointer;transition:all .3s;
+}
+.btn-glass:hover{
+  border-color:var(--gold);color:var(--gold);
+  box-shadow:0 0 20px var(--gold-glow);
+}
+
+/* ===== بطاقة زجاجية ===== */
+.glass-card{
+  background:var(--bg-card);backdrop-filter:blur(var(--blur));
+  border:1px solid var(--border);border-radius:20px;
+  box-shadow:var(--glass-shadow);transition:all .4s;overflow:hidden;
+}
+.glass-card:hover{
+  border-color:var(--gold);transform:translateY(-6px);
+  box-shadow:0 12px 40px var(--gold-glow);
+}
+
+/* ===== عناوين الأقسام ===== */
+.section-label{
+  font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:5px;
+  color:var(--gold);text-transform:uppercase;margin-bottom:8px;
+}
+.section-title{
+  font-size:clamp(1.6rem,4vw,2.5rem);font-weight:800;
+  color:var(--text);line-height:1.4;
+}
+.section-desc{color:var(--text2);font-size:16px;max-width:600px;line-height:1.8}
+
+/* ===== الإحصائيات ===== */
+.stat-num{
+  font-family:'Orbitron',sans-serif;font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:900;background:linear-gradient(135deg,var(--gold-l),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ===== بطاقات المشاريع ===== */
+.project-card{position:relative;border-radius:20px;overflow:hidden}
+.project-card img{width:100%;height:240px;object-fit:cover;transition:transform .6s}
+.project-card:hover img{transform:scale(1.08)}
+.project-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(5,5,8,0.95) 0%,rgba(5,5,8,0.3) 50%,transparent 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:24px;
+}
+.project-badge{
+  position:absolute;top:16px;right:16px;padding:4px 14px;
+  background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.4);
+  color:#10B981;font-size:12px;font-weight:700;border-radius:20px;
+  backdrop-filter:blur(8px);
+}
+.project-tag{
+  position:absolute;top:16px;left:16px;padding:4px 14px;
+  background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);
+  color:var(--gold);font-size:11px;font-weight:600;border-radius:20px;
+  backdrop-filter:blur(8px);
+}
+
+/* ===== الشهادات ===== */
+.testimonial-card{padding:32px;position:relative}
+.testimonial-card::before{
+  content:'\201C';position:absolute;top:12px;right:24px;
+  font-size:80px;color:var(--gold);opacity:0.15;font-family:serif;line-height:1;
+}
+
+/* ===== المدونة ===== */
+.blog-card img{width:100%;height:200px;object-fit:cover;transition:transform .5s}
+.blog-card:hover img{transform:scale(1.06)}
+.blog-tag{
+  display:inline-block;padding:3px 12px;font-size:11px;font-weight:700;
+  border-radius:12px;background:rgba(26,140,255,0.12);color:var(--blue);
+  border:1px solid rgba(26,140,255,0.25);
+}
+
+/* ===== نموذج التواصل ===== */
+.form-input{
+  width:100%;padding:14px 18px;background:var(--bg-card);
+  border:1px solid var(--border);border-radius:12px;color:var(--text);
+  font-family:'Cairo',sans-serif;font-size:14px;outline:none;
+  backdrop-filter:blur(8px);transition:border-color .3s;
+}
+.form-input:focus{border-color:var(--gold)}
+.form-input::placeholder{color:var(--text2)}
+
+/* ===== المفتاح العائم ===== */
+#floating-key{
+  position:fixed;bottom:100px;left:28px;z-index:90;cursor:pointer;
+  animation:floatKey 4s ease-in-out infinite;
+  transition:filter .3s;
+}
+#floating-key:hover{filter:drop-shadow(0 0 20px rgba(201,168,76,0.9))}
+@keyframes floatKey{
+  0%,100%{transform:translateY(0) rotate(-5deg)}
+  50%{transform:translateY(-12px) rotate(5deg)}
+}
+.key-menu{
+  position:absolute;bottom:70px;left:0;width:220px;
+  background:var(--bg-card);backdrop-filter:blur(var(--blur));
+  border:1px solid var(--border);border-radius:16px;
+  box-shadow:var(--glass-shadow);padding:12px;
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:all .3s;
+}
+.key-menu.open{opacity:1;visibility:visible;transform:translateY(0)}
+.key-menu-item{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  border-radius:10px;color:var(--text);font-size:13px;font-weight:500;
+  cursor:pointer;transition:all .2s;
+}
+.key-menu-item:hover{background:rgba(201,168,76,0.1);color:var(--gold)}
+.key-menu-item i{color:var(--gold);width:18px;text-align:center}
+
+/* ===== واتساب ===== */
+#whatsapp-btn{
+  position:fixed;bottom:28px;left:28px;z-index:90;width:56px;height:56px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-size:24px;
+  cursor:pointer;box-shadow:0 4px 20px rgba(37,211,102,0.4);
+  transition:all .3s;overflow:hidden;
+}
+#whatsapp-btn:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(37,211,102,0.6)}
+#whatsapp-btn .ripple{
+  position:absolute;width:100%;height:100%;border-radius:50%;
+  background:rgba(201,168,76,0.3);
+  animation:whatsappRipple 2s ease-in-out infinite;
+}
+@keyframes whatsappRipple{
+  0%{transform:scale(1);opacity:0.6}100%{transform:scale(2.5);opacity:0}
+}
+
+/* ===== روبوت أمان ===== */
+#chatbot-btn{
+  position:fixed;bottom:28px;right:28px;z-index:90;width:60px;height:60px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--gold-d),var(--gold-l));
+  color:#050508;font-size:22px;cursor:pointer;
+  box-shadow:0 4px 24px var(--gold-glow);transition:all .3s;
+}
+#chatbot-btn:hover{transform:scale(1.1)}
+#chatbot-popup{
+  position:fixed;bottom:100px;right:28px;z-index:91;width:360px;max-width:calc(100vw - 56px);
+  height:500px;max-height:calc(100vh - 140px);
+  background:var(--bg2);border:1px solid var(--border);border-radius:20px;
+  box-shadow:0 16px 60px rgba(0,0,0,0.5);display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transform:translateY(20px) scale(0.95);
+  transition:all .4s;overflow:hidden;
+}
+#chatbot-popup.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.chat-header{
+  padding:16px 20px;background:linear-gradient(135deg,var(--gold-d),var(--gold));
+  color:#050508;display:flex;align-items:center;gap:12px;
+}
+.chat-header h3{font-size:15px;font-weight:700}
+.chat-header span{font-size:11px;opacity:0.7}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.chat-msg{
+  max-width:85%;padding:10px 14px;border-radius:16px;font-size:13px;line-height:1.7;
+}
+.chat-msg.bot{
+  align-self:flex-start;background:var(--bg-card);border:1px solid var(--border);
+  color:var(--text);border-bottom-right-radius:4px;
+}
+.chat-msg.user{
+  align-self:flex-end;background:linear-gradient(135deg,var(--gold-d),var(--gold));
+  color:#050508;border-bottom-left-radius:4px;
+}
+.chat-input-area{
+  padding:12px;border-top:1px solid var(--border);display:flex;gap:8px;
+}
+.chat-input-area input{
+  flex:1;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);
+  border-radius:25px;color:var(--text);font-family:'Cairo';font-size:13px;outline:none;
+}
+.chat-input-area input:focus{border-color:var(--gold)}
+.chat-input-area button{
+  width:40px;height:40px;border-radius:50%;border:none;
+  background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#050508;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:transform .2s;
+}
+.chat-input-area button:hover{transform:scale(1.1)}
+.typing-indicator{display:flex;gap:4px;padding:10px 14px;align-self:flex-start}
+.typing-indicator span{
+  width:7px;height:7px;border-radius:50%;background:var(--gold);
+  animation:typingDot 1.4s ease-in-out infinite;
+}
+.typing-indicator span:nth-child(2){animation-delay:0.2s}
+.typing-indicator span:nth-child(3){animation-delay:0.4s}
+@keyframes typingDot{0%,60%,100%{opacity:0.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-6px)}}
+
+/* ===== زر العودة للأعلى ===== */
+#back-top{
+  position:fixed;bottom:100px;right:28px;z-index:89;width:44px;height:44px;
+  border-radius:50%;background:var(--bg-card);backdrop-filter:blur(12px);
+  border:1px solid var(--border);color:var(--gold);font-size:16px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transform:translateY(10px);transition:all .3s;
+}
+#back-top.show{opacity:1;visibility:visible;transform:translateY(0)}
+#back-top:hover{border-color:var(--gold);box-shadow:0 0 15px var(--gold-glow)}
+
+/* ===== تبديل الوضع ===== */
+.theme-toggle{
+  width:44px;height:44px;border-radius:50%;background:var(--bg-card);
+  backdrop-filter:blur(12px);border:1px solid var(--border);
+  color:var(--gold);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .3s;
+}
+.theme-toggle:hover{border-color:var(--gold);box-shadow:0 0 15px var(--gold-glow)}
+
+/* ===== انيميشن الظهور ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ===== الشريط المتحرك ===== */
+.marquee-track{
+  display:flex;gap:60px;animation:marquee 30s linear infinite;width:max-content;
+}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ===== خط ذهبي فاصل ===== */
+.gold-divider{
+  width:60px;height:3px;border-radius:3px;
+  background:linear-gradient(90deg,var(--gold-d),var(--gold-l),var(--gold));
+}
+
+/* ===== تذييل ===== */
+footer{background:var(--bg2);border-top:1px solid var(--border)}
+.footer-brand{
+  font-size:clamp(1.2rem,3vw,1.6rem);font-weight:900;
+  background:linear-gradient(135deg,var(--gold-l),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ===== الاستجابة ===== */
+@media(max-width:768px){
+  .hero-key{width:80px}
+  #chatbot-popup{width:calc(100vw - 32px);right:16px;bottom:90px;height:420px}
+  #floating-key{bottom:90px;left:16px}
+  #floating-key svg{width:40px;height:auto}
+  #whatsapp-btn{bottom:20px;left:16px;width:50px;height:50px;font-size:20px}
+  #chatbot-btn{bottom:20px;right:16px;width:52px;height:52px;font-size:20px}
+  #back-top{bottom:90px;right:16px}
+  .key-menu{width:200px;left:0}
+}
+
+/* ===== استجابة مشهد الافتتاح ===== */
+@media(max-width:768px){
+  .intro-brand{top:20px;font-size:10px;letter-spacing:4px}
+  #skipIntro{top:auto;bottom:60px;left:50%;transform:translateX(-50%);padding:6px 16px;font-size:12px}
+  .intro-words{gap:6px;margin-top:4px}
+  .intro-progress{bottom:22px}
+}
+
+/* ===== تقليل الحركة ===== */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== مشهد الافتتاح – منزل يُفتح بمفتاح فريد ===== -->
+<div id="intro" aria-label="مشهد افتتاح بيت الأمان">
+  <div class="intro-brand">B Y T E L A M A N</div>
+  <div class="intro-flash"></div>
+  <svg id="houseScene" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="منزل فاخر يُفتح بمفتاح ذهبي فريد">
+    <defs>
+      <linearGradient id="igGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#E8D48B"/><stop offset="50%" stop-color="#C9A84C"/><stop offset="100%" stop-color="#A07C2A"/>
+      </linearGradient>
+      <linearGradient id="igBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#1A8CFF"/><stop offset="100%" stop-color="#67B6FF"/>
+      </linearGradient>
+      <linearGradient id="igRay" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="rgba(232,212,139,0.75)"/><stop offset="100%" stop-color="rgba(232,212,139,0)"/>
+      </linearGradient>
+      <radialGradient id="igInner" cx="50%" cy="60%" r="65%">
+        <stop offset="0%" stop-color="#FFE9AE"/><stop offset="55%" stop-color="rgba(201,168,76,0.55)"/><stop offset="100%" stop-color="rgba(201,168,76,0)"/>
+      </radialGradient>
+      <filter id="iSoft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    </defs>
+
+    <!-- الأرضية والمدخل -->
+    <path class="draw" d="M120 500H680" stroke="url(#igBlue)" stroke-width="2" opacity=".7" style="animation-delay:.1s"/>
+    <path class="draw" d="M320 500V486H480V500" stroke="#3A4664" stroke-width="2" style="animation-delay:1.7s"/>
+
+    <!-- جسم المنزل والسقف والبرج -->
+    <path class="draw" d="M210 498V310H590V498" stroke="url(#igGold)" stroke-width="3.5" style="animation-delay:.25s"/>
+    <path class="draw" d="M180 312L400 206L620 312" stroke="url(#igGold)" stroke-width="4" style="animation-delay:.55s"/>
+    <path class="draw" d="M400 206V166" stroke="url(#igGold)" stroke-width="3" style="animation-delay:.95s"/>
+    <circle class="draw" cx="400" cy="157" r="6" stroke="#67B6FF" stroke-width="2.5" style="animation-delay:1.1s"/>
+    <path class="draw" d="M210 448H590" stroke="#3A4664" stroke-width="2" style="animation-delay:1.25s"/>
+
+    <!-- الشبابيك الزجاجية -->
+    <rect class="draw" x="250" y="350" width="80" height="72" rx="8" stroke="url(#igBlue)" stroke-width="2.5" style="animation-delay:1.35s"/>
+    <path class="draw" d="M290 350V422M250 386H330" stroke="url(#igBlue)" stroke-width="1.6" opacity=".8" style="animation-delay:1.55s"/>
+    <rect class="draw" x="470" y="350" width="80" height="72" rx="8" stroke="url(#igBlue)" stroke-width="2.5" style="animation-delay:1.45s"/>
+    <path class="draw" d="M510 350V422M470 386H550" stroke="url(#igBlue)" stroke-width="1.6" opacity=".8" style="animation-delay:1.65s"/>
+
+    <!-- إطار الباب -->
+    <path class="draw" d="M350 372H450" stroke="url(#igGold)" stroke-width="3" style="animation-delay:1.8s"/>
+    <path class="draw" d="M358 498V372M442 498V372" stroke="url(#igGold)" stroke-width="3" style="animation-delay:1.9s"/>
+
+    <!-- التوهج الداخلي (يظهر عند الفتح) -->
+    <rect id="innerGlow" x="330" y="368" width="140" height="132" fill="url(#igInner)" filter="url(#iSoft)"/>
+
+    <!-- ضلفا الباب الزجاجيتان -->
+    <g id="panelL">
+      <rect x="359" y="373" width="41" height="125" rx="3" fill="rgba(201,168,76,0.10)" stroke="url(#igGold)" stroke-width="2"/>
+      <circle cx="392" cy="436" r="3.2" fill="#E8D48B"/>
+    </g>
+    <g id="panelR">
+      <rect x="400" y="373" width="41" height="125" rx="3" fill="rgba(201,168,76,0.10)" stroke="url(#igGold)" stroke-width="2"/>
+      <circle cx="408" cy="436" r="3.2" fill="#E8D48B"/>
+    </g>
+
+    <!-- شعاع ضوئي يتصاعد من الباب المفتوح -->
+    <path id="lightRay" d="M400 380L318 128L482 128Z" fill="url(#igRay)"/>
+
+    <!-- المفتاح الفريد – قوس سداسي + نجمة + جوهرة زمردية -->
+    <g id="introKey">
+      <polygon points="96,0 83,29 57,29 44,0 57,-29 83,-29" stroke="url(#igGold)" stroke-width="4"/>
+      <polygon points="70,-11 74,-2 83,-2 76,4 79,13 70,7.5 61,13 64,4 57,-2 66,-2" fill="url(#igGold)"/>
+      <rect x="-100" y="-5" width="164" height="10" rx="5" fill="url(#igGold)"/>
+      <rect x="-100" y="5" width="14" height="16" rx="2" fill="url(#igGold)"/>
+      <rect x="-78" y="5" width="12" height="23" rx="2" fill="url(#igGold)"/>
+      <rect x="-56" y="5" width="17" height="13" rx="2" fill="url(#igGold)"/>
+      <polygon points="-104,0 -113,10 -122,0 -113,-10" fill="#10B981"/>
+      <circle cx="-30" cy="0" r="3.4" fill="#0B0B18" stroke="#A07C2A" stroke-width="1.5"/>
+    </g>
+
+    <!-- عناصر زخرفية عائمة -->
+    <circle class="draw" cx="676" cy="196" r="10" stroke="rgba(201,168,76,0.5)" stroke-width="1.6" style="animation-delay:2s"/>
+    <circle class="draw" cx="130" cy="238" r="7" stroke="rgba(103,182,255,0.5)" stroke-width="1.6" style="animation-delay:2.1s"/>
+  </svg>
+
+  <div class="intro-words">
+    <span class="iw ar">بيت الأمان..</span>
+    <span class="iw ar2">حيث يبدأ المستقبل</span>
+    <span class="iw en">BYTELAMAN – مفتاحك لعالم الاستثمار الآمن</span>
+  </div>
+
+  <div class="intro-progress"><i></i></div>
+  <button id="skipIntro"><i class="fas fa-forward"></i> تخطي المشهد</button>
+</div>
+
+<!-- ===== كانفاس الجزيئات ===== -->
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+<!-- ===== توهج الماوس ===== -->
+<div id="mouse-glow" aria-hidden="true"></div>
+
+<!-- ===== التنقل ===== -->
+<nav id="navbar" aria-label="القائمة الرئيسية">
+  <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="#hero" class="flex items-center gap-3 no-underline">
+      <svg width="32" height="32" viewBox="0 0 120 260" fill="none">
+        <circle cx="60" cy="55" r="40" stroke="#C9A84C" stroke-width="6"/>
+        <circle cx="60" cy="55" r="26" stroke="#C9A84C" stroke-width="3.5"/>
+        <path d="M48 55L60 43L72 55L60 67Z" stroke="#C9A84C" stroke-width="2.5" fill="none"/>
+        <rect x="55" y="95" width="10" height="130" rx="3" fill="#C9A84C"/>
+        <rect x="65" y="160" width="22" height="7" rx="2" fill="#C9A84C"/>
+        <rect x="65" y="180" width="17" height="7" rx="2" fill="#C9A84C"/>
+        <rect x="65" y="200" width="12" height="7" rx="2" fill="#C9A84C"/>
+      </svg>
+      <div>
+        <div class="font-orbitron text-sm font-bold" style="color:var(--gold)">BYTELAMAN</div>
+        <div class="text-xs" style="color:var(--text2)">بيت الأمان</div>
+      </div>
+    </a>
+    <div class="hidden md:flex items-center gap-7">
+      <a href="#hero" class="nav-link active">الرئيسية</a>
+      <a href="#about" class="nav-link">من نحن</a>
+      <a href="#projects" class="nav-link">المشاريع</a>
+      <a href="#media" class="nav-link">المنصة الإعلامية</a>
+      <a href="#investors" class="nav-link">المستثمر الدولي</a>
+      <a href="#blog" class="nav-link">المدونة</a>
+      <a href="#contact" class="nav-link">تواصل معنا</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع">
+        <i class="fas fa-sun"></i>
+      </button>
+      <button class="btn-gold text-sm hidden sm:inline-flex" onclick="scrollToSection('projects')">
+        <i class="fas fa-key"></i> استثمر الآن
+      </button>
+      <button class="md:hidden text-xl" style="color:var(--gold);background:none;border:none;cursor:pointer" id="mobileMenuBtn" aria-label="القائمة">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+  <!-- قائمة الموبايل -->
+  <div id="mobileMenu" class="md:hidden hidden px-5 pb-4 flex flex-col gap-3">
+    <a href="#hero" class="nav-link">الرئيسية</a>
+    <a href="#about" class="nav-link">من نحن</a>
+    <a href="#projects" class="nav-link">المشاريع</a>
+    <a href="#media" class="nav-link">المنصة الإعلامية</a>
+    <a href="#investors" class="nav-link">المستثمر الدولي</a>
+    <a href="#blog" class="nav-link">المدونة</a>
+    <a href="#contact" class="nav-link">تواصل معنا</a>
+    <button class="btn-gold text-sm w-full justify-center mt-2" onclick="scrollToSection('projects')">
+      <i class="fas fa-key"></i> استثمر الآن
+    </button>
+  </div>
+</nav>
+
+<!-- ===== القسم البطل ===== -->
+<section id="hero">
+  <svg class="hero-key" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="gGold2" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#E8D48B"/><stop offset="50%" stop-color="#C9A84C"/><stop offset="100%" stop-color="#A07C2A"/>
+      </linearGradient>
+      <filter id="keyGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <circle cx="60" cy="55" r="40" stroke="url(#gGold2)" stroke-width="5" filter="url(#keyGlow)"/>
+    <circle cx="60" cy="55" r="26" stroke="url(#gGold2)" stroke-width="3"/>
+    <path d="M48 55L60 43L72 55L60 67Z" stroke="url(#gGold2)" stroke-width="2.5" fill="none"/>
+    <rect x="55" y="95" width="10" height="130" rx="3" fill="url(#gGold2)" filter="url(#keyGlow)"/>
+    <rect x="65" y="160" width="22" height="7" rx="2" fill="url(#gGold2)"/>
+    <rect x="65" y="180" width="17" height="7" rx="2" fill="url(#gGold2)"/>
+    <rect x="65" y="200" width="12" height="7" rx="2" fill="url(#gGold2)"/>
+  </svg>
+  <h1 class="hero-title">بيت الأمان<span class="block mt-2" style="font-size:clamp(1rem,3vw,1.7rem);font-weight:700;-webkit-text-fill-color:var(--gold);background:none">للاستثمار العقاري والسياحي</span></h1>
+  <p class="hero-subtitle">BYTELAMAN</p>
+  <p class="hero-tagline"><strong style="color:var(--gold)">استثمارك الآمن.. عبر الحدود</strong><br>فرص عقارية وسياحية آمنة في مصر ودول الخليج وأوروبا</p>
+  <div class="flex flex-wrap gap-4 mt-8 justify-center hero-actions">
+    <button class="btn-gold" onclick="scrollToSection('projects')"><i class="fas fa-key"></i> استثمر الآن</button>
+    <button class="btn-glass" onclick="scrollToSection('about')"><i class="fas fa-play"></i> اكتشف المزيد</button>
+  </div>
+  <div class="mt-16 hero-scroll">
+    <i class="fas fa-chevron-down text-lg"></i>
+  </div>
+</section>
+
+<!-- ===== شريط الشركاء المتحرك ===== -->
+<div class="py-8 overflow-hidden" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:2">
+  <div class="marquee-track">
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">DUBAI LAND DEPT.</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">NEW ADMIN CAPITAL</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">NORTH COAST</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">RIYADH VISION</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">SMART CITY</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">GLOBAL INVEST</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">LUXURY REALTY</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">FUTURE HOMES</span>
+    <!-- تكرار -->
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">DUBAI LAND DEPT.</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">NEW ADMIN CAPITAL</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">NORTH COAST</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">RIYADH VISION</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">SMART CITY</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">GLOBAL INVEST</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">LUXURY REALTY</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">FUTURE HOMES</span>
+  </div>
+</div>
+
+<!-- ===== الإحصائيات ===== -->
+<section class="py-20 relative z-10">
+  <div class="max-w-6xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div class="glass-card p-6 text-center reveal">
+      <div class="stat-num" data-target="50">0</div>
+      <div class="text-xs mt-2 font-semibold" style="color:var(--gold)">+ مشروع عقاري</div>
+    </div>
+    <div class="glass-card p-6 text-center reveal reveal-delay-1">
+      <div class="stat-num" data-target="2500">0</div>
+      <div class="text-xs mt-2 font-semibold" style="color:var(--gold)">+ مستثمر راضٍ</div>
+    </div>
+    <div class="glass-card p-6 text-center reveal reveal-delay-2">
+      <div class="stat-num" data-target="35">0</div>
+      <div class="text-xs mt-2 font-semibold" style="color:var(--gold)">% عائد سنوي</div>
+    </div>
+    <div class="glass-card p-6 text-center reveal reveal-delay-3">
+      <div class="stat-num" data-target="10">0</div>
+      <div class="text-xs mt-2 font-semibold" style="color:var(--gold)">+ سنوات خبرة</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== من نحن ===== -->
+<section id="about" class="py-24 relative z-10">
+  <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-16 items-center">
+    <div class="reveal">
+      <div class="section-label">ABOUT US</div>
+      <h2 class="section-title mb-4">بيت الأمان<br><span style="color:var(--gold)">وجهتك الموثوقة عبر الحدود</span></h2>
+      <div class="gold-divider mb-6"></div>
+      <p class="section-desc mb-6">
+        تُعد شركة بيت الأمان للاستثمار العقاري والسياحي وجهتك الموثوقة للاستثمار العقاري والتطوير السياحي داخل جمهورية مصر العربية والدول العربية والأوروبية. نتميز بتقديم محفظة عقارية وسياحية متنوعة تشمل العقارات السكنية الحديثة، المراكز التجارية المتميزة، والمنتجعات السياحية الفاخرة.
+      </p>
+      <p class="section-desc mb-8">
+        نهدف إلى بناء شراكات طويلة الأجل مع عملائنا في دول الخليج العربي وأوروبا ومصر، من خلال تقديم فرص استثمارية آمنة تحقق أعلى عوائد استثمارية وتلبي تطلعات الحياة العصرية — مدعومة بتحليل السوق الذكي، والجولات الافتراضية ثلاثية الأبعاد، ومستشارنا الرقمي "أمان".
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <button class="btn-gold text-sm" onclick="scrollToSection('projects')"><i class="fas fa-building"></i> تصفح المشاريع</button>
+        <button class="btn-glass text-sm" onclick="scrollToSection('contact')"><i class="fas fa-phone"></i> تواصل معنا</button>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2 relative">
+      <div class="glass-card p-2">
+        <img src="https://picsum.photos/seed/bytelaman-about/600/450.jpg" alt="مقر بيت الأمان" class="w-full h-auto rounded-2xl" loading="lazy">
+      </div>
+      <div class="absolute -bottom-6 -right-6 glass-card px-5 py-4 flex items-center gap-3" style="border-color:var(--emerald)">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(16,185,129,0.15)">
+          <i class="fas fa-shield-halved" style="color:var(--emerald)"></i>
+        </div>
+        <div>
+          <div class="text-sm font-bold" style="color:var(--emerald)">شهادة ضمان</div>
+          <div class="text-xs" style="color:var(--text2)">استثمار آمن 100%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== الرؤية والرسالة ===== -->
+<section id="vision" class="py-24 relative z-10" style="background:var(--bg2)">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-14">
+      <div class="section-label reveal">VISION & MISSION</div>
+      <h2 class="section-title mb-4 reveal">رؤيتنا <span style="color:var(--gold)">ورسالتنا</span></h2>
+      <div class="gold-divider mx-auto reveal"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-7">
+      <div class="glass-card p-8 reveal">
+        <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
+          <i class="fas fa-eye text-xl" style="color:var(--gold)"></i>
+        </div>
+        <h3 class="font-bold text-xl mb-3">رؤيتنا</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:2">أن نكون الجسر العقاري والسياحي الأكثر أماناً وموثوقية الذي يربط بين الفرص الاستثمارية الواعدة في مصر ودول الخليج وأوروبا.</p>
+      </div>
+      <div class="glass-card p-8 reveal reveal-delay-1">
+        <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.2)">
+          <i class="fas fa-paper-plane text-xl" style="color:var(--blue)"></i>
+        </div>
+        <h3 class="font-bold text-xl mb-3">رسالتنا</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:2">تقديم حلول عقارية وسياحية متكاملة وعابرة للحدود، تضمن الأمان الاستثماري وتوفر تجارب سكنية وسياحية فريدة، مع الالتزام بأعلى معايير المصداقية والشفافية.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== مجالات عملنا ===== -->
+<section id="portfolio" class="py-24 relative z-10">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-14">
+      <div class="section-label reveal">OUR PORTFOLIO</div>
+      <h2 class="section-title mb-4 reveal">مجالات <span style="color:var(--gold)">عملنا</span></h2>
+      <div class="gold-divider mx-auto mb-4 reveal"></div>
+      <p class="section-desc mx-auto reveal">تغطي خدماتنا ومشاريعنا ثلاثة قطاعات رئيسية داخل مصر وخارجها</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-7">
+      <div class="glass-card p-8 text-center reveal">
+        <div class="w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
+          <i class="fas fa-house-chimney text-2xl" style="color:var(--gold)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-3">العقارات السكنية</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">وحدات وشقق فاخرة، شاليهات، وفيلل مصممة لتلائم أنماط الحياة العصرية وتوفر الراحة والأمان للعائلات والمستثمرين.</p>
+      </div>
+      <div class="glass-card p-8 text-center reveal reveal-delay-1">
+        <div class="w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.2)">
+          <i class="fas fa-briefcase text-2xl" style="color:var(--blue)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-3">العقارات التجارية</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">مكاتب إدارية، ومحلات تجارية، ومراكز أعمال في مواقع استراتيجية حيوية تضمن أعلى عائد على الاستثمار واستدامة الأعمال.</p>
+      </div>
+      <div class="glass-card p-8 text-center reveal reveal-delay-2">
+        <div class="w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)">
+          <i class="fas fa-umbrella-beach text-2xl" style="color:var(--emerald)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-3">المنتجعات والمشاريع السياحية</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">إدارة وتطوير وتسويق الفنادق والمنتجعات السياحية الفاخرة التي توفر تجارب استجمام استثنائية وفرصاً استثمارية سياحية واعدة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== الخدمات ===== -->
+<section class="py-24 relative z-10" style="background:var(--bg2)">
+  <div class="max-w-6xl mx-auto px-5 text-center">
+    <div class="section-label reveal">WHY CHOOSE US?</div>
+    <h2 class="section-title mb-4 reveal">لماذا تختار <span style="color:var(--gold)">بيت الأمان</span>؟</h2>
+    <div class="gold-divider mx-auto mb-12 reveal"></div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass-card p-7 text-center reveal">
+        <div class="w-14 h-14 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
+          <i class="fas fa-earth-africa text-xl" style="color:var(--gold)"></i>
+        </div>
+        <h3 class="font-bold text-base mb-3">تغطية إقليمية ودولية</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.8">خيارات استثمارية متنوعة تجمع بين الأسواق الواعدة في مصر والخليج وأوروبا</p>
+      </div>
+      <div class="glass-card p-7 text-center reveal reveal-delay-1">
+        <div class="w-14 h-14 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)">
+          <i class="fas fa-shield-halved text-xl" style="color:var(--emerald)"></i>
+        </div>
+        <h3 class="font-bold text-base mb-3">أمان واستقرار الاستثمار</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.8">دراسات جدوى دقيقة واستشارات قانونية وعقارية لحماية رأس المال وضمان أعلى العوائد</p>
+      </div>
+      <div class="glass-card p-7 text-center reveal reveal-delay-2">
+        <div class="w-14 h-14 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.2)">
+          <i class="fas fa-layer-group text-xl" style="color:var(--blue)"></i>
+        </div>
+        <h3 class="font-bold text-base mb-3">تنوع المشاريع</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.8">خيارات متعددة تناسب الأغراض السكنية والتجارية والسياحية على حد سواء</p>
+      </div>
+      <div class="glass-card p-7 text-center reveal reveal-delay-3">
+        <div class="w-14 h-14 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
+          <i class="fas fa-handshake-angle text-xl" style="color:var(--gold)"></i>
+        </div>
+        <h3 class="font-bold text-base mb-3">خدمات متكاملة</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.8">متابعة وإدارة الأملاك العقارية والسياحية قبل وبعد البيع على مدار الساعة</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== المشاريع ===== -->
+<section id="projects" class="py-24 relative z-10">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-14">
+      <div class="section-label reveal">PROJECTS</div>
+      <h2 class="section-title mb-4 reveal">وجهات <span style="color:var(--gold)">استثمارية</span> استثنائية</h2>
+      <div class="gold-divider mx-auto mb-4 reveal"></div>
+      <p class="section-desc mx-auto reveal">محفظة متنوعة من المشاريع السكنية والتجارية والمنتجعات في مصر والخليج وأوروبا</p>
+    </div>
+    <!-- فلاتر -->
+    <div class="flex flex-wrap justify-center gap-3 mb-10 reveal">
+      <button class="filter-btn active btn-glass text-sm" data-filter="all">الكل</button>
+      <button class="filter-btn btn-glass text-sm" data-filter="residential">سكني</button>
+      <button class="filter-btn btn-glass text-sm" data-filter="commercial">تجاري</button>
+      <button class="filter-btn btn-glass text-sm" data-filter="resort">منتجعات سياحية</button>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7" id="projectsGrid">
+      <!-- المشاريع تُولّد بالجافاسكربت -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== التواجد الجغرافي ===== -->
+<section id="reach" class="py-24 relative z-10" style="background:var(--bg2)">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-14">
+      <div class="section-label reveal">GLOBAL REACH</div>
+      <h2 class="section-title mb-4 reveal">التواجد <span style="color:var(--gold)">الجغرافي</span></h2>
+      <div class="gold-divider mx-auto mb-4 reveal"></div>
+      <p class="section-desc mx-auto reveal">استثمارك الآمن.. عبر الحدود — حضور يمتد من قلب مصر إلى الخليج وأوروبا</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-7">
+      <div class="glass-card p-8 text-center reveal">
+        <div class="w-16 h-16 rounded-full mx-auto mb-5 flex items-center justify-center" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25)">
+          <i class="fas fa-landmark-marked text-2xl" style="color:var(--gold)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-3">داخل مصر</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">تغطية شاملة للمدن الجديدة، العاصمة الإدارية، المناطق الساحلية، والمناطق السياحية الرئيسية.</p>
+      </div>
+      <div class="glass-card p-8 text-center reveal reveal-delay-1">
+        <div class="w-16 h-16 rounded-full mx-auto mb-5 flex items-center justify-center" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.25)">
+          <i class="fas fa-mosque text-2xl" style="color:var(--blue)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-3">دول الخليج العربي</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">استشارات وفرص استثمارية تناسب المستثمر الخليجي والباحثين عن التوسع العقاري والسياحي في المنطقة.</p>
+      </div>
+      <div class="glass-card p-8 text-center reveal reveal-delay-2">
+        <div class="w-16 h-16 rounded-full mx-auto mb-5 flex items-center justify-center" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25)">
+          <i class="fas fa-earth-europe text-2xl" style="color:var(--emerald)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-3">الدول الأوروبية</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">إتاحة فرص استثمار عقاري دولية وإدارة أملاك سياحية وفق المعايير العالمية.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== للمستثمرين الدوليين ===== -->
+<section id="investors" class="py-24 relative z-10">
+  <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <div class="section-label">INTERNATIONAL INVESTORS</div>
+      <h2 class="section-title mb-4">المستثمر <span style="color:var(--gold)">الدولي</span> أولاً</h2>
+      <div class="gold-divider mb-6"></div>
+      <p class="section-desc mb-7">قسم مخصص لمستثمري الخليج وأوروبا يشرح التسهيلات والقوانين العقارية المتاحة داخل مصر، ونرافقك خطوة بخطوة حتى تسلم مفاتيح وحدتك.</p>
+      <ul class="flex flex-col gap-4">
+        <li class="flex items-start gap-3"><i class="fas fa-circle-check mt-1" style="color:var(--emerald)"></i><span class="text-sm" style="line-height:1.8">حق ملكية كاملة للأجانب في المناطق المسموح بها قانونياً</span></li>
+        <li class="flex items-start gap-3"><i class="fas fa-circle-check mt-1" style="color:var(--emerald)"></i><span class="text-sm" style="line-height:1.8">إقامة استثمارية عند شراء عقار بقيمة محددة</span></li>
+        <li class="flex items-start gap-3"><i class="fas fa-circle-check mt-1" style="color:var(--emerald)"></i><span class="text-sm" style="line-height:1.8">استشارات قانونية وعقارية وفحص جاهزية المستندات</span></li>
+        <li class="flex items-start gap-3"><i class="fas fa-circle-check mt-1" style="color:var(--emerald)"></i><span class="text-sm" style="line-height:1.8">إدارة الأملاك والتأجير وصيانة الوحدة نيابةً عنك</span></li>
+        <li class="flex items-start gap-3"><i class="fas fa-circle-check mt-1" style="color:var(--emerald)"></i><span class="text-sm" style="line-height:1.8">أسعار بالدولار واليورو وخطط سداد مرنة عبر الحدود</span></li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="glass-card p-8 text-center">
+        <svg width="64" height="64" viewBox="0 0 120 260" fill="none" class="mx-auto mb-4">
+          <circle cx="60" cy="55" r="40" stroke="#C9A84C" stroke-width="6"/>
+          <circle cx="60" cy="55" r="26" stroke="#C9A84C" stroke-width="3.5"/>
+          <rect x="55" y="95" width="10" height="130" rx="3" fill="#C9A84C"/>
+          <rect x="65" y="160" width="22" height="7" rx="2" fill="#C9A84C"/>
+          <rect x="65" y="180" width="17" height="7" rx="2" fill="#C9A84C"/>
+          <rect x="65" y="200" width="12" height="7" rx="2" fill="#C9A84C"/>
+        </svg>
+        <h3 class="font-bold text-xl mb-2">اطلب دليل المستثمر الدولي</h3>
+        <p class="text-sm mb-6" style="color:var(--text2);line-height:1.9">ملف شامل بالقوانين والضرائب وإجراءات الشراء عن بُعد وأفضل الفرص الحالية — يصلك على بريدك مجاناً.</p>
+        <form class="flex flex-col sm:flex-row gap-3" onsubmit="event.preventDefault();this.reset();showToast('تم إرسال دليل المستثمر الدولي إلى بريدك')">
+          <input class="form-input flex-1 text-sm" type="email" placeholder="بريدك الإلكتروني" required aria-label="البريد الإلكتروني">
+          <button type="submit" class="btn-gold text-sm justify-center"><i class="fas fa-key"></i> أرسل لي الدليل</button>
+        </form>
+        <button class="btn-glass text-sm w-full justify-center mt-3" onclick="scrollToSection('contact')"><i class="fas fa-headset"></i> أو حدّد موعد استشارة مجانية</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== المنصة الإعلامية ===== -->
+<section id="media" class="py-24 relative z-10" style="background:var(--bg2)">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-14">
+      <div class="section-label reveal">MEDIA PLATFORM</div>
+      <h2 class="section-title mb-4 reveal">رؤية <span style="color:var(--gold)">عقارية</span></h2>
+      <div class="gold-divider mx-auto mb-4 reveal"></div>
+      <p class="section-desc mx-auto reveal">برنامج إعلامي تفاعلي يسلط الضوء على أحدث تطورات السوق العقاري</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-7">
+      <div class="glass-card overflow-hidden reveal group cursor-pointer">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/media-ep1/500/300.jpg" alt="الحلقة الأولى" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+          <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:var(--gold)">
+              <i class="fas fa-play text-black text-lg mr-[-2px]"></i>
+            </div>
+          </div>
+          <div class="absolute bottom-3 right-3 px-2 py-1 rounded text-xs font-bold" style="background:var(--gold);color:#000">45:20</div>
+        </div>
+        <div class="p-5">
+          <span class="blog-tag mb-2">الحلقة 12</span>
+          <h3 class="font-bold mt-2 mb-2">مستقبل العقارات في العاصمة الإدارية 2030</h3>
+          <p class="text-xs" style="color:var(--text2)">ضيفنا: د. أحمد المنصور – خبير اقتصادي</p>
+        </div>
+      </div>
+      <div class="glass-card overflow-hidden reveal reveal-delay-1 group cursor-pointer">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/media-ep2/500/300.jpg" alt="الحلقة الثانية" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+          <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:var(--gold)">
+              <i class="fas fa-play text-black text-lg mr-[-2px]"></i>
+            </div>
+          </div>
+          <div class="absolute bottom-3 right-3 px-2 py-1 rounded text-xs font-bold" style="background:var(--gold);color:#000">38:15</div>
+        </div>
+        <div class="p-5">
+          <span class="blog-tag mb-2">الحلقة 11</span>
+          <h3 class="font-bold mt-2 mb-2">لماذا دبي تبقى الوجهة الأولى للمستثمر العربي</h3>
+          <p class="text-xs" style="color:var(--text2)">ضيفنا: م. خالد الراشد – مستشار عقاري بدبي</p>
+        </div>
+      </div>
+      <div class="glass-card overflow-hidden reveal reveal-delay-2 group cursor-pointer">
+        <div class="relative">
+          <img src="https://picsum.photos/seed/media-ep3/500/300.jpg" alt="الحلقة الثالثة" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+          <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:var(--gold)">
+              <i class="fas fa-play text-black text-lg mr-[-2px]"></i>
+            </div>
+          </div>
+          <div class="absolute bottom-3 right-3 px-2 py-1 rounded text-xs font-bold" style="background:var(--gold);color:#000">52:40</div>
+        </div>
+        <div class="p-5">
+          <span class="blog-tag mb-2">بث مباشر</span>
+          <h3 class="font-bold mt-2 mb-2">الساحل الشمالي: فرصة ذهبية أم فقاعة؟</h3>
+          <p class="text-xs" style="color:var(--text2)">ندوة مفتوحة مع نخبة من الخبراء</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== الشهادات ===== -->
+<section class="py-24 relative z-10">
+  <div class="max-w-4xl mx-auto px-5 text-center">
+    <div class="section-label reveal">TESTIMONIALS</div>
+    <h2 class="section-title mb-4 reveal">تجارب <span style="color:var(--gold)">المستثمرين</span> العالميين</h2>
+    <div class="gold-divider mx-auto mb-14 reveal"></div>
+    <div id="testimonialSlider" class="relative overflow-hidden">
+      <div class="testimonial-slide glass-card testimonial-card" id="currentTestimonial">
+        <!-- يُملأ بالجافاسكربت -->
+      </div>
+      <div class="flex justify-center gap-3 mt-8">
+        <button onclick="prevTestimonial()" class="w-10 h-10 rounded-full glass-card flex items-center justify-center" style="border-color:var(--border)" aria-label="السابق"><i class="fas fa-chevron-right text-sm" style="color:var(--gold)"></i></button>
+        <div id="testimonialDots" class="flex items-center gap-2"></div>
+        <button onclick="nextTestimonial()" class="w-10 h-10 rounded-full glass-card flex items-center justify-center" style="border-color:var(--border)" aria-label="التالي"><i class="fas fa-chevron-left text-sm" style="color:var(--gold)"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== المدونة ===== -->
+<section id="blog" class="py-24 relative z-10" style="background:var(--bg2)">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-14">
+      <div class="section-label reveal">BLOG & INSIGHTS</div>
+      <h2 class="section-title mb-4 reveal">رؤى وتحليلات <span style="color:var(--gold)">السوق</span></h2>
+      <div class="gold-divider mx-auto mb-4 reveal"></div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-7">
+      <article class="glass-card blog-card overflow-hidden reveal group cursor-pointer">
+        <div class="overflow-hidden"><img src="https://picsum.photos/seed/blog-1/500/300.jpg" alt="توقعات السوق" loading="lazy"></div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="blog-tag">توقعات</span>
+            <span class="text-xs" style="color:var(--text2)"><i class="far fa-calendar-alt ml-1"></i> 15 يناير 2025</span>
+          </div>
+          <h3 class="font-bold mb-2 group-hover:text-[var(--gold)] transition-colors">توقعات سوق العقارات المصري في النصف الثاني من 2025</h3>
+          <p class="text-sm" style="color:var(--text2);line-height:1.7">تحليل معمق يستند إلى بيانات السوق والاتجاهات الاقتصادية الكبرى...</p>
+        </div>
+      </article>
+      <article class="glass-card blog-card overflow-hidden reveal reveal-delay-1 group cursor-pointer">
+        <div class="overflow-hidden"><img src="https://picsum.photos/seed/blog-2/500/300.jpg" alt="دليل المستثمر" loading="lazy"></div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="blog-tag">دليل</span>
+            <span class="text-xs" style="color:var(--text2)"><i class="far fa-calendar-alt ml-1"></i> 8 يناير 2025</span>
+          </div>
+          <h3 class="font-bold mb-2 group-hover:text-[var(--gold)] transition-colors">الدليل الشامل للمستثمر الأجنبي في مصر 2025</h3>
+          <p class="text-sm" style="color:var(--text2);line-height:1.7">كل ما تحتاج معرفته عن القوانين والإجراءات وفرص الاستثمار...</p>
+        </div>
+      </article>
+      <article class="glass-card blog-card overflow-hidden reveal reveal-delay-2 group cursor-pointer">
+        <div class="overflow-hidden"><img src="https://picsum.photos/seed/blog-3/500/300.jpg" alt="مقارنة العوائد" loading="lazy"></div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="blog-tag">تحليل</span>
+            <span class="text-xs" style="color:var(--text2)"><i class="far fa-calendar-alt ml-1"></i> 2 يناير 2025</span>
+          </div>
+          <h3 class="font-bold mb-2 group-hover:text-[var(--gold)] transition-colors">مقارنة عوائد العقارات: دبي مقابل القاهرة الجديدة</h3>
+          <p class="text-sm" style="color:var(--text2);line-height:1.7">دراسة مقارنة شاملة للعوائد الاستثمارية ومخاطر كل سوق...</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== تواصل معنا ===== -->
+<section id="contact" class="py-24 relative z-10">
+  <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-16">
+    <div class="reveal">
+      <div class="section-label">CONTACT US</div>
+      <h2 class="section-title mb-4">افتح باب <span style="color:var(--gold)">الفرصة</span></h2>
+      <div class="gold-divider mb-6"></div>
+      <p class="section-desc mb-8">فريقنا جاهز لمساعدتك في اتخاذ القرار الاستثماري الأنسب. تواصل معنا الآن ودعنا نرشدك إلى فرصتك التالية.</p>
+      <div class="flex flex-col gap-5">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
+            <i class="fas fa-map-marker-alt" style="color:var(--gold)"></i>
+          </div>
+          <div>
+            <div class="font-semibold text-sm">العنوان</div>
+            <div class="text-xs" style="color:var(--text2)">القاهرة الجديدة – العاصمة الإدارية – برج بيت الأمان</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.2)">
+            <i class="fas fa-phone" style="color:var(--blue)"></i>
+          </div>
+          <div>
+            <div class="font-semibold text-sm">الهاتف</div>
+            <div class="text-xs" style="color:var(--text2)" dir="ltr">+20 100 123 4567</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)">
+            <i class="fas fa-envelope" style="color:var(--emerald)"></i>
+          </div>
+          <div>
+            <div class="font-semibold text-sm">البريد الإلكتروني</div>
+            <div class="text-xs" style="color:var(--text2)">invest@bytelaman.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <form class="glass-card p-8 flex flex-col gap-5" id="contactForm" onsubmit="handleContact(event)">
+        <div class="grid sm:grid-cols-2 gap-5">
+          <input class="form-input" type="text" placeholder="الاسم الكامل" required aria-label="الاسم">
+          <input class="form-input" type="tel" placeholder="رقم الهاتف" required aria-label="الهاتف">
+        </div>
+        <input class="form-input" type="email" placeholder="البريد الإلكتروني" required aria-label="البريد">
+        <select class="form-input" required aria-label="الدولة">
+          <option value="" disabled selected style="color:var(--text2)">الدولة المستهدفة للاستثمار</option>
+          <option>مصر</option>
+          <option>دول الخليج العربي</option>
+          <option>دول أوروبا</option>
+        </select>
+        <select class="form-input" required aria-label="نوع العقار">
+          <option value="" disabled selected style="color:var(--text2)">نوع العقار المطلوب</option>
+          <option>سكني</option>
+          <option>تجاري</option>
+          <option>منتجع سياحي</option>
+          <option>متعدد الأغراض</option>
+        </select>
+        <textarea class="form-input" rows="4" placeholder="رسالتك أو استفسارك..." aria-label="الرسالة"></textarea>
+        <button type="submit" class="btn-gold justify-center text-sm"><i class="fas fa-paper-plane"></i> أرسل استفسارك</button>
+      </form>
+      <div id="contactSuccess" class="hidden glass-card p-6 text-center mt-4" style="border-color:var(--emerald)">
+        <i class="fas fa-check-circle text-3xl mb-3" style="color:var(--emerald)"></i>
+        <p class="font-bold" style="color:var(--emerald)">تم إرسال استفسارك بنجاح</p>
+        <p class="text-sm mt-1" style="color:var(--text2)">سيتواصل معك فريقنا خلال 24 ساعة</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== التذييل ===== -->
+<footer class="py-16 relative z-10">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+      <div>
+        <div class="footer-brand mb-4">BYTELAMAN</div>
+        <p class="text-sm mb-5" style="color:var(--text2);line-height:1.8">بيت الأمان.. مفتاحك لثروة الغد. نحن نبني جسور الثقة بين المستثمرين وفرص العقار الاستثنائية.</p>
+        <div class="flex gap-3">
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text2)" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text2)" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text2)" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text2)" aria-label="لينكدإن"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text2)" aria-label="إكس"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-bold mb-5 text-sm" style="color:var(--gold)">روابط سريعة</h4>
+        <ul class="flex flex-col gap-3">
+          <li><a href="#about" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">من نحن</a></li>
+          <li><a href="#projects" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">المشاريع</a></li>
+          <li><a href="#media" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">المنصة الإعلامية</a></li>
+          <li><a href="#investors" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">المستثمر الدولي</a></li>
+          <li><a href="#blog" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">المدونة</a></li>
+          <li><a href="#contact" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">تواصل معنا</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-5 text-sm" style="color:var(--gold)">المواقع</h4>
+        <ul class="flex flex-col gap-3">
+          <li><span class="text-sm" style="color:var(--text2)"><i class="fas fa-location-dot ml-1" style="color:var(--gold)"></i>مصر: العاصمة الإدارية والمدن الجديدة والساحل</span></li>
+          <li><span class="text-sm" style="color:var(--text2)"><i class="fas fa-location-dot ml-1" style="color:var(--blue)"></i>الخليج العربي: دبي – الرياض</span></li>
+          <li><span class="text-sm" style="color:var(--text2)"><i class="fas fa-location-dot ml-1" style="color:var(--emerald)"></i>أوروبا: اليونان وإسبانيا</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-5 text-sm" style="color:var(--gold)">النشرة البريدية</h4>
+        <p class="text-sm mb-4" style="color:var(--text2);line-height:1.7">احصل على أحدث العروض وتحليلات السوق مباشرة في بريدك</p>
+        <form class="flex gap-2" onsubmit="event.preventDefault();this.querySelector('input').value='';showToast('تم الاشتراك بنجاح')">
+          <input class="form-input flex-1 text-sm" type="email" placeholder="بريدك الإلكتروني" required aria-label="البريد الإلكتروني">
+          <button type="submit" class="btn-gold px-4 text-sm" aria-label="اشتراك"><i class="fas fa-arrow-left"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4" style="border-top:1px solid var(--border)">
+      <p class="text-xs" style="color:var(--text2)">&copy; 2025 BYTELAMAN – بيت الأمان. جميع الحقوق محفوظة.</p>
+      <p class="text-xs font-orbitron" style="color:var(--gold);opacity:.5">BYTELAMAN – Your Key to Tomorrow's Wealth</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== المفتاح العائم ===== -->
+<div id="floating-key" aria-label="قائمة المفتاح السريعة">
+  <svg width="48" height="48" viewBox="0 0 120 260" fill="none">
+    <circle cx="60" cy="55" r="40" stroke="#C9A84C" stroke-width="6"/>
+    <circle cx="60" cy="55" r="26" stroke="#C9A84C" stroke-width="3.5"/>
+    <rect x="55" y="95" width="10" height="130" rx="3" fill="#C9A84C"/>
+    <rect x="65" y="160" width="22" height="7" rx="2" fill="#C9A84C"/>
+    <rect x="65" y="180" width="17" height="7" rx="2" fill="#C9A84C"/>
+    <rect x="65" y="200" width="12" height="7" rx="2" fill="#C9A84C"/>
+  </svg>
+  <div class="key-menu" id="keyMenu">
+    <div class="key-menu-item" onclick="scrollToSection('projects');closeKeyMenu()"><i class="fas fa-building"></i> أبرز العروض</div>
+    <div class="key-menu-item" onclick="openChatbot();closeKeyMenu()"><i class="fas fa-robot"></i> تحدث مع أمان</div>
+    <div class="key-menu-item" onclick="scrollToSection('media');closeKeyMenu()"><i class="fas fa-play-circle"></i> رؤية عقارية</div>
+    <div class="key-menu-item" onclick="scrollToSection('contact');closeKeyMenu()"><i class="fas fa-calendar-check"></i> احجز موعد</div>
+  </div>
+</div>
+
+<!-- ===== زر واتساب ===== -->
+<div id="whatsapp-btn" onclick="window.open('https://wa.me/201001234567?text='+encodeURIComponent('مرحباً، أريد الاستفسار عن فرص الاستثمار في بيت الأمان'),' _blank')" aria-label="تواصل عبر واتساب">
+  <div class="ripple"></div>
+  <i class="fab fa-whatsapp relative z-10"></i>
+</div>
+
+<!-- ===== روبوت أمان ===== -->
+<button id="chatbot-btn" onclick="toggleChatbot()" aria-label="مستشار أمان الذكي">
+  <i class="fas fa-key"></i>
+</button>
+<div id="chatbot-popup" role="dialog" aria-label="محادثة مع أمان">
+  <div class="chat-header">
+    <div class="w-9 h-9 rounded-full bg-black/20 flex items-center justify-center">
+      <i class="fas fa-key text-sm"></i>
+    </div>
+    <div>
+      <h3>أمان – المستشار الذكي</h3>
+      <span>متصل الآن <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#10B981;margin-right:4px"></span></span>
+    </div>
+    <button onclick="toggleChatbot()" style="margin-right:auto;background:none;border:none;color:#000;cursor:pointer;font-size:16px" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">مرحباً بك في بيت الأمان – BYTELAMAN. أنا أمان، مستشارك الذكي. مفتاحك إلى مستقبل استثماري آمن. كيف يمكنني مساعدتك؟</div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chatInput" placeholder="اكتب رسالتك..." onkeydown="if(event.key==='Enter')sendChat()" aria-label="رسالتك">
+    <button onclick="sendChat()" aria-label="إرسال"><i class="fas fa-paper-plane text-sm"></i></button>
+  </div>
+</div>
+
+<!-- ===== زر العودة للأعلى ===== -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="العودة للأعلى">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- ===== إشعار Toast ===== -->
+<div id="toast" style="position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);z-index:200;padding:12px 28px;border-radius:12px;background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--emerald);color:var(--emerald);font-size:14px;font-weight:600;opacity:0;visibility:hidden;transition:all .4s;pointer-events:none"></div>
+
+<script>
+/* ===== بيانات المشاريع ===== */
+const projects = [
+  {id:1,name:'برج النيل الذهبي',location:'العاصمة الإدارية – مصر',filter:'commercial',price:'3,200,000 ج.م',roi:'32%',img:'bytelaman-p1',tag:'مراكز أعمال'},
+  {id:2,name:'واحة الخليج',location:'دبي مارينا – الإمارات',filter:'residential',price:'4,500,000 درهم',roi:'28%',img:'bytelaman-p2',tag:'سكني فاخر'},
+  {id:3,name:'أبراج الساحل',location:'الساحل الشمالي – مصر',filter:'resort',price:'2,800,000 ج.م',roi:'35%',img:'bytelaman-p3',tag:'منتجع سياحي'},
+  {id:4,name:'مركز المال العالمي',location:'القاهرة الجديدة – مصر',filter:'commercial',price:'5,100,000 ج.م',roi:'30%',img:'bytelaman-p4',tag:'تجاري'},
+  {id:5,name:'فيلات الأفق',location:'مرسى علم – البحر الأحمر',filter:'resort',price:'8,500,000 ج.م',roi:'34%',img:'bytelaman-p6',tag:'فيلات فاخرة'},
+  {id:6,name:'أثينا ريفييرا',location:'أثينا – اليونان',filter:'residential',price:'€310,000',roi:'24%',img:'bytelaman-p8',tag:'سكني أوروبي'},
+];
+
+/* ===== بيانات الشهادات ===== */
+const testimonials = [
+  {name:'ماركو روسي',role:'مستثمر إيطالي',text:'بيت الأمان قدّم لي تجربة استثمارية استثنائية. من التحليل الذكي إلى الجولة الافتراضية، كل شيء كان احترافياً بمعنى الكلمة. أنصح أي مستثمر أوروبي بالتعامل معهم.',avatar:'marco-rossi'},
+  {name:'سارة المنصوري',role:'مستثمرة إماراتية',text:'استثمرت في 3 مشاريع عبر بيت الأمان والعوائد فاقت توقعاتي. الروبوت الذكي أمان ساعدني في اتخاذ القرار الصحيح بسرعة.',avatar:'sara-mansouri'},
+  {name:'جون كارتر',role:'مستثمر بريطاني',text:'الشفافية في التعامل والبيانات الدقيقة جعلتني أثق بهم تماماً. شهادة الضمان الاستثماري أعطتني راحة بال لا تُقدّر بثمن.',avatar:'john-carter'},
+  {name:'أحمد الشمري',role:'مستثمر سعودي',text:'تعاملت مع شركات عقارية كثيرة لكن بيت الأمان مختلف فعلاً. التكنولوجيا المستخدمة والخدمة الشخصية جعلت التجربة مميزة.',avatar:'ahmed-shamri'},
+];
+
+/* ===== متغيرات عامة ===== */
+let currentTestimonial = 0;
+let chatbotOpen = false;
+let keyMenuOpen = false;
+
+/* ===== نظام الجزيئات ===== */
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouse = {x: -1000, y: -1000};
+let isLight = false;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+/* إنشاء الجزيئات */
+function createParticles() {
+  const count = window.innerWidth < 768 ? 45 : 100;
+  particles = [];
+  const colors = isLight
+    ? ['rgba(160,124,42,0.5)','rgba(26,140,255,0.3)','rgba(16,185,129,0.3)']
+    : ['rgba(201,168,76,0.6)','rgba(232,212,139,0.4)','rgba(26,140,255,0.3)','rgba(16,185,129,0.3)','rgba(255,255,255,0.2)'];
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      size: Math.max(0.5, Math.random() * 2.5),
+      color: colors[Math.floor(Math.random() * colors.length)],
+      baseOpacity: Math.random() * 0.5 + 0.2,
+      opacity: 0,
+    });
+  }
+}
+createParticles();
+
+/* تحريك ورسم الجزيئات */
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const lineColor = isLight ? '160,124,42' : '201,168,76';
+
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    /* تفاعل الماوس */
+    const dx = mouse.x - p.x;
+    const dy = mouse.y - p.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 160) {
+      p.x -= dx * 0.008;
+      p.y -= dy * 0.008;
+    }
+    /* ظهور تدريجي */
+    if (p.opacity < p.baseOpacity) p.opacity += 0.005;
+  });
+
+  /* خطوط الربط */
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 110) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = 'rgba(' + lineColor + ',' + (0.08 * (1 - dist / 110)).toFixed(3) + ')';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+
+  /* رسم الجزيئات */
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, Math.max(0.3, p.size), 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = Math.max(0, p.opacity);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+/* ===== تتبع الماوس ===== */
+const mouseGlow = document.getElementById('mouse-glow');
+document.addEventListener('mousemove', e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+  mouseGlow.style.left = e.clientX + 'px';
+  mouseGlow.style.top = e.clientY + 'px';
+});
+document.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
+
+/* ===== مشهد الافتتاح – المنزل والمفتاح ===== */
+const introEl = document.getElementById('intro');
+let introDone = false;
+const introTimers = [];
+
+/* نغمة فتح القفل الفاخرة */
+function playUnlockChime() {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const ac = playUnlockChime.ctx || (playUnlockChime.ctx = new AC());
+    if (ac.state === 'suspended') ac.resume().catch(() => {});
+    const t = ac.currentTime;
+    [[660, 0], [880, 0.09], [1320, 0.18]].forEach(([f, d]) => {
+      const o = ac.createOscillator();
+      const g = ac.createGain();
+      o.type = 'triangle';
+      o.frequency.value = f;
+      g.gain.setValueAtTime(0, t + d);
+      g.gain.linearRampToValueAtTime(0.12, t + d + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + d + 0.6);
+      o.connect(g).connect(ac.destination);
+      o.start(t + d);
+      o.stop(t + d + 0.65);
+    });
+  } catch (e) { /* الصوت اختياري */ }
+}
+
+function finishIntro() {
+  if (introDone) return;
+  introDone = true;
+  introTimers.forEach(clearTimeout);
+  document.body.classList.add('ready');
+  document.body.classList.remove('no-scroll');
+  introEl.classList.add('done');
+  setTimeout(() => introEl.remove(), 1000);
+}
+
+document.body.classList.add('no-scroll');
+requestAnimationFrame(() => introEl.classList.add('play'));
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  finishIntro();
+} else {
+  introTimers.push(setTimeout(playUnlockChime, 5650));
+  introTimers.push(setTimeout(finishIntro, 8600));
+}
+document.getElementById('skipIntro').addEventListener('click', () => {
+  playUnlockChime();
+  finishIntro();
+});
+
+/* ===== تبديل الوضع ===== */
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+  isLight = !isLight;
+  document.body.classList.toggle('light-mode', isLight);
+  themeToggle.innerHTML = isLight ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  /* تحديث ألوان الجزيئات */
+  createParticles();
+});
+
+/* ===== قائمة الموبايل ===== */
+document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('hidden');
+});
+/* إغلاق قائمة الموبايل عند النقر على رابط */
+document.querySelectorAll('#mobileMenu .nav-link').forEach(link => {
+  link.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'));
+});
+
+/* ===== التنقل عند التمرير ===== */
+const navbar = document.getElementById('navbar');
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section[id]');
+
+window.addEventListener('scroll', () => {
+  /* ظل التنقل */
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+  /* زر العودة للأعلى */
+  document.getElementById('back-top').classList.toggle('show', window.scrollY > 500);
+  /* تحديث الرابط النشط */
+  let current = '';
+  sections.forEach(sec => {
+    const top = sec.offsetTop - 120;
+    if (window.scrollY >= top) current = sec.getAttribute('id');
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+});
+
+/* ===== التمرير السلس ===== */
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ===== انيميشن الظهور عند التمرير ===== */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {threshold: 0.1, rootMargin: '0px 0px -40px 0px'});
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ===== عداد الأرقام ===== */
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = 'true';
+      const target = parseInt(entry.target.dataset.target);
+      let current = 0;
+      const step = Math.max(1, Math.floor(target / 60));
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        entry.target.textContent = current.toLocaleString('ar-EG');
+      }, 30);
+    }
+  });
+}, {threshold: 0.5});
+
+document.querySelectorAll('.stat-num').forEach(el => counterObserver.observe(el));
+
+/* ===== توليد بطاقات المشاريع ===== */
+function renderProjects(filter = 'all') {
+  const grid = document.getElementById('projectsGrid');
+  const filtered = filter === 'all' ? projects : projects.filter(p => p.filter === filter);
+  grid.innerHTML = '';
+  filtered.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'project-card glass-card reveal' + (i > 0 ? ' reveal-delay-' + Math.min(i, 4) : '');
+    card.innerHTML = `
+      <img src="https://picsum.photos/seed/${p.img}/600/400.jpg" alt="${p.name}" loading="lazy">
+      <div class="project-badge"><i class="fas fa-chart-line ml-1"></i> عائد ${p.roi}</div>
+      <div class="project-tag">${p.tag}</div>
+      <div class="project-overlay">
+        <h3 class="font-bold text-lg mb-1">${p.name}</h3>
+        <p class="text-xs mb-2" style="color:var(--text2)"><i class="fas fa-map-marker-alt ml-1" style="color:var(--gold)"></i>${p.location}</p>
+        <p class="text-sm font-bold mb-3" style="color:var(--gold)">${p.price}</p>
+        <button class="btn-gold text-xs w-full justify-center py-2" onclick="showToast('تم تسجيل اهتمامك – سيتواصل معك فريقنا قريباً')"><i class="fas fa-key"></i> استثمر الآن</button>
+      </div>
+    `;
+    grid.appendChild(card);
+    /* إعادة مراقبة العنصر الجديد */
+    revealObserver.observe(card);
+    /* تأخير الظهور */
+    setTimeout(() => card.classList.add('visible'), 100 + i * 120);
+  });
+}
+renderProjects();
+
+/* فلاتر المشاريع */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    btn.style.borderColor = 'var(--gold)';
+    btn.style.color = 'var(--gold)';
+    document.querySelectorAll('.filter-btn:not(.active)').forEach(b => {
+      b.style.borderColor = '';
+      b.style.color = '';
+    });
+    renderProjects(btn.dataset.filter);
+  });
+});
+
+/* ===== الشهادات ===== */
+function renderTestimonial() {
+  const t = testimonials[currentTestimonial];
+  const el = document.getElementById('currentTestimonial');
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(10px)';
+  setTimeout(() => {
+    el.innerHTML = `
+      <p class="text-sm leading-8 mb-6" style="color:var(--text);line-height:2">"${t.text}"</p>
+      <div class="flex items-center justify-center gap-4">
+        <img src="https://picsum.photos/seed/${t.avatar}/80/80.jpg" alt="${t.name}" class="w-12 h-12 rounded-full object-cover" style="border:2px solid var(--gold)">
+        <div class="text-right">
+          <div class="font-bold text-sm">${t.name}</div>
+          <div class="text-xs" style="color:var(--gold)">${t.role}</div>
+        </div>
+      </div>
+    `;
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  }, 300);
+  /* نقاط */
+  const dots = document.getElementById('testimonialDots');
+  dots.innerHTML = '';
+  testimonials.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.style.cssText = `width:${i===currentTestimonial?'24px':'8px'};height:8px;border-radius:4px;background:${i===currentTestimonial?'var(--gold)':'var(--border)'};transition:all .3s;cursor:pointer`;
+    dot.onclick = () => { currentTestimonial = i; renderTestimonial(); };
+    dots.appendChild(dot);
+  });
+}
+renderTestimonial();
+function nextTestimonial() { currentTestimonial = (currentTestimonial + 1) % testimonials.length; renderTestimonial(); }
+function prevTestimonial() { currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length; renderTestimonial(); }
+/* تبديل تلقائي */
+setInterval(nextTestimonial, 6000);
+
+/* ===== المفتاح العائم ===== */
+document.getElementById('floating-key').addEventListener('click', (e) => {
+  e.stopPropagation();
+  keyMenuOpen = !keyMenuOpen;
+  document.getElementById('keyMenu').classList.toggle('open', keyMenuOpen);
+});
+function closeKeyMenu() {
+  keyMenuOpen = false;
+  document.getElementById('keyMenu').classList.remove('open');
+}
+document.addEventListener('click', closeKeyMenu);
+
+/* ===== روبوت أمان ===== */
+function toggleChatbot() {
+  chatbotOpen = !chatbotOpen;
+  document.getElementById('chatbot-popup').classList.toggle('open', chatbotOpen);
+  if (chatbotOpen) document.getElementById('chatInput').focus();
+}
+function openChatbot() {
+  if (!chatbotOpen) toggleChatbot();
+}
+
+/* ردود أمان الذكية */
+const amanResponses = {
+  greeting: 'أهلاً وسهلاً بك! كيف يمكنني مساعدتك في رحلتك الاستثمارية؟',
+  invest: 'نوفر لك أكثر من 50 مشروعاً استثمارياً في القاهرة الجديدة والعاصمة الإدارية ودبي والساحل والرياض. ما هي المنطقة التي تهمك؟',
+  roi: 'عوائدنا الاستثمارية تتراوح بين 26% و35% سنوياً حسب المشروع والموقع. هل تريد تفاصيل عن مشروع محدد؟',
+  dubai: 'في دبي نوفر مشاريع سكنية فاخرة في مارينا وبرج خليفة ودبي لاند. العائد يبدأ من 28% سنوياً. هل تريد حجز جولة افتراضية؟',
+  cairo: 'القاهرة الجديدة والعاصمة الإدارية من أقوى الأسواق حالياً. لدينا برج النيل الذهبي ومركز المال العالمي بعوائد تصل إلى 32%.',
+  coast: 'الساحل الشمالي يقدم فرصاً استثنائية هذا الموسم. أبراج الساحل وفيلات الأفق بعوائد تصل إلى 35%.',
+  contact: 'يمكنك التواصل معنا عبر الهاتف: 01001234567 أو البريد: invest@bytelaman.com أو حجز موعد مباشرة من صفحة التواصل.',
+  tour: 'بالتأكيد! يمكنني ترتيب جولة افتراضية 360° لأي مشروع يهمك. ما هو المشروع الذي تريد زيارته؟',
+  foreign: 'نقدم دليلاً شاملاً للمستثمر الأجنبي يشمل الإجراءات القانونية والتمويل الدولي وشهادات الضمان. هل تريد إرساله لبريدك؟',
+  safe: 'الأمان هو أساس عملنا. نقدم شهادات ضمان استثماري رسمية، تقارير دورية، وتشفير كامل لبياناتك. استثمارك محمي 100%.',
+  europe: 'في أوروبا نوفر فرصاً عقارية وسياحية وفق المعايير العالمية — مثل مشروع أثينا ريفييرا في اليونان بإمكانيات إقامة استثمارية. هل تريد دليل المستثمر الدولي؟',
+  vision: 'رؤيتنا أن نكون الجسر العقاري والسياحي الأكثر أماناً وموثوقية بين مصر والخليج وأوروبا، ورسالتنا حلول متكاملة عابرة للحدود بأعلى معايير الشفافية.',
+  default: 'شكراً لرسالتك! يمكنني مساعدتك في: المشاريع السكنية والتجارية والمنتجعات، العوائد الاستثمارية، الاستثمار في مصر أو الخليج أو أوروبا، الجولات الافتراضية، أو حجز استشارة. ما الذي يهمك؟'
+};
+
+function getAmanResponse(msg) {
+  const m = msg.toLowerCase();
+  if (/مرحب|هلا|أهلا|سلام|هاي|hello|hi/.test(m)) return amanResponses.greeting;
+  if (/استثم|فرص|مشروع/.test(m)) return amanResponses.invest;
+  if (/عائد|ربح|roi|نسبة/.test(m)) return amanResponses.roi;
+  if (/دبي|امارات|imarat/.test(m)) return amanResponses.dubai;
+  if (/قاهرة|عاصم|مصر|cairo/.test(m)) return amanResponses.cairo;
+  if (/ساحل|بحر|شاطئ|coast/.test(m)) return amanResponses.coast;
+  if (/تواصل|اتصل|هاتف|phone|contact/.test(m)) return amanResponses.contact;
+  if (/جول|افتراض|tour|vr|زيار/.test(m)) return amanResponses.tour;
+  if (/أجنبي|دليل|foreign|أوروب|خليج/.test(m)) return amanResponses.foreign;
+  if (/أمان|ضمان|حماي|safe|secure/.test(m)) return amanResponses.safe;
+  if (/أوروب|europe|يونان|إسبان|اليونان/.test(m)) return amanResponses.europe;
+  if (/رؤية|رسالة|vision|mission/.test(m)) return amanResponses.vision;
+  return amanResponses.default;
+}
+
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  const messages = document.getElementById('chatMessages');
+
+  /* رسالة المستخدم */
+  const userDiv = document.createElement('div');
+  userDiv.className = 'chat-msg user';
+  userDiv.textContent = msg;
+  messages.appendChild(userDiv);
+
+  /* مؤشر الكتابة */
+  const typing = document.createElement('div');
+  typing.className = 'typing-indicator';
+  typing.innerHTML = '<span></span><span></span><span></span>';
+  messages.appendChild(typing);
+  messages.scrollTop = messages.scrollHeight;
+
+  /* رد أمان */
+  setTimeout(() => {
+    typing.remove();
+    const botDiv = document.createElement('div');
+    botDiv.className = 'chat-msg bot';
+    botDiv.textContent = getAmanResponse(msg);
+    messages.appendChild(botDiv);
+    messages.scrollTop = messages.scrollHeight;
+  }, 1200 + Math.random() * 800);
+}
+
+/* ===== نموذج التواصل ===== */
+function handleContact(e) {
+  e.preventDefault();
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('contactSuccess').classList.remove('hidden');
+  setTimeout(() => {
+    document.getElementById('contactForm').style.display = '';
+    document.getElementById('contactForm').reset();
+    document.getElementById('contactSuccess').classList.add('hidden');
+  }, 5000);
+}
+
+/* ===== إشعار Toast ===== */
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.style.opacity = '1';
+  toast.style.visibility = 'visible';
+  toast.style.transform = 'translateX(-50%) translateY(0)';
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.visibility = 'hidden';
+    toast.style.transform = 'translateX(-50%) translateY(-20px)';
+  }, 3000);
+}
+</script>
+</body>
+</html>
