@@ -587,6 +587,15 @@ footer{background:var(--bg2);border-top:1px solid var(--border)}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
 }
+
+/* ===== ضبط العناصر في وضع LTR (الإنجليزية/الفرنسية/الألمانية) ===== */
+html[dir="ltr"] body{letter-spacing:.1px}
+html[dir="ltr"] .nav-link::after{right:auto;left:0}
+html[dir="ltr"] #foreignModal .modal-card>button:first-child{left:auto;right:16px}
+html[dir="ltr"] .stat-num{font-family:'Orbitron',monospace}
+html[dir="ltr"] .fa-quote-right{right:auto!important;left:24px}
+html[dir="ltr"] .chat-msg.bot{border-bottom-left-radius:4px;border-bottom-right-radius:16px}
+html[dir="ltr"] .chat-msg.user{border-bottom-right-radius:4px;border-bottom-left-radius:16px}
 </style>
 </head>
 <body>
@@ -855,7 +864,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border)}
     </div>
     <div class="reveal reveal-delay-2 relative">
       <div class="glass-card p-2">
-        <img src="https://picsum.photos/seed/bytelaman-about/600/450.jpg" alt="مقر بيت الأمان" class="w-full h-auto rounded-2xl" loading="lazy">
+        <img src="img/about-team.webp" alt="مقر بيت الأمان" class="w-full h-auto rounded-2xl" loading="lazy">
       </div>
       <div class="absolute -bottom-6 -right-6 glass-card px-5 py-4 flex items-center gap-3" style="border-color:var(--emerald)">
         <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(16,185,129,0.15)">
@@ -1290,7 +1299,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border)}
     <div class="grid md:grid-cols-3 gap-7">
       <div class="glass-card overflow-hidden reveal group cursor-pointer">
         <div class="relative">
-          <img src="https://picsum.photos/seed/media-ep1/500/300.jpg" alt="الحلقة الأولى" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+           <img src="img/media-1.webp" alt="الحلقة الأولى" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
           <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:var(--gold)">
               <i class="fas fa-play text-black text-lg mr-[-2px]"></i>
@@ -1306,7 +1315,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border)}
       </div>
       <div class="glass-card overflow-hidden reveal reveal-delay-1 group cursor-pointer">
         <div class="relative">
-          <img src="https://picsum.photos/seed/media-ep2/500/300.jpg" alt="الحلقة الثانية" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+           <img src="img/media-2.webp" alt="الحلقة الثانية" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
           <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:var(--gold)">
               <i class="fas fa-play text-black text-lg mr-[-2px]"></i>
@@ -1322,7 +1331,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border)}
       </div>
       <div class="glass-card overflow-hidden reveal reveal-delay-2 group cursor-pointer">
         <div class="relative">
-          <img src="https://picsum.photos/seed/media-ep3/500/300.jpg" alt="الحلقة الثالثة" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+           <img src="img/media-3.webp" alt="الحلقة الثالثة" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
           <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
             <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:var(--gold)">
               <i class="fas fa-play text-black text-lg mr-[-2px]"></i>
@@ -1369,7 +1378,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border)}
     </div>
     <div class="grid md:grid-cols-3 gap-7">
       <article class="glass-card blog-card overflow-hidden reveal group cursor-pointer">
-        <div class="overflow-hidden"><img src="https://picsum.photos/seed/blog-1/500/300.jpg" alt="توقعات السوق" loading="lazy"></div>
+         <div class="overflow-hidden"><img src="img/blog-market.webp" alt="توقعات السوق" loading="lazy"></div>
         <div class="p-6">
           <div class="flex items-center gap-3 mb-3">
             <span class="blog-tag">توقعات</span>
@@ -1380,7 +1389,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border)}
         </div>
       </article>
       <article class="glass-card blog-card overflow-hidden reveal reveal-delay-1 group cursor-pointer">
-        <div class="overflow-hidden"><img src="https://picsum.photos/seed/blog-2/500/300.jpg" alt="دليل المستثمر" loading="lazy"></div>
+         <div class="overflow-hidden"><img src="img/project-finance.webp" alt="دليل المستثمر" loading="lazy"></div>
         <div class="p-6">
           <div class="flex items-center gap-3 mb-3">
             <span class="blog-tag">دليل</span>
@@ -1391,7 +1400,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border)}
         </div>
       </article>
       <article class="glass-card blog-card overflow-hidden reveal reveal-delay-2 group cursor-pointer">
-        <div class="overflow-hidden"><img src="https://picsum.photos/seed/blog-3/500/300.jpg" alt="مقارنة العوائد" loading="lazy"></div>
+         <div class="overflow-hidden"><img src="img/project-tower.webp" alt="مقارنة العوائد" loading="lazy"></div>
         <div class="p-6">
           <div class="flex items-center gap-3 mb-3">
             <span class="blog-tag">تحليل</span>
@@ -1665,20 +1674,20 @@ var IDX = {ar:0, en:1, fr:2, de:3};
 let projFilter = 'all';
 
 const projects = [
-  {id:1,name:['برج النيل الذهبي','Golden Nile Tower','Tour Golden Nile','Goldener-Nil-Turm'],location:['العاصمة الإدارية – مصر','New Administrative Capital – Egypt','Capitale administrative – Égypte','Neue Verwaltungshauptstadt – Ägypten'],filter:'commercial',price:['3,200,000 ج.م','EGP 3,200,000','3 200 000 EGP','3.200.000 EGP'],roi:'32%',img:'bytelaman-p1',tag:['مراكز أعمال','Business Hub','Hub d\'affaires','Business-Zentrum']},
-  {id:2,name:['واحة الخليج','Gulf Oasis','Oasis du Golfe','Golf-Oase'],location:['دبي مارينا – الإمارات','Dubai Marina – UAE','Dubai Marina – EAU','Dubai Marina – VAE'],filter:'residential',price:['4,500,000 درهم','AED 4,500,000','4 500 000 AED','4.500.000 AED'],roi:'28%',img:'bytelaman-p2',tag:['سكني فاخر','Luxury Residential','Résidentiel de luxe','Wohnen der Luxusklasse']},
-  {id:3,name:['أبراج الساحل','Coast Towers','Tours de la Côte','Küsten-Türme'],location:['الساحل الشمالي – مصر','North Coast – Egypt','Côte Nord – Égypte','Nordküste – Ägypten'],filter:'resort',price:['2,800,000 ج.م','EGP 2,800,000','2 800 000 EGP','2.800.000 EGP'],roi:'35%',img:'bytelaman-p3',tag:['منتجع سياحي','Tourist Resort','Resort touristique','Ferienresort']},
-  {id:4,name:['مركز المال العالمي','Global Finance Center','Centre Financier Mondial','Internationales Finanzzentrum'],location:['القاهرة الجديدة – مصر','New Cairo – Egypt','Nouvelle Le Caire – Égypte','Neu-Kairo – Ägypten'],filter:'commercial',price:['5,100,000 ج.م','EGP 5,100,000','5 100 000 EGP','5.100.000 EGP'],roi:'30%',img:'bytelaman-p4',tag:['تجاري','Commercial','Commercial','Gewerbe']},
-  {id:5,name:['فيلات الأفق','Horizon Villas','Villas Horizon','Horizon-Villen'],location:['مرسى علم – البحر الأحمر','Marsa Alam – Red Sea','Marsa Alam – Mer Rouge','Marsa Alam – Rotes Meer'],filter:'resort',price:['8,500,000 ج.م','EGP 8,500,000','8 500 000 EGP','8.500.000 EGP'],roi:'34%',img:'bytelaman-p6',tag:['فيلات فاخرة','Luxury Villas','Villas de luxe','Luxusvillen']},
-  {id:6,name:['أثينا ريفييرا','Athina Riviera','Athènes Riviera','Athen Riviera'],location:['أثينا – اليونان','Athens – Greece','Athènes – Grèce','Athen – Griechenland'],filter:'residential',price:['€310,000','€310,000','310 000 €','310.000 €'],roi:'24%',img:'bytelaman-p8',tag:['سكني أوروبي','European Residential','Résidentiel européen','Europäisches Wohnen']},
+  {id:1,name:['برج النيل الذهبي','Golden Nile Tower','Tour Golden Nile','Goldener-Nil-Turm'],location:['العاصمة الإدارية – مصر','New Administrative Capital – Egypt','Capitale administrative – Égypte','Neue Verwaltungshauptstadt – Ägypten'],filter:'commercial',price:['3,200,000 ج.م','EGP 3,200,000','3 200 000 EGP','3.200.000 EGP'],roi:'32%',img:'project-tower',tag:['مراكز أعمال','Business Hub','Hub d\'affaires','Business-Zentrum']},
+  {id:2,name:['واحة الخليج','Gulf Oasis','Oasis du Golfe','Golf-Oase'],location:['دبي مارينا – الإمارات','Dubai Marina – UAE','Dubai Marina – EAU','Dubai Marina – VAE'],filter:'residential',price:['4,500,000 درهم','AED 4,500,000','4 500 000 AED','4.500.000 AED'],roi:'28%',img:'project-oasis',tag:['سكني فاخر','Luxury Residential','Résidentiel de luxe','Wohnen der Luxusklasse']},
+  {id:3,name:['أبراج الساحل','Coast Towers','Tours de la Côte','Küsten-Türme'],location:['الساحل الشمالي – مصر','North Coast – Egypt','Côte Nord – Égypte','Nordküste – Ägypten'],filter:'resort',price:['2,800,000 ج.م','EGP 2,800,000','2 800 000 EGP','2.800.000 EGP'],roi:'35%',img:'project-coast',tag:['منتجع سياحي','Tourist Resort','Resort touristique','Ferienresort']},
+  {id:4,name:['مركز المال العالمي','Global Finance Center','Centre Financier Mondial','Internationales Finanzzentrum'],location:['القاهرة الجديدة – مصر','New Cairo – Egypt','Nouvelle Le Caire – Égypte','Neu-Kairo – Ägypten'],filter:'commercial',price:['5,100,000 ج.م','EGP 5,100,000','5 100 000 EGP','5.100.000 EGP'],roi:'30%',img:'project-finance',tag:['تجاري','Commercial','Commercial','Gewerbe']},
+  {id:5,name:['فيلات الأفق','Horizon Villas','Villas Horizon','Horizon-Villen'],location:['مرسى علم – البحر الأحمر','Marsa Alam – Red Sea','Marsa Alam – Mer Rouge','Marsa Alam – Rotes Meer'],filter:'resort',price:['8,500,000 ج.م','EGP 8,500,000','8 500 000 EGP','8.500.000 EGP'],roi:'34%',img:'project-villa',tag:['فيلات فاخرة','Luxury Villas','Villas de luxe','Luxusvillen']},
+  {id:6,name:['أثينا ريفييرا','Athina Riviera','Athènes Riviera','Athen Riviera'],location:['أثينا – اليونان','Athens – Greece','Athènes – Grèce','Athen – Griechenland'],filter:'residential',price:['€310,000','€310,000','310 000 €','310.000 €'],roi:'24%',img:'project-riviera',tag:['سكني أوروبي','European Residential','Résidentiel européen','Europäisches Wohnen']},
 ];
 
 /* ===== بيانات الشهادات (متعددة اللغات) ===== */
 const testimonials = [
-  {name:['ماركو روسي','Marco Rossi','Marco Rossi','Marco Rossi'],role:['مستثمر إيطالي','Italian Investor','Investisseur italien','Investor aus Italien'],text:['بيت الأمان قدّم لي تجربة استثمارية استثنائية. من التحليل الذكي إلى الجولة الافتراضية، كل شيء كان احترافياً بمعنى الكلمة. أنصح أي مستثمر أوروبي بالتعامل معهم.','Bayt Al-Aman delivered an exceptional investment experience. From smart analysis to the virtual tour, everything was truly professional. I recommend them to any European investor.','Bayt Al-Aman m\'a offert une expérience d\'investissement exceptionnelle. De l\'analyse intelligente à la visite virtuelle, tout était professionnel. Je recommande à tout investisseur européen.','Bayt Al-Aman hat mir ein außergewöhnliches Investmenterlebnis geboten. Von der intelligenten Analyse bis zur Virtual Tour war alles absolut professionell. Ich empfehle sie jedem europäischen Investor.'],avatar:'marco-rossi'},
-  {name:['سارة المنصوري','Sara Al-Mansouri','Sara Al-Mansouri','Sara Al-Mansouri'],role:['مستثمرة إماراتية','Emirati Investor','Investisseuse émiratie','Investorin aus den VAE'],text:['استثمرت في 3 مشاريع عبر بيت الأمان والعوائد فاقت توقعاتي. الروبوت الذكي أمان ساعدني في اتخاذ القرار الصحيح بسرعة.','I invested in 3 projects through Bayt Al-Aman and returns exceeded my expectations. The smart advisor Aman helped me make the right decision quickly.','J\'ai investi dans 3 projets via Bayt Al-Aman et les rendements ont dépassé mes attentes. Le conseiller intelligent Aman m\'a aidée à décider vite et juste.','Ich habe über Bayt Al-Aman in 3 Projekte investiert, die Renditen übertrafen meine Erwartungen. Der digitale Berater Aman half mir, schnell die richtige Entscheidung zu treffen.'],avatar:'sara-mansouri'},
-  {name:['جون كارتر','John Carter','John Carter','John Carter'],role:['مستثمر بريطاني','British Investor','Investisseur britannique','Investor aus Großbritannien'],text:['الشفافية في التعامل والبيانات الدقيقة جعلتني أثق بهم تماماً. شهادة الضمان الاستثماري أعطتني راحة بال لا تُقدّر بثمن.','Their transparency and accurate data earned my full trust. The investment guarantee certificate gave me priceless peace of mind.','Leur transparence et leurs données précises m\'ont entièrement convaincu. Le certificat de garantie d\'investissement m\'a donné une tranquillité inestimable.','Transparenz und präzise Daten haben mein volles Vertrauen gewonnen. Das Investitionszertifikat gab mir unbezahlbare Sicherheit.'],avatar:'john-carter'},
-  {name:['أحمد الشمري','Ahmed Al-Shamri','Ahmed Al-Shamri','Ahmed Al-Shamri'],role:['مستثمر سعودي','Saudi Investor','Investisseur saoudien','Investor aus Saudi-Arabien'],text:['تعاملت مع شركات عقارية كثيرة لكن بيت الأمان مختلف فعلاً. التكنولوجيا المستخدمة والخدمة الشخصية جعلت التجربة مميزة.','I have dealt with many real estate companies, but Bayt Al-Aman is truly different. The technology and personal service made the experience outstanding.','J\'ai traité avec beaucoup de sociétés immobilières, mais Bayt Al-Aman est vraiment différente. La technologie et le service personnalisé ont fait la différence.','Ich habe mit vielen Immobilienfirmen gearbeitet, aber Bayt Al-Aman ist wirklich anders. Technologie und persönlicher Service machten den Unterschied.'],avatar:'ahmed-shamri'},
+  {name:['ماركو روسي','Marco Rossi','Marco Rossi','Marco Rossi'],role:['مستثمر إيطالي','Italian Investor','Investisseur italien','Investor aus Italien'],text:['بيت الأمان قدّم لي تجربة استثمارية استثنائية. من التحليل الذكي إلى الجولة الافتراضية، كل شيء كان احترافياً بمعنى الكلمة. أنصح أي مستثمر أوروبي بالتعامل معهم.','Bayt Al-Aman delivered an exceptional investment experience. From smart analysis to the virtual tour, everything was truly professional. I recommend them to any European investor.','Bayt Al-Aman m\'a offert une expérience d\'investissement exceptionnelle. De l\'analyse intelligente à la visite virtuelle, tout était professionnel. Je recommande à tout investisseur européen.','Bayt Al-Aman hat mir ein außergewöhnliches Investmenterlebnis geboten. Von der intelligenten Analyse bis zur Virtual Tour war alles absolut professionell. Ich empfehle sie jedem europäischen Investor.'],avatar:'avatar-marco'},
+  {name:['سارة المنصوري','Sara Al-Mansouri','Sara Al-Mansouri','Sara Al-Mansouri'],role:['مستثمرة إماراتية','Emirati Investor','Investisseuse émiratie','Investorin aus den VAE'],text:['استثمرت في 3 مشاريع عبر بيت الأمان والعوائد فاقت توقعاتي. الروبوت الذكي أمان ساعدني في اتخاذ القرار الصحيح بسرعة.','I invested in 3 projects through Bayt Al-Aman and returns exceeded my expectations. The smart advisor Aman helped me make the right decision quickly.','J\'ai investi dans 3 projets via Bayt Al-Aman et les rendements ont dépassé mes attentes. Le conseiller intelligent Aman m\'a aidée à décider vite et juste.','Ich habe über Bayt Al-Aman in 3 Projekte investiert, die Renditen übertrafen meine Erwartungen. Der digitale Berater Aman half mir, schnell die richtige Entscheidung zu treffen.'],avatar:'avatar-sara'},
+  {name:['جون كارتر','John Carter','John Carter','John Carter'],role:['مستثمر بريطاني','British Investor','Investisseur britannique','Investor aus Großbritannien'],text:['الشفافية في التعامل والبيانات الدقيقة جعلتني أثق بهم تماماً. شهادة الضمان الاستثماري أعطتني راحة بال لا تُقدّر بثمن.','Their transparency and accurate data earned my full trust. The investment guarantee certificate gave me priceless peace of mind.','Leur transparence et leurs données précises m\'ont entièrement convaincu. Le certificat de garantie d\'investissement m\'a donné une tranquillité inestimable.','Transparenz und präzise Daten haben mein volles Vertrauen gewonnen. Das Investitionszertifikat gab mir unbezahlbare Sicherheit.'],avatar:'avatar-john'},
+  {name:['أحمد الشمري','Ahmed Al-Shamri','Ahmed Al-Shamri','Ahmed Al-Shamri'],role:['مستثمر سعودي','Saudi Investor','Investisseur saoudien','Investor aus Saudi-Arabien'],text:['تعاملت مع شركات عقارية كثيرة لكن بيت الأمان مختلف فعلاً. التكنولوجيا المستخدمة والخدمة الشخصية جعلت التجربة مميزة.','I have dealt with many real estate companies, but Bayt Al-Aman is truly different. The technology and personal service made the experience outstanding.','J\'ai traité avec beaucoup de sociétés immobilières, mais Bayt Al-Aman est vraiment différente. La technologie et le service personnalisé ont fait la différence.','Ich habe mit vielen Immobilienfirmen gearbeitet, aber Bayt Al-Aman ist wirklich anders. Technologie und persönlicher Service machten den Unterschied.'],avatar:'avatar-ahmed'},
 ];
 
 /* ===== متغيرات عامة ===== */
@@ -1924,7 +1933,7 @@ function renderProjects(filter = 'all') {
     const card = document.createElement('div');
     card.className = 'project-card glass-card reveal' + (i > 0 ? ' reveal-delay-' + Math.min(i, 4) : '');
     card.innerHTML = `
-      <img src="https://picsum.photos/seed/${p.img}/600/400.jpg" alt="${p.name[idx]}" loading="lazy">
+      <img src="img/${p.img}.webp" alt="${p.name[idx]}" loading="lazy">
       <div class="project-badge"><i class="fas fa-chart-line ml-1"></i> ${roiLabel}${p.roi}</div>
       <div class="project-tag">${p.tag[idx]}</div>
       <div class="project-overlay">
@@ -1969,7 +1978,7 @@ function renderTestimonial() {
     el.innerHTML = `
       <p class="text-sm leading-8 mb-6" style="color:var(--text);line-height:2">"${t.text[idx]}"</p>
       <div class="flex items-center justify-center gap-4">
-        <img src="https://picsum.photos/seed/${t.avatar}/80/80.jpg" alt="${t.name[idx]}" class="w-12 h-12 rounded-full object-cover" style="border:2px solid var(--gold)">
+        <img src="img/${t.avatar}.webp" alt="${t.name[idx]}" class="w-12 h-12 rounded-full object-cover" style="border:2px solid var(--gold)">
         <div class="${document.documentElement.dir === 'rtl' ? 'text-right' : 'text-left'}">
           <div class="font-bold text-sm">${t.name[idx]}</div>
           <div class="text-xs" style="color:var(--gold)">${t.role[idx]}</div>
@@ -2498,32 +2507,46 @@ var P = {
 };
 
 /* ===== تطبيق اللغة على كامل الصفحة ===== */
+/* ذاكرة النص العربي الأصلي لكل عقدة — لجعل التبديل بين اللغات يعمل في كل الاتجاهات */
+var ORIG = new WeakMap();
+
 function applyLang() {
-  /* مصفوفات القاموس [en,fr,de] — العربية أصل الصفحة فلا تحتاج استبدالاً */
   var ti = {en:0, fr:1, de:2}[LANG];
   document.documentElement.lang = LANG;
   document.documentElement.dir = LANGS[LANG].dir;
   document.title = TITLES[LANG] || TITLES.ar;
 
-  if (ti !== undefined) {
-    /* استبدال كل النصوص */
-    try {
-      var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
-      var n;
-      while ((n = walker.nextNode())) {
-        var raw = n.nodeValue;
-        if (!raw || !raw.trim()) continue;
-        var v = D[raw.trim()];
-        if (v && v[ti]) n.nodeValue = raw.replace(raw.trim(), v[ti]);
+  /* استبدال النصوص: دائماً من النص العربي الأصلي المخزّن وليس من نص الصفحة الحالي */
+  try {
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    var n;
+    while ((n = walker.nextNode())) {
+      var cur = n.nodeValue;
+      if (!cur || !cur.trim()) continue;
+      var orig = ORIG.get(n);
+      if (orig === undefined) { orig = cur; ORIG.set(n, orig); }
+      var o = orig.trim();
+      if (!o) continue;
+      if (ti === undefined) { /* العربية: استرجاع الأصل */
+        if (cur !== orig) n.nodeValue = orig;
+        continue;
       }
-    } catch (err) {}
+      var v = D[o];
+      if (v && v[ti]) n.nodeValue = orig.replace(o, v[ti]);
+    }
+  } catch (err) {}
 
-    /* استبدال الـ placeholders */
-    document.querySelectorAll('[placeholder]').forEach(function(el){
-      var v = P[el.getAttribute('placeholder').trim()];
-      if (v && v[ti]) el.setAttribute('placeholder', v[ti]);
-    });
-  }
+  /* استبدال الـ placeholders (بنفس آلية التخزين) */
+  document.querySelectorAll('[placeholder]').forEach(function(el){
+    var ph = el.getAttribute('placeholder');
+    if (!ph || !ph.trim()) return;
+    var orig = el.dataset.origPh || ph;
+    el.dataset.origPh = orig;
+    if (ti === undefined) { if (ph !== orig) el.setAttribute('placeholder', orig); return; }
+    var v = P[orig.trim()];
+    var nv = v && v[ti] ? v[ti] : orig;
+    if (ph !== nv) el.setAttribute('placeholder', nv);
+  });
 
   /* إعادة توليد المحتوى الديناميكي */
   renderProjects(projFilter);
