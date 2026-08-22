@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دليل المستثمر الأجنبي للتملك العقاري والاستثماري – BYTELAMAN بيت الأمان</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#A07C2A;--gold-l:#C9A84C;--gold-xl:#E8D48B;--ink:#1F2430;--muted:#5B6472;
+  --line:#E3E0D6;--bg:#FFFFFF;--bg2:#FAF8F2;--blue:#1A8CFF;--emerald:#10B981;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Cairo',sans-serif;color:var(--ink);background:var(--bg);line-height:1.9}
+.wrap{max-width:860px;margin:0 auto;padding:40px 24px}
+.en{font-family:'Orbitron',sans-serif;letter-spacing:4px}
+
+/* ===== الترويسة ===== */
+header.cover{background:linear-gradient(135deg,#14100a 0%,#2b2110 55%,#4d3a14 100%);color:#fff;padding:64px 24px;text-align:center}
+header.cover .brand{font-size:13px;letter-spacing:7px;color:var(--gold-l);font-family:'Orbitron',sans-serif;margin-bottom:22px}
+header.cover h1{font-size:clamp(1.5rem,4vw,2.3rem);font-weight:900;line-height:1.6}
+header.cover h1 span{color:var(--gold-l)}
+header.cover .sub{color:#D8CBA8;font-size:.95rem;margin-top:10px}
+header.cover .meta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:26px}
+header.cover .meta span{border:1px solid rgba(201,168,76,.45);border-radius:30px;padding:6px 18px;font-size:12px;color:var(--gold-xl)}
+.key-mark{width:54px;margin:0 auto 18px;display:block}
+
+/* ===== الأقسام ===== */
+section{padding:34px 0;border-bottom:1px solid var(--line)}
+h2{font-size:1.25rem;font-weight:800;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+h2::before{content:'';width:34px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--gold-xl));flex-shrink:0}
+h3{font-size:1rem;font-weight:800;margin:18px 0 8px}
+p{margin-bottom:10px;color:var(--ink)}
+.muted{color:var(--muted);font-size:.9rem}
+
+/* ===== البطاقات والجداول ===== */
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:14px}
+.card h3{margin-top:0}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:10px;background:#fff;border-radius:12px;overflow:hidden}
+th,td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#14100A;color:var(--gold-xl);font-weight:700}
+tr:last-child td{border-bottom:none}
+.steps{counter-reset:step}
+.step{position:relative;padding-right:56px;margin-bottom:20px}
+.step::before{
+  counter-increment:step;content:counter(step,decimal-leading-zero);
+  position:absolute;right:0;top:0;width:40px;height:40px;border-radius:50%;
+  background:#14100A;color:var(--gold-xl);font-family:'Orbitron',sans-serif;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;
+  border:2px solid var(--gold-l);
+}
+.step h3{margin-top:8px}
+ul.tick{list-style:none;margin-top:8px}
+ul.tick li{padding-right:28px;position:relative;margin-bottom:9px}
+ul.tick li::before{content:'\2713';position:absolute;right:0;top:0;width:19px;height:19px;border-radius:50%;background:rgba(16,185,129,.12);color:var(--emerald);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{border:1px solid var(--line);background:var(--bg2);border-radius:20px;padding:4px 14px;font-size:12px;color:var(--muted)}
+.note{border-right:4px solid var(--gold-l);background:var(--bg2);border-radius:10px;padding:14px 18px;font-size:.88rem;color:var(--muted)}
+
+/* ===== التواصل ===== */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.contact-item{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+.contact-item i{font-size:20px;color:var(--gold);margin-bottom:6px;display:block}
+footer.end{background:#14100A;color:#CBBE97;text-align:center;padding:30px 24px;font-size:.82rem}
+footer.end b{color:var(--gold-l)}
+
+/* ===== زر الطباعة ===== */
+.print-bar{position:fixed;top:18px;left:18px;z-index:50}
+.print-btn{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border:none;border-radius:30px;
+  background:linear-gradient(135deg,#A07C2A,#C9A84C,#E8D48B);color:#14100A;font-family:'Cairo';
+  font-weight:800;font-size:13px;cursor:pointer;box-shadow:0 6px 22px rgba(160,124,42,.35);
+}
+.print-btn:hover{transform:translateY(-1px)}
+
+@media print{
+  @page{size:A4;margin:14mm}
+  body{background:#fff}
+  .print-bar{display:none!important}
+  header.cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  th{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section{page-break-inside:avoid;padding:20px 0}
+  a{text-decoration:none;color:inherit}
+}
+</style>
+</head>
+<body>
+
+<div class="print-bar no-print">
+  <button class="print-btn" onclick="window.print()"><i class="fas fa-file-pdf"></i> طباعة / حفظ كـ PDF</button>
+</div>
+
+<!-- ===== الغلاف ===== -->
+<header class="cover">
+  <svg class="key-mark" viewBox="0 0 120 260" fill="none">
+    <circle cx="60" cy="55" r="40" stroke="#E8D48B" stroke-width="7"/>
+    <circle cx="60" cy="55" r="26" stroke="#E8D48B" stroke-width="4"/>
+    <rect x="55" y="95" width="10" height="130" rx="3" fill="#E8D48B"/>
+    <rect x="65" y="160" width="22" height="7" rx="2" fill="#E8D48B"/>
+    <rect x="65" y="180" width="17" height="7" rx="2" fill="#E8D48B"/>
+    <rect x="65" y="200" width="12" height="7" rx="2" fill="#E8D48B"/>
+  </svg>
+  <div class="brand">B Y T E L A M A N</div>
+  <h1>دليل المستثمر الأجنبي<br><span>للتملك العقاري والاستثماري</span></h1>
+  <p class="sub">صادر عن شركة بيت الأمان للاستثمار العقاري والسياحي</p>
+  <div class="meta">
+    <span>الإصدار 2026</span>
+    <span>مصر · الخليج العربي · أوروبا</span>
+    <span>نسخة مجانية للمستثمرين</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ===== 1. المقدمة ===== -->
+  <section id="intro-guide">
+    <h2>المقدمة والرسالة الترحيبية</h2>
+    <p>نرحب بكم في دليلكم الموثوق للتملك والاستثمار العقاري. تم إعداد هذا الدليل ليكون مرجعاً قانونياً وإجرائياً محايداً للأجانب والمغتربين الراغبين في امتلاك وتطوير وإدارة العقارات السكنية والتجارية والمنتجعات داخل جمهورية مصر العربية ودول الخليج العربي والدول الأوروبية بأمان تام.</p>
+    <p>في بيت الأمان لا نلتزم بحدود معارضنا أو مشاريعنا فقط — إذا كان لديك عقار معيّن في ذهنك في أي مكان، أو ترغب في البحث عن فرصة بمواصفات خاصة في السوق المفتوح: أنت تختار العقار (أو نحدده معاً)، ونحن نتولى الفحص والشراء والتسجيل والإدارة والتطوير.</p>
+    <p class="note"><b>هام:</b> هذا الدليل لأغراض إرشادية عامة. تختلف النسب والحدود القانونية بين الدول وتخضع للتغيير؛ يُرجى اعتماد الاستشارة القانونية المخصصة قبل أي التزام مالي.</p>
+  </section>
+
+  <!-- ===== 2. الإطار القانوني ===== -->
+  <section id="legal-frame">
+    <h2>الإطار القانوني والضمانات الدولية</h2>
+    <table>
+      <tr><th style="width:32%">المجال</th><th>الحماية الممنوحة للمستثمر</th></tr>
+      <tr><td><b>التملك والتوثيق الرسمي</b></td><td>تسجيل العقار بأسماء الأشخاص الطبيعيين أو الاعتباريين (الشركات) بشكل موثق لدى الجهات الحكومية الرسمية (الشهر العقاري / هيئات الاستثمار).</td></tr>
+      <tr><td><b>حرية تحويل الأموال</b></td><td>ضمان تحويل رؤوس الأموال والعوائد الإيجارية وأرباح إعادة البيع إلى الحسابات البنكية الخارجية بالعملات الأجنبية وفق القوانين المحلية.</td></tr>
+      <tr><td><b>الحماية التعاقدية</b></td><td>صياغة عقود بيع وشراء محكمة تعتمد أحدث المعايير الدولية وبنود الضمان، مع خيار التحكيم التجاري لحفظ الحقوق.</td></tr>
+      <tr><td><b>المعاملة الوطنية</b></td><td>ضمان حقوق التملك والتصرف والمساواة الإجرائية أمام كافة الهيئات والمؤسسات الرسمية في نطاق ما تسمح به تشريعات كل دولة.</td></tr>
+    </table>
+    <h3>أبرز المحطات التشريعية</h3>
+    <ul class="tick">
+      <li>قوانين تملك غير المواطنين في مصر (بما يشمل مناطق التملك الحر Freehold والحدود القصوى للمساحات).</li>
+      <li>أنظمة التملك في دول الخليج (مناطق محددة بالتملك الكامل للأجانب في الإمارات والسعودية وقطر وعُمان والبحرين والكويت).</li>
+      <li>أنظمة الإقامة الذهبية مقابل العقار في أوروبا (إسبانيا، اليونان، وغيرها) وتركيا.</li>
+    </ul>
+  </section>
+
+  <!-- ===== 3. خطوات التملك ===== -->
+  <section id="steps">
+    <h2>خطوات التملك الاستثماري — رحلة المستثمر خطوة بخطوة</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>التحديد والتدقيق القانوني (Due Diligence)</h3>
+        <ul class="tick">
+          <li>فحص الوضع القانوني للعقار وتسلسل الملكية والتأكد من خلوه من أي نزاعات أو رهونات بنكية.</li>
+          <li>التأكد من التراخيص الصادرة ومطابقتها للمخططات العمرانية والرسمية.</li>
+          <li>تقييم السوق والتفاوض وسيطاً محايداً للوصول إلى أفضل سعر عادل.</li>
+        </ul>
+      </div>
+      <div class="step">
+        <h3>المعاملات المالية والمصرفية</h3>
+        <ul class="tick">
+          <li>فتح حساب بنكي استثماري مخصص باسم العميل.</li>
+          <li>تحويل المبالغ عبر الجهاز المصرفي المعتمد رسمياً لضمان توثيق مصدر الأموال وإثبات الجدية.</li>
+        </ul>
+      </div>
+      <div class="step">
+        <h3>التعاقد والشهر العقاري</h3>
+        <ul class="tick">
+          <li>صياغة وتوقيع عقود البيع الابتدائية والنهائية مع إدراج بنود الضمانات والصيانة.</li>
+          <li>إتمام إجراءات التسجيل والتوثيق لدى مكاتب الشهر العقاري أو هيئات الاستثمار المعنية.</li>
+        </ul>
+      </div>
+      <div class="step">
+        <h3>الإقامة الاستثمارية (حسب الدولة)</h3>
+        <ul class="tick">
+          <li>استيفاء شروط الحد الأدنى لتملك العقار للحصول على الإقامة الاستثمارية للمستثمر وأسرته.</li>
+          <li>إعداد الملف والأوراق المطلوبة وتقديم الطلب بالتنسيق مع الجهات والمختصين المعتمدين.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. خيارات الاستثمار ===== -->
+  <section id="options">
+    <h2>خيارات الاستثمار المتنوعة عبر «بيت الأمان»</h2>
+    <div class="card">
+      <h3>العقارات السكنية</h3>
+      <p class="muted">شقق وفيلل وشاليهات سكنية في مواقع حيوية داخل مصر ودول الخليج وأوروبا.</p>
+    </div>
+    <div class="card">
+      <h3>العقارات التجارية</h3>
+      <p class="muted">مكاتب إدارية ومحلات تجارية ومراكز أعمال ذات عوائد تشغيلية مستمرة.</p>
+    </div>
+    <div class="card">
+      <h3>المنتجعات والمشاريع السياحية</h3>
+      <p class="muted">أصول سياحية وفندقية مخصصة للإدارة والتشغيل السياحي بأعلى نسب إشغال.</p>
+    </div>
+    <p class="muted">وتشمل الخدمة أيضاً شراء أي عقار يعجبك في السوق المفتوح خارج قائمة مشاريعنا — نتولى تدقيقه والوساطة القانونية لحماية أموالك.</p>
+  </section>
+
+  <!-- ===== 5. إدارة الأملاك ===== -->
+  <section id="management">
+    <h2>خدمات إدارة الأملاك والتطوير بعد الشراء (Property &amp; Asset Management)</h2>
+    <p>نحن لا نتوقف عند خطوة تسليم المفتاح، بل نوفر لك منظومة تشغيلية كاملة:</p>
+    <ul class="tick">
+      <li><b>إدارة والتأجير الفندقي/السياحي:</b> تشغيل الوحدة وتأجيرها لضمان تدفق نقدي وعائد استثماري مستمر.</li>
+      <li><b>التطوير ورفع القيمة (Asset Value Addition):</b> إعادة التجهيز والتصميم الداخلي لمضاعفة القيمة السوقية عند التأجير أو البيع.</li>
+      <li><b>الصيانة والخدمات اللوجستية:</b> متابعة حالة العقار وتحصيل المستحقات وسداد الفواتير والضرائب الدورية نيابةً عنك.</li>
+      <li><b>تحويل العوائد إلى الخارج:</b> آلية نظامية لتحويل العوائد الإيجارية وأصل رأس المال عند إعادة البيع إلى حسابك الخارجي.</li>
+    </ul>
+  </section>
+
+  <!-- ===== 6. الضرائب والرسوم ===== -->
+  <section id="taxes">
+    <h2>جدول الضرائب والرسوم التقديرية</h2>
+    <table>
+      <tr><th style="width:38%">نوع الرسم / الضريبة</th><th>النسبة التقديرية / الوصف</th></tr>
+      <tr><td>رسوم التسجيل والتوثيق</td><td>رسوم حكومية مقطوعة أو بنسبة محددة حسب القوانين المحلية لكل دولة.</td></tr>
+      <tr><td>ضريبة التصرفات العقارية</td><td>تُحدد وفق التشريعات الضريبية المعمول بها عند بيع العقار.</td></tr>
+      <tr><td>رسوم ودمغة التعاقدات</td><td>نسب رموية على العقود والشهادات حسب قيمة التصرف.</td></tr>
+      <tr><td>الضريبة العقارية الدورية</td><td>ضريبة سنوية على المنشآت المبنية تُسدد للجهات الضريبية المختصة.</td></tr>
+      <tr><td>رسوم الإدارة والتشغيل</td><td>نسبة مئوية متفق عليها من العوائد الإيجارية المحققة للعميل.</td></tr>
+    </table>
+    <p class="note">نلتزم بالشفافية المطلقة: نزودك قبل أي تعاقد بكشف تفصيلي بجميع التكاليف الجانبية المباشرة وغير المباشرة الخاصة بالصفقة المقترحة.</p>
+  </section>
+
+  <!-- ===== 7. التواصل ===== -->
+  <section id="contact-guide" style="border-bottom:none">
+    <h2>التواصل وحجز استشارتك القانونية</h2>
+    <p>لحجز استشارة عقارية وقانونية مخصصة لتملك عقارك المقبل، أو لتكليفنا بفحص عقار معيّن في السوق:</p>
+    <br>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <i>✉</i>
+        <b>البريد الإلكتروني</b>
+        <div class="muted" dir="ltr">invest@bytelaman.com</div>
+      </div>
+      <div class="contact-item">
+        <i>☎</i>
+        <b>واتساب / هاتف مباشر</b>
+        <div class="muted" dir="ltr">+20 11 22324831</div>
+      </div>
+      <div class="contact-item">
+        <i>⌂</i>
+        <b>المقر الرئيسي</b>
+        <div class="muted">القاهرة الجديدة – العاصمة الإدارية – برج بيت الأمان</div>
+      </div>
+    </div>
+    <br>
+    <p class="note">«لا تدع الحدود تعيق استثمارك.. نحن ذراعك الموثوقة وحمايتك القانونية لتملك عقارك الصحيح.»</p>
+  </section>
+
+</div>
+
+<footer class="end">
+  <b>BYTELAMAN – بيت الأمان</b> · دليل المستثمر الأجنبي للتملك العقاري والاستثماري · الإصدار 2026<br>
+  Your Key to Tomorrow's Wealth
+</footer>
+
+</body>
+</html>
