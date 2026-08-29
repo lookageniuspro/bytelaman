@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -2609,4 +2610,2617 @@ document.addEventListener('click', function(e){
 applyLang();
 </script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BYTELAMAN – بيت الأمان</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script>
+tailwind.config={darkMode:'class',theme:{extend:{colors:{gold:'#C9A84C','gold-light':'#E8D48B','gold-dark':'#A07C2A','neon-blue':'#1A8CFF','deep-blue':'#0D47A1',emerald:'#10B981','abs-black':'#050508','icy-white':'#F0F4F8'},fontFamily:{cairo:['Cairo','sans-serif'],orbitron:['Orbitron','sans-serif'],exo:['Exo 2','sans-serif']}}}}
+</script>
+<style>
+/* ===== متغيرات التصميم ===== */
+:root{
+  color-scheme:dark;
+  --bg:#050508;--bg2:#0A0A14;--bg-card:rgba(255,255,255,0.035);
+  --border:rgba(201,168,76,0.15);--text:#F0F0F0;--text2:#8A8A9A;
+  --gold:#C9A84C;--gold-l:#E8D48B;--gold-d:#A07C2A;
+  --gold-glow:rgba(201,168,76,0.35);--blue:#1A8CFF;
+  --emerald:#10B981;--blur:22px;
+  --glass-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+.light-mode{
+  color-scheme:light;
+  --bg:#F0F4F8;--bg2:#FFFFFF;--bg-card:rgba(255,255,255,0.55);
+  --border:rgba(160,124,42,0.22);--text:#1A1A2E;--text2:#6B7280;
+  --gold:#A07C2A;--gold-l:#C9A84C;--gold-d:#7A5E1A;
+  --gold-glow:rgba(160,124,42,0.25);--glass-shadow:0 8px 32px rgba(0,0,0,0.08);
+}
+
+/* ===== أساسيات ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);
+  overflow-x:hidden;transition:background .6s,color .6s;
+}
+::selection{background:var(--gold);color:#000}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* ===== مشهد الافتتاح – المنزل والمفتاح ===== */
+#intro{
+  position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 42%,#0B0B18 0%,#050508 72%);
+  transition:opacity .9s ease,visibility .9s;
+}
+#intro.done{opacity:0;visibility:hidden;pointer-events:none}
+body.no-scroll{overflow:hidden;height:100vh}
+
+.intro-brand{
+  position:absolute;top:34px;left:50%;transform:translateX(-50%);
+  font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:7px;
+  color:var(--gold);opacity:.85;white-space:nowrap;
+}
+#houseScene{width:min(92vw,720px);height:auto;overflow:visible}
+
+/* رسم الخطوط تدريجياً */
+.draw{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+#intro.play .draw{animation:drawPath 1s ease forwards}
+@keyframes drawPath{to{stroke-dashoffset:0}}
+
+/* الحالة المخفية الافتراضية */
+#introKey,#innerGlow,#lightRay,.intro-flash,.iw,#panelL,#panelR,#skipIntro{opacity:0}
+
+/* المفتاح الفريد */
+#introKey{
+  transform:translate(640px,435px);
+  transform-box:fill-box;transform-origin:center;
+}
+#intro.play #introKey{
+  animation:
+    keyMat .8s ease 2.4s forwards,
+    keyMove 1.5s cubic-bezier(.6,.05,.3,1) 3.4s forwards,
+    keyTurn .45s ease-in-out 5.05s forwards,
+    keyAway .7s ease 6.1s forwards;
+}
+@keyframes keyMat{to{opacity:1}}
+@keyframes keyMove{
+  0%{transform:translate(640px,435px)}
+  50%{transform:translate(585px,405px)}
+  100%{transform:translate(524px,435px)}
+}
+@keyframes keyTurn{
+  0%{transform:translate(524px,435px) rotate(0deg)}
+  100%{transform:translate(524px,435px) rotate(-16deg)}
+}
+@keyframes keyAway{
+  0%{opacity:1;transform:translate(524px,435px) rotate(-16deg)}
+  100%{opacity:0;transform:translate(524px,470px) rotate(-26deg) scale(.92)}
+}
+
+/* ضلفا الباب */
+#intro.play #panelL{animation:panelIn .5s ease 1.95s forwards,panelLOpen 1.1s cubic-bezier(.7,0,.25,1) 5.55s forwards}
+#intro.play #panelR{animation:panelIn .5s ease 2s forwards,panelROpen 1.1s cubic-bezier(.7,0,.25,1) 5.55s forwards}
+@keyframes panelIn{to{opacity:1}}
+@keyframes panelLOpen{to{transform:translateX(-64px);opacity:.12}}
+@keyframes panelROpen{to{transform:translateX(64px);opacity:.12}}
+
+/* التوهج الداخلي والشعاع */
+#intro.play #innerGlow{animation:glowIn 1.6s ease 5.5s forwards}
+@keyframes glowIn{to{opacity:1}}
+#lightRay{transform-box:fill-box;transform-origin:center bottom}
+#intro.play #lightRay{animation:rayIn 2s ease 6.2s forwards}
+@keyframes rayIn{0%{opacity:0;transform:scaleY(.15)}100%{opacity:.9;transform:scaleY(1)}}
+
+/* انفجار ضوئي عند فتح الباب */
+.intro-flash{
+  position:absolute;left:50%;top:45%;width:60vmax;height:60vmax;border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(circle,rgba(255,236,180,.95),rgba(201,168,76,.5) 35%,transparent 70%);
+}
+#intro.play .intro-flash{animation:flashOut 1.2s ease-out 5.5s forwards}
+@keyframes flashOut{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}
+  18%{opacity:.95}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(2.6)}
+}
+
+/* الكلمات المضيئة */
+.intro-words{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:10px;text-align:center;padding:0 16px}
+.iw{font-weight:800;color:var(--gold-l);text-shadow:0 0 24px rgba(201,168,76,.45);transform:translateY(16px)}
+.iw.ar{font-size:clamp(1.15rem,3.6vw,1.9rem)}
+.iw.ar2{font-size:clamp(.95rem,2.8vw,1.4rem);color:#EAD9A8}
+.iw.en{font-family:'Orbitron',sans-serif;font-weight:600;font-size:clamp(.62rem,2vw,.95rem);letter-spacing:5px;color:#CFD6E4;text-shadow:0 0 18px rgba(26,140,255,.45)}
+#intro.play .iw{animation:iwIn .7s cubic-bezier(.2,.9,.3,1.15) forwards}
+#intro.play .iw:nth-child(1){animation-delay:6.55s}
+#intro.play .iw:nth-child(2){animation-delay:7s}
+#intro.play .iw:nth-child(3){animation-delay:7.5s}
+@keyframes iwIn{to{opacity:1;transform:translateY(0)}}
+
+/* شريط التقدم */
+.intro-progress{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  width:min(60vw,280px);height:2px;background:rgba(201,168,76,.15);
+  border-radius:2px;overflow:hidden;
+}
+.intro-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold-d),var(--gold-l))}
+#intro.play .intro-progress i{animation:introLoad 8.3s linear forwards}
+@keyframes introLoad{to{width:100%}}
+
+/* زر التخطي */
+#skipIntro{
+  position:absolute;top:28px;left:28px;display:inline-flex;align-items:center;gap:8px;
+  padding:8px 18px;border-radius:30px;background:rgba(255,255,255,.04);
+  border:1px solid var(--border);color:var(--text2);
+  font-family:'Cairo',sans-serif;font-size:13px;font-weight:600;cursor:pointer;
+  backdrop-filter:blur(8px);transition:border-color .3s,color .3s;
+}
+#intro.play #skipIntro{animation:iwIn .6s ease 1.2s forwards}
+#skipIntro:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ===== كانفاس الجزيئات ===== */
+#particles-canvas{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+}
+
+/* ===== توهج الماوس ===== */
+#mouse-glow{
+  position:fixed;width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,168,76,0.06),transparent 70%);
+  pointer-events:none;z-index:1;transform:translate(-50%,-50%);
+  transition:opacity .3s;
+}
+
+/* ===== التنقل ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:var(--bg-card);backdrop-filter:blur(var(--blur));
+  border-bottom:1px solid var(--border);
+  transition:all .4s;
+}
+nav.scrolled{box-shadow:var(--glass-shadow)}
+.nav-link{
+  position:relative;color:var(--text2);font-size:14px;font-weight:500;
+  transition:color .3s;padding:4px 0;
+}
+.nav-link:hover,.nav-link.active{color:var(--gold)}
+.nav-link::after{
+  content:'';position:absolute;bottom:-2px;right:0;width:0;height:2px;
+  background:var(--gold);transition:width .3s;
+}
+.nav-link:hover::after,.nav-link.active::after{width:100%}
+
+/* ===== البطل ===== */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;position:relative;z-index:2;
+  padding:120px 20px 60px;
+}
+.hero-key{
+  width:120px;height:auto;animation:heroFloat 6s ease-in-out infinite;
+  filter:drop-shadow(0 0 30px rgba(201,168,76,0.5));
+  cursor:pointer;transition:filter .3s;
+}
+.hero-key:hover{filter:drop-shadow(0 0 50px rgba(201,168,76,0.9))}
+@keyframes heroFloat{
+  0%,100%{transform:translateY(0) rotate(-3deg)}
+  50%{transform:translateY(-20px) rotate(3deg)}
+}
+.hero-title{
+  font-size:clamp(2rem,6vw,4rem);font-weight:900;
+  background:linear-gradient(135deg,var(--gold-l),var(--gold),var(--gold-d));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;margin-top:24px;text-align:center;
+}
+.hero-subtitle{
+  font-family:'Orbitron',sans-serif;font-size:clamp(.7rem,2vw,1.1rem);
+  letter-spacing:6px;color:var(--text2);margin-top:8px;
+}
+.hero-tagline{
+  font-size:clamp(1rem,2.5vw,1.3rem);color:var(--text2);
+  max-width:600px;text-align:center;margin-top:20px;line-height:1.8;
+  opacity:0;transform:translateY(20px);
+  transition:opacity .8s ease .15s,transform .8s ease .15s;
+}
+body.ready .hero-tagline{opacity:1;transform:translateY(0)}
+.hero-actions{opacity:0;transform:translateY(20px);transition:opacity .8s ease .4s,transform .8s ease .4s}
+body.ready .hero-actions{opacity:1;transform:translateY(0)}
+.hero-scroll{color:var(--text2);opacity:0;transition:opacity .8s ease .7s}
+body.ready .hero-scroll{opacity:1;animation:softBounce 2s ease-in-out .7s infinite}
+@keyframes softBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* ===== الأزرار ===== */
+.btn-gold{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 36px;background:linear-gradient(135deg,var(--gold-d),var(--gold),var(--gold-l));
+  color:#050508;font-weight:700;font-size:15px;border-radius:50px;
+  border:none;cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.btn-gold:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px var(--gold-glow);
+}
+.btn-gold::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+  transform:translateX(-100%);transition:transform .6s;
+}
+.btn-gold:hover::before{transform:translateX(100%)}
+.btn-glass{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 36px;background:var(--bg-card);
+  backdrop-filter:blur(12px);border:1px solid var(--border);
+  color:var(--text);font-weight:600;font-size:15px;border-radius:50px;
+  cursor:pointer;transition:all .3s;
+}
+.btn-glass:hover{
+  border-color:var(--gold);color:var(--gold);
+  box-shadow:0 0 20px var(--gold-glow);
+}
+
+/* ===== بطاقة زجاجية ===== */
+.glass-card{
+  background:var(--bg-card);backdrop-filter:blur(var(--blur));
+  border:1px solid var(--border);border-radius:20px;
+  box-shadow:var(--glass-shadow);transition:all .4s;overflow:hidden;
+}
+.glass-card:hover{
+  border-color:var(--gold);transform:translateY(-6px);
+  box-shadow:0 12px 40px var(--gold-glow);
+}
+
+/* ===== عناوين الأقسام ===== */
+.section-label{
+  font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:5px;
+  color:var(--gold);text-transform:uppercase;margin-bottom:8px;
+}
+.section-title{
+  font-size:clamp(1.6rem,4vw,2.5rem);font-weight:800;
+  color:var(--text);line-height:1.4;
+}
+.section-desc{color:var(--text2);font-size:16px;max-width:600px;line-height:1.8}
+
+/* ===== الإحصائيات ===== */
+.stat-num{
+  font-family:'Orbitron',sans-serif;font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:900;background:linear-gradient(135deg,var(--gold-l),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ===== بطاقات المشاريع ===== */
+.project-card{position:relative;border-radius:20px;overflow:hidden}
+.project-card img{width:100%;height:240px;object-fit:cover;transition:transform .6s}
+.project-card:hover img{transform:scale(1.08)}
+.project-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(5,5,8,0.95) 0%,rgba(5,5,8,0.3) 50%,transparent 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:24px;
+}
+.project-badge{
+  position:absolute;top:16px;right:16px;padding:4px 14px;
+  background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.4);
+  color:#10B981;font-size:12px;font-weight:700;border-radius:20px;
+  backdrop-filter:blur(8px);
+}
+.project-tag{
+  position:absolute;top:16px;left:16px;padding:4px 14px;
+  background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);
+  color:var(--gold);font-size:11px;font-weight:600;border-radius:20px;
+  backdrop-filter:blur(8px);
+}
+
+/* ===== الشهادات ===== */
+.testimonial-card{padding:32px;position:relative}
+.testimonial-card::before{
+  content:'\201C';position:absolute;top:12px;right:24px;
+  font-size:80px;color:var(--gold);opacity:0.15;font-family:serif;line-height:1;
+}
+
+/* ===== المدونة ===== */
+.blog-card img{width:100%;height:200px;object-fit:cover;transition:transform .5s}
+.blog-card:hover img{transform:scale(1.06)}
+.blog-tag{
+  display:inline-block;padding:3px 12px;font-size:11px;font-weight:700;
+  border-radius:12px;background:rgba(26,140,255,0.12);color:var(--blue);
+  border:1px solid rgba(26,140,255,0.25);
+}
+
+/* ===== نموذج التواصل ===== */
+.form-input{
+  width:100%;padding:14px 18px;background:var(--bg-card);
+  border:1px solid var(--border);border-radius:12px;color:var(--text);
+  font-family:'Cairo',sans-serif;font-size:14px;outline:none;
+  backdrop-filter:blur(8px);transition:border-color .3s;
+}
+.form-input:focus{border-color:var(--gold)}
+.form-input::placeholder{color:var(--text2)}
+
+/* ===== إصلاح القوائم المنسدلة ===== */
+select.form-input{
+  cursor:pointer;-webkit-appearance:none;appearance:none;
+  padding-left:44px;
+  background-color:var(--bg2);
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23C9A84C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:left 18px center;
+  transition:border-color .3s,box-shadow .3s;
+}
+select.form-input:hover{border-color:var(--gold)}
+select.form-input:focus{box-shadow:0 0 0 3px rgba(201,168,76,0.15)}
+select.form-input option,
+select.form-input optgroup{
+  background-color:#0A0A14;
+  color:#F0F0F0;
+  font-family:'Cairo',sans-serif;font-size:14px;
+  padding:10px;
+}
+.light-mode select.form-input{
+  background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23A07C2A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.light-mode select.form-input option,
+.light-mode select.form-input optgroup{
+  background-color:#FFFFFF;
+  color:#1A1A2E;
+}
+
+/* ===== المفتاح العائم ===== */
+#floating-key{
+  position:fixed;bottom:100px;left:28px;z-index:90;cursor:pointer;
+  animation:floatKey 4s ease-in-out infinite;
+  transition:filter .3s;
+}
+#floating-key:hover{filter:drop-shadow(0 0 20px rgba(201,168,76,0.9))}
+@keyframes floatKey{
+  0%,100%{transform:translateY(0) rotate(-5deg)}
+  50%{transform:translateY(-12px) rotate(5deg)}
+}
+.key-menu{
+  position:absolute;bottom:70px;left:0;width:220px;
+  background:var(--bg-card);backdrop-filter:blur(var(--blur));
+  border:1px solid var(--border);border-radius:16px;
+  box-shadow:var(--glass-shadow);padding:12px;
+  opacity:0;visibility:hidden;transform:translateY(10px);
+  transition:all .3s;
+}
+.key-menu.open{opacity:1;visibility:visible;transform:translateY(0)}
+.key-menu-item{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  border-radius:10px;color:var(--text);font-size:13px;font-weight:500;
+  cursor:pointer;transition:all .2s;
+}
+.key-menu-item:hover{background:rgba(201,168,76,0.1);color:var(--gold)}
+.key-menu-item i{color:var(--gold);width:18px;text-align:center}
+
+/* ===== واتساب ===== */
+#whatsapp-btn{
+  position:fixed;bottom:28px;left:28px;z-index:90;width:56px;height:56px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;font-size:24px;
+  cursor:pointer;box-shadow:0 4px 20px rgba(37,211,102,0.4);
+  transition:all .3s;overflow:hidden;
+}
+#whatsapp-btn:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(37,211,102,0.6)}
+#whatsapp-btn .ripple{
+  position:absolute;width:100%;height:100%;border-radius:50%;
+  background:rgba(201,168,76,0.3);
+  animation:whatsappRipple 2s ease-in-out infinite;
+}
+@keyframes whatsappRipple{
+  0%{transform:scale(1);opacity:0.6}100%{transform:scale(2.5);opacity:0}
+}
+
+/* ===== روبوت أمان ===== */
+#chatbot-btn{
+  position:fixed;bottom:28px;right:28px;z-index:90;width:60px;height:60px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--gold-d),var(--gold-l));
+  color:#050508;font-size:22px;cursor:pointer;
+  box-shadow:0 4px 24px var(--gold-glow);transition:all .3s;
+}
+#chatbot-btn:hover{transform:scale(1.1)}
+#chatbot-popup{
+  position:fixed;bottom:100px;right:28px;z-index:91;width:360px;max-width:calc(100vw - 56px);
+  height:500px;max-height:calc(100vh - 140px);
+  background:var(--bg2);border:1px solid var(--border);border-radius:20px;
+  box-shadow:0 16px 60px rgba(0,0,0,0.5);display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transform:translateY(20px) scale(0.95);
+  transition:all .4s;overflow:hidden;
+}
+#chatbot-popup.open{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.chat-header{
+  padding:16px 20px;background:linear-gradient(135deg,var(--gold-d),var(--gold));
+  color:#050508;display:flex;align-items:center;gap:12px;
+}
+.chat-header h3{font-size:15px;font-weight:700}
+.chat-header span{font-size:11px;opacity:0.7}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.chat-msg{
+  max-width:85%;padding:10px 14px;border-radius:16px;font-size:13px;line-height:1.7;
+}
+.chat-msg.bot{
+  align-self:flex-start;background:var(--bg-card);border:1px solid var(--border);
+  color:var(--text);border-bottom-right-radius:4px;
+}
+.chat-msg.user{
+  align-self:flex-end;background:linear-gradient(135deg,var(--gold-d),var(--gold));
+  color:#050508;border-bottom-left-radius:4px;
+}
+.chat-input-area{
+  padding:12px;border-top:1px solid var(--border);display:flex;gap:8px;
+}
+.chat-input-area input{
+  flex:1;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);
+  border-radius:25px;color:var(--text);font-family:'Cairo';font-size:13px;outline:none;
+}
+.chat-input-area input:focus{border-color:var(--gold)}
+.chat-input-area button{
+  width:40px;height:40px;border-radius:50%;border:none;
+  background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#050508;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:transform .2s;
+}
+.chat-input-area button:hover{transform:scale(1.1)}
+.typing-indicator{display:flex;gap:4px;padding:10px 14px;align-self:flex-start}
+.typing-indicator span{
+  width:7px;height:7px;border-radius:50%;background:var(--gold);
+  animation:typingDot 1.4s ease-in-out infinite;
+}
+.typing-indicator span:nth-child(2){animation-delay:0.2s}
+.typing-indicator span:nth-child(3){animation-delay:0.4s}
+@keyframes typingDot{0%,60%,100%{opacity:0.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-6px)}}
+
+/* ===== زر العودة للأعلى ===== */
+#back-top{
+  position:fixed;bottom:100px;right:28px;z-index:89;width:44px;height:44px;
+  border-radius:50%;background:var(--bg-card);backdrop-filter:blur(12px);
+  border:1px solid var(--border);color:var(--gold);font-size:16px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transform:translateY(10px);transition:all .3s;
+}
+#back-top.show{opacity:1;visibility:visible;transform:translateY(0)}
+#back-top:hover{border-color:var(--gold);box-shadow:0 0 15px var(--gold-glow)}
+
+/* ===== تبديل الوضع ===== */
+.theme-toggle{
+  width:44px;height:44px;border-radius:50%;background:var(--bg-card);
+  backdrop-filter:blur(12px);border:1px solid var(--border);
+  color:var(--gold);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .3s;
+}
+.theme-toggle:hover{border-color:var(--gold);box-shadow:0 0 15px var(--gold-glow)}
+
+/* ===== مبدل اللغة ===== */
+#langBtn span{pointer-events:none}
+#langMenu{
+  position:absolute;top:52px;left:0;right:auto;bottom:auto;width:160px;z-index:120;
+}
+.lang-chip{
+  padding:7px 16px;border-radius:20px;font-family:'Cairo';font-size:12px;font-weight:700;
+  background:var(--bg-card);border:1px solid var(--border);color:var(--text);
+  cursor:pointer;transition:all .2s;
+}
+.lang-chip.active,.lang-chip:hover{border-color:var(--gold);color:var(--gold)}
+html[dir="ltr"] .btn-gold::before,
+html[dir="ltr"] .btn-royal::before{transform:translateX(100%)}
+
+/* ===== زر تملك الأجانب المميز ===== */
+.btn-royal{
+  position:relative;display:inline-flex;align-items:center;gap:8px;
+  padding:12px 26px;border-radius:50px;border:none;cursor:pointer;
+  font-family:'Cairo',sans-serif;font-weight:800;font-size:14px;color:#050508;
+  background:linear-gradient(135deg,var(--gold-d),var(--gold),var(--gold-l));
+  box-shadow:0 0 0 0 rgba(201,168,76,0.5);
+  animation:ctaPulse 2.6s infinite;overflow:hidden;
+  transition:transform .3s;
+}
+.btn-royal:hover{transform:translateY(-2px)}
+.btn-royal::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.45),transparent);
+  transform:translateX(-100%);transition:transform .6s;
+}
+.btn-royal:hover::before{transform:translateX(100%)}
+@keyframes ctaPulse{
+  0%{box-shadow:0 0 0 0 rgba(201,168,76,0.55)}
+  70%{box-shadow:0 0 0 16px rgba(201,168,76,0)}
+  100%{box-shadow:0 0 0 0 rgba(201,168,76,0)}
+}
+
+/* ===== نافذة طلب التملك ===== */
+#foreignModal{transition:opacity .35s ease}
+.modal-card{
+  transform:translateY(26px) scale(.96);
+  transition:transform .4s cubic-bezier(.22,1,.36,1);
+}
+#foreignModal:not(.hidden) .modal-card{transform:translateY(0) scale(1)}
+.step-num{
+  font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;
+  color:var(--gold);border:1px solid var(--border);border-radius:20px;
+  padding:3px 12px;display:inline-block;margin-bottom:16px;
+}
+
+/* ===== انيميشن الظهور ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ===== الشريط المتحرك ===== */
+.marquee-track{
+  display:flex;gap:60px;animation:marquee 30s linear infinite;width:max-content;
+}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* ===== خط ذهبي فاصل ===== */
+.gold-divider{
+  width:60px;height:3px;border-radius:3px;
+  background:linear-gradient(90deg,var(--gold-d),var(--gold-l),var(--gold));
+}
+
+/* ===== تذييل ===== */
+footer{background:var(--bg2);border-top:1px solid var(--border)}
+.footer-brand{
+  font-size:clamp(1.2rem,3vw,1.6rem);font-weight:900;
+  background:linear-gradient(135deg,var(--gold-l),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ===== الاستجابة ===== */
+@media(max-width:768px){
+  .hero-key{width:80px}
+  #chatbot-popup{width:calc(100vw - 32px);right:16px;bottom:90px;height:420px}
+  #floating-key{bottom:90px;left:16px}
+  #floating-key svg{width:40px;height:auto}
+  #whatsapp-btn{bottom:20px;left:16px;width:50px;height:50px;font-size:20px}
+  #chatbot-btn{bottom:20px;right:16px;width:52px;height:52px;font-size:20px}
+  #back-top{bottom:90px;right:16px}
+  .key-menu{width:200px;left:0}
+}
+
+/* ===== استجابة مشهد الافتتاح ===== */
+@media(max-width:768px){
+  .intro-brand{top:20px;font-size:10px;letter-spacing:4px}
+  #skipIntro{top:auto;bottom:60px;left:50%;transform:translateX(-50%);padding:6px 16px;font-size:12px}
+  .intro-words{gap:6px;margin-top:4px}
+  .intro-progress{bottom:22px}
+}
+
+/* ===== تقليل الحركة ===== */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
+}
+
+/* ===== ضبط العناصر في وضع LTR (الإنجليزية/الفرنسية/الألمانية) ===== */
+html[dir="ltr"] body{letter-spacing:.1px}
+html[dir="ltr"] .nav-link::after{right:auto;left:0}
+html[dir="ltr"] #foreignModal .modal-card>button:first-child{left:auto;right:16px}
+html[dir="ltr"] .stat-num{font-family:'Orbitron',monospace}
+html[dir="ltr"] .fa-quote-right{right:auto!important;left:24px}
+html[dir="ltr"] .chat-msg.bot{border-bottom-left-radius:4px;border-bottom-right-radius:16px}
+html[dir="ltr"] .chat-msg.user{border-bottom-right-radius:4px;border-bottom-left-radius:16px}
+</style>
+</head>
+<body>
+
+<!-- ===== مشهد الافتتاح – منزل يُفتح بمفتاح فريد ===== -->
+<div id="intro" aria-label="مشهد افتتاح بيت الأمان">
+  <div class="intro-brand">B Y T E L A M A N</div>
+  <div class="intro-flash"></div>
+  <svg id="houseScene" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="منزل فاخر يُفتح بمفتاح ذهبي فريد">
+    <defs>
+      <linearGradient id="igGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#E8D48B"/><stop offset="50%" stop-color="#C9A84C"/><stop offset="100%" stop-color="#A07C2A"/>
+      </linearGradient>
+      <linearGradient id="igBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#1A8CFF"/><stop offset="100%" stop-color="#67B6FF"/>
+      </linearGradient>
+      <linearGradient id="igRay" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0%" stop-color="rgba(232,212,139,0.75)"/><stop offset="100%" stop-color="rgba(232,212,139,0)"/>
+      </linearGradient>
+      <radialGradient id="igInner" cx="50%" cy="60%" r="65%">
+        <stop offset="0%" stop-color="#FFE9AE"/><stop offset="55%" stop-color="rgba(201,168,76,0.55)"/><stop offset="100%" stop-color="rgba(201,168,76,0)"/>
+      </radialGradient>
+      <filter id="iSoft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+    </defs>
+
+    <!-- الأرضية والمدخل -->
+    <path class="draw" d="M120 500H680" stroke="url(#igBlue)" stroke-width="2" opacity=".7" style="animation-delay:.1s"/>
+    <path class="draw" d="M320 500V486H480V500" stroke="#3A4664" stroke-width="2" style="animation-delay:1.7s"/>
+
+    <!-- جسم المنزل والسقف والبرج -->
+    <path class="draw" d="M210 498V310H590V498" stroke="url(#igGold)" stroke-width="3.5" style="animation-delay:.25s"/>
+    <path class="draw" d="M180 312L400 206L620 312" stroke="url(#igGold)" stroke-width="4" style="animation-delay:.55s"/>
+    <path class="draw" d="M400 206V166" stroke="url(#igGold)" stroke-width="3" style="animation-delay:.95s"/>
+    <circle class="draw" cx="400" cy="157" r="6" stroke="#67B6FF" stroke-width="2.5" style="animation-delay:1.1s"/>
+    <path class="draw" d="M210 448H590" stroke="#3A4664" stroke-width="2" style="animation-delay:1.25s"/>
+
+    <!-- الشبابيك الزجاجية -->
+    <rect class="draw" x="250" y="350" width="80" height="72" rx="8" stroke="url(#igBlue)" stroke-width="2.5" style="animation-delay:1.35s"/>
+    <path class="draw" d="M290 350V422M250 386H330" stroke="url(#igBlue)" stroke-width="1.6" opacity=".8" style="animation-delay:1.55s"/>
+    <rect class="draw" x="470" y="350" width="80" height="72" rx="8" stroke="url(#igBlue)" stroke-width="2.5" style="animation-delay:1.45s"/>
+    <path class="draw" d="M510 350V422M470 386H550" stroke="url(#igBlue)" stroke-width="1.6" opacity=".8" style="animation-delay:1.65s"/>
+
+    <!-- إطار الباب -->
+    <path class="draw" d="M350 372H450" stroke="url(#igGold)" stroke-width="3" style="animation-delay:1.8s"/>
+    <path class="draw" d="M358 498V372M442 498V372" stroke="url(#igGold)" stroke-width="3" style="animation-delay:1.9s"/>
+
+    <!-- التوهج الداخلي (يظهر عند الفتح) -->
+    <rect id="innerGlow" x="330" y="368" width="140" height="132" fill="url(#igInner)" filter="url(#iSoft)"/>
+
+    <!-- ضلفا الباب الزجاجيتان -->
+    <g id="panelL">
+      <rect x="359" y="373" width="41" height="125" rx="3" fill="rgba(201,168,76,0.10)" stroke="url(#igGold)" stroke-width="2"/>
+      <circle cx="392" cy="436" r="3.2" fill="#E8D48B"/>
+    </g>
+    <g id="panelR">
+      <rect x="400" y="373" width="41" height="125" rx="3" fill="rgba(201,168,76,0.10)" stroke="url(#igGold)" stroke-width="2"/>
+      <circle cx="408" cy="436" r="3.2" fill="#E8D48B"/>
+    </g>
+
+    <!-- شعاع ضوئي يتصاعد من الباب المفتوح -->
+    <path id="lightRay" d="M400 380L318 128L482 128Z" fill="url(#igRay)"/>
+
+    <!-- المفتاح الفريد – قوس سداسي + نجمة + جوهرة زمردية -->
+    <g id="introKey">
+      <polygon points="96,0 83,29 57,29 44,0 57,-29 83,-29" stroke="url(#igGold)" stroke-width="4"/>
+      <polygon points="70,-11 74,-2 83,-2 76,4 79,13 70,7.5 61,13 64,4 57,-2 66,-2" fill="url(#igGold)"/>
+      <rect x="-100" y="-5" width="164" height="10" rx="5" fill="url(#igGold)"/>
+      <rect x="-100" y="5" width="14" height="16" rx="2" fill="url(#igGold)"/>
+      <rect x="-78" y="5" width="12" height="23" rx="2" fill="url(#igGold)"/>
+      <rect x="-56" y="5" width="17" height="13" rx="2" fill="url(#igGold)"/>
+      <polygon points="-104,0 -113,10 -122,0 -113,-10" fill="#10B981"/>
+      <circle cx="-30" cy="0" r="3.4" fill="#0B0B18" stroke="#A07C2A" stroke-width="1.5"/>
+    </g>
+
+    <!-- عناصر زخرفية عائمة -->
+    <circle class="draw" cx="676" cy="196" r="10" stroke="rgba(201,168,76,0.5)" stroke-width="1.6" style="animation-delay:2s"/>
+    <circle class="draw" cx="130" cy="238" r="7" stroke="rgba(103,182,255,0.5)" stroke-width="1.6" style="animation-delay:2.1s"/>
+  </svg>
+
+  <div class="intro-words">
+    <span class="iw ar">بيت الأمان..</span>
+    <span class="iw ar2">حيث يبدأ المستقبل</span>
+    <span class="iw en">BYTELAMAN – مفتاحك لعالم الاستثمار الآمن</span>
+  </div>
+
+  <div class="intro-progress"><i></i></div>
+  <button id="skipIntro"><i class="fas fa-forward"></i> تخطي المشهد</button>
+</div>
+
+<!-- ===== كانفاس الجزيئات ===== -->
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+<!-- ===== توهج الماوس ===== -->
+<div id="mouse-glow" aria-hidden="true"></div>
+
+<!-- ===== التنقل ===== -->
+<nav id="navbar" aria-label="القائمة الرئيسية">
+  <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
+    <a href="#hero" class="flex items-center gap-3 no-underline">
+      <svg width="32" height="32" viewBox="0 0 120 260" fill="none">
+        <circle cx="60" cy="55" r="40" stroke="#C9A84C" stroke-width="6"/>
+        <circle cx="60" cy="55" r="26" stroke="#C9A84C" stroke-width="3.5"/>
+        <path d="M48 55L60 43L72 55L60 67Z" stroke="#C9A84C" stroke-width="2.5" fill="none"/>
+        <rect x="55" y="95" width="10" height="130" rx="3" fill="#C9A84C"/>
+        <rect x="65" y="160" width="22" height="7" rx="2" fill="#C9A84C"/>
+        <rect x="65" y="180" width="17" height="7" rx="2" fill="#C9A84C"/>
+        <rect x="65" y="200" width="12" height="7" rx="2" fill="#C9A84C"/>
+      </svg>
+      <div>
+        <div class="font-orbitron text-sm font-bold" style="color:var(--gold)">BYTELAMAN</div>
+        <div class="text-xs" style="color:var(--text2)">بيت الأمان</div>
+      </div>
+    </a>
+    <div class="hidden md:flex items-center gap-7">
+      <a href="#hero" class="nav-link active">الرئيسية</a>
+      <a href="#about" class="nav-link">من نحن</a>
+      <a href="#projects" class="nav-link">المشاريع</a>
+      <a href="#media" class="nav-link">المنصة الإعلامية</a>
+      <a href="#investors" class="nav-link">المستثمر الدولي</a>
+      <a href="#blog" class="nav-link">المدونة</a>
+      <a href="#contact" class="nav-link">تواصل معنا</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="relative">
+        <button class="theme-toggle" id="langBtn" aria-label="Language" onclick="toggleLangMenu(event)">
+          <span id="langBtnLabel" style="font-family:'Orbitron';font-size:11px;font-weight:700;line-height:1">AR</span>
+        </button>
+        <div id="langMenu" class="key-menu">
+          <div class="key-menu-item lang-opt active" data-lang="ar" onclick="setLang('ar')"><span>🇪🇬</span> العربية</div>
+          <div class="key-menu-item lang-opt" data-lang="en" onclick="setLang('en')"><span>🇬🇧</span> English</div>
+          <div class="key-menu-item lang-opt" data-lang="fr" onclick="setLang('fr')"><span>🇫🇷</span> Français</div>
+          <div class="key-menu-item lang-opt" data-lang="de" onclick="setLang('de')"><span>🇩🇪</span> Deutsch</div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع">
+        <i class="fas fa-sun"></i>
+      </button>
+      <button class="btn-royal text-sm hidden sm:inline-flex" onclick="openForeignModal()">
+        <i class="fas fa-passport"></i> طلب تملك للأجانب
+      </button>
+      <button class="md:hidden text-xl" style="color:var(--gold);background:none;border:none;cursor:pointer" id="mobileMenuBtn" aria-label="القائمة">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+  <!-- قائمة الموبايل -->
+  <div id="mobileMenu" class="md:hidden hidden px-5 pb-4 flex flex-col gap-3">
+    <a href="#hero" class="nav-link">الرئيسية</a>
+    <a href="#about" class="nav-link">من نحن</a>
+    <a href="#projects" class="nav-link">المشاريع</a>
+    <a href="#media" class="nav-link">المنصة الإعلامية</a>
+    <a href="#investors" class="nav-link">المستثمر الدولي</a>
+    <a href="#blog" class="nav-link">المدونة</a>
+    <a href="#contact" class="nav-link">تواصل معنا</a>
+    <div class="flex justify-center gap-2 mt-1">
+      <button class="lang-chip active" data-lang="ar" onclick="setLang('ar')">ع</button>
+      <button class="lang-chip" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-chip" data-lang="fr" onclick="setLang('fr')">FR</button>
+      <button class="lang-chip" data-lang="de" onclick="setLang('de')">DE</button>
+    </div>
+    <button class="btn-royal text-sm w-full justify-center mt-2" onclick="openForeignModal()">
+      <i class="fas fa-passport"></i> طلب تملك للمستثمرين الأجانب
+    </button>
+  </div>
+</nav>
+
+<!-- ===== القسم البطل ===== -->
+<section id="hero">
+  <svg class="hero-key" viewBox="0 0 120 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="gGold2" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#E8D48B"/><stop offset="50%" stop-color="#C9A84C"/><stop offset="100%" stop-color="#A07C2A"/>
+      </linearGradient>
+      <filter id="keyGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <circle cx="60" cy="55" r="40" stroke="url(#gGold2)" stroke-width="5" filter="url(#keyGlow)"/>
+    <circle cx="60" cy="55" r="26" stroke="url(#gGold2)" stroke-width="3"/>
+    <path d="M48 55L60 43L72 55L60 67Z" stroke="url(#gGold2)" stroke-width="2.5" fill="none"/>
+    <rect x="55" y="95" width="10" height="130" rx="3" fill="url(#gGold2)" filter="url(#keyGlow)"/>
+    <rect x="65" y="160" width="22" height="7" rx="2" fill="url(#gGold2)"/>
+    <rect x="65" y="180" width="17" height="7" rx="2" fill="url(#gGold2)"/>
+    <rect x="65" y="200" width="12" height="7" rx="2" fill="url(#gGold2)"/>
+  </svg>
+  <h1 class="hero-title">بيت الأمان<span class="block mt-2" style="font-size:clamp(1rem,3vw,1.7rem);font-weight:700;-webkit-text-fill-color:var(--gold);background:none">للاستثمار العقاري والسياحي</span></h1>
+  <p class="hero-subtitle">BYTELAMAN</p>
+  <p class="hero-tagline"><strong style="color:var(--gold)">استثمارك الآمن.. عبر الحدود</strong><br>فرص عقارية وسياحية آمنة في مصر ودول الخليج وأوروبا</p>
+  <!-- الأزرار الاستراتيجية: خدمة أي عقار في السوق -->
+  <div class="flex flex-wrap gap-4 mt-9 justify-center hero-actions">
+    <button class="btn-royal text-base px-8 py-4" onclick="openForeignModal('find')"><i class="fas fa-magnifying-glass-location"></i> أبحث عن عقار خارج مشاريعكم</button>
+    <button class="btn-glass text-base px-8 py-4" onclick="openForeignModal('manage')"><i class="fas fa-screwdriver-wrench"></i> أملك عقاراً أرغب في فحصه أو تطويره</button>
+  </div>
+  <div class="flex flex-wrap gap-4 mt-4 justify-center hero-actions">
+    <button class="btn-gold" onclick="scrollToSection('projects')"><i class="fas fa-key"></i> استثمر الآن</button>
+    <button class="btn-glass" onclick="scrollToSection('investors')"><i class="fas fa-book-open"></i> دليل المستثمر الأجنبي مجاناً</button>
+  </div>
+  <div class="glass-card px-6 py-4 mt-10 max-w-3xl mx-auto hero-actions">
+    <p class="text-sm md:text-base font-bold leading-relaxed text-center" style="color:var(--gold-l)">«لا نبيعك المتاح فقط.. بل نجلب لك العقار الذي تحلم به في أي مكان، نضمن أمانه القانوني، ونطوّره ليعمل لحسابك.»</p>
+  </div>
+  <div class="mt-16 hero-scroll">
+    <i class="fas fa-chevron-down text-lg"></i>
+  </div>
+</section>
+
+<!-- ===== شريط الشركاء المتحرك ===== -->
+<div class="py-8 overflow-hidden" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:2">
+  <div class="marquee-track">
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">DUBAI LAND DEPT.</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">NEW ADMIN CAPITAL</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">NORTH COAST</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">RIYADH VISION</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">SMART CITY</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">GLOBAL INVEST</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">LUXURY REALTY</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">FUTURE HOMES</span>
+    <!-- تكرار -->
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">DUBAI LAND DEPT.</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">NEW ADMIN CAPITAL</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">NORTH COAST</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">RIYADH VISION</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">SMART CITY</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">GLOBAL INVEST</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">LUXURY REALTY</span>
+    <span class="font-orbitron text-sm font-semibold whitespace-nowrap" style="color:var(--text2);opacity:.4">FUTURE HOMES</span>
+  </div>
+</div>
+
+<!-- ===== الإحصائيات ===== -->
+<section class="py-20 relative z-10">
+  <div class="max-w-6xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div class="glass-card p-6 text-center reveal">
+      <div class="stat-num" data-target="50">0</div>
+      <div class="text-xs mt-2 font-semibold" style="color:var(--gold)">+ مشروع عقاري</div>
+    </div>
+    <div class="glass-card p-6 text-center reveal reveal-delay-1">
+      <div class="stat-num" data-target="2500">0</div>
+      <div class="text-xs mt-2 font-semibold" style="color:var(--gold)">+ مستثمر راضٍ</div>
+    </div>
+    <div class="glass-card p-6 text-center reveal reveal-delay-2">
+      <div class="stat-num" data-target="35">0</div>
+      <div class="text-xs mt-2 font-semibold" style="color:var(--gold)">% عائد سنوي</div>
+    </div>
+    <div class="glass-card p-6 text-center reveal reveal-delay-3">
+      <div class="stat-num" data-target="10">0</div>
+      <div class="text-xs mt-2 font-semibold" style="color:var(--gold)">+ سنوات خبرة</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== من نحن ===== -->
+<section id="about" class="py-24 relative z-10">
+  <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-16 items-center">
+    <div class="reveal">
+      <div class="section-label">ABOUT US</div>
+      <h2 class="section-title mb-4">بيت الأمان<br><span style="color:var(--gold)">وجهتك الموثوقة عبر الحدود</span></h2>
+      <div class="gold-divider mb-6"></div>
+      <p class="section-desc mb-6">
+        تُعد شركة بيت الأمان للاستثمار العقاري والسياحي وجهتك الموثوقة للاستثمار العقاري والتطوير السياحي داخل جمهورية مصر العربية والدول العربية والأوروبية. نتميز بتقديم محفظة عقارية وسياحية متنوعة تشمل العقارات السكنية الحديثة، المراكز التجارية المتميزة، والمنتجعات السياحية الفاخرة.
+      </p>
+      <p class="section-desc mb-8">
+        نهدف إلى بناء شراكات طويلة الأجل مع عملائنا في دول الخليج العربي وأوروبا ومصر، من خلال تقديم فرص استثمارية آمنة تحقق أعلى عوائد استثمارية وتلبي تطلعات الحياة العصرية — مدعومة بتحليل السوق الذكي، والجولات الافتراضية ثلاثية الأبعاد، ومستشارنا الرقمي "أمان".
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <button class="btn-gold text-sm" onclick="scrollToSection('projects')"><i class="fas fa-building"></i> تصفح المشاريع</button>
+        <button class="btn-glass text-sm" onclick="scrollToSection('contact')"><i class="fas fa-phone"></i> تواصل معنا</button>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2 relative">
+      <div class="glass-card p-2">
+        <img src="img/about-team.webp" alt="مقر بيت الأمان" class="w-full h-auto rounded-2xl" loading="lazy">
+      </div>
+      <div class="absolute -bottom-6 -right-6 glass-card px-5 py-4 flex items-center gap-3" style="border-color:var(--emerald)">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:rgba(16,185,129,0.15)">
+          <i class="fas fa-shield-halved" style="color:var(--emerald)"></i>
+        </div>
+        <div>
+          <div class="text-sm font-bold" style="color:var(--emerald)">شهادة ضمان</div>
+          <div class="text-xs" style="color:var(--text2)">استثمار آمن 100%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== الرؤية والرسالة ===== -->
+<section id="vision" class="py-24 relative z-10" style="background:var(--bg2)">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-14">
+      <div class="section-label reveal">VISION & MISSION</div>
+      <h2 class="section-title mb-4 reveal">رؤيتنا <span style="color:var(--gold)">ورسالتنا</span></h2>
+      <div class="gold-divider mx-auto reveal"></div>
+    </div>
+    <div class="grid md:grid-cols-2 gap-7">
+      <div class="glass-card p-8 reveal">
+        <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
+          <i class="fas fa-eye text-xl" style="color:var(--gold)"></i>
+        </div>
+        <h3 class="font-bold text-xl mb-3">رؤيتنا</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:2">أن نكون الجسر العقاري والسياحي الأكثر أماناً وموثوقية الذي يربط بين الفرص الاستثمارية الواعدة في مصر ودول الخليج وأوروبا.</p>
+      </div>
+      <div class="glass-card p-8 reveal reveal-delay-1">
+        <div class="w-14 h-14 rounded-2xl mb-5 flex items-center justify-center" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.2)">
+          <i class="fas fa-paper-plane text-xl" style="color:var(--blue)"></i>
+        </div>
+        <h3 class="font-bold text-xl mb-3">رسالتنا</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:2">تقديم حلول عقارية وسياحية متكاملة وعابرة للحدود، تضمن الأمان الاستثماري وتوفر تجارب سكنية وسياحية فريدة، مع الالتزام بأعلى معايير المصداقية والشفافية.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== مجالات عملنا ===== -->
+<section id="portfolio" class="py-24 relative z-10">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-14">
+      <div class="section-label reveal">OUR PORTFOLIO</div>
+      <h2 class="section-title mb-4 reveal">مجالات <span style="color:var(--gold)">عملنا</span></h2>
+      <div class="gold-divider mx-auto mb-4 reveal"></div>
+      <p class="section-desc mx-auto reveal">تغطي خدماتنا ومشاريعنا ثلاثة قطاعات رئيسية داخل مصر وخارجها</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-7">
+      <div class="glass-card p-8 text-center reveal">
+        <div class="w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
+          <i class="fas fa-house-chimney text-2xl" style="color:var(--gold)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-3">العقارات السكنية</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">وحدات وشقق فاخرة، شاليهات، وفيلل مصممة لتلائم أنماط الحياة العصرية وتوفر الراحة والأمان للعائلات والمستثمرين.</p>
+      </div>
+      <div class="glass-card p-8 text-center reveal reveal-delay-1">
+        <div class="w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.2)">
+          <i class="fas fa-briefcase text-2xl" style="color:var(--blue)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-3">العقارات التجارية</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">مكاتب إدارية، ومحلات تجارية، ومراكز أعمال في مواقع استراتيجية حيوية تضمن أعلى عائد على الاستثمار واستدامة الأعمال.</p>
+      </div>
+      <div class="glass-card p-8 text-center reveal reveal-delay-2">
+        <div class="w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)">
+          <i class="fas fa-umbrella-beach text-2xl" style="color:var(--emerald)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-3">المنتجعات والمشاريع السياحية</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">إدارة وتطوير وتسويق الفنادق والمنتجعات السياحية الفاخرة التي توفر تجارب استجمام استثنائية وفرصاً استثمارية سياحية واعدة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== الخدمات ===== -->
+<section class="py-24 relative z-10" style="background:var(--bg2)">
+  <div class="max-w-6xl mx-auto px-5 text-center">
+    <div class="section-label reveal">WHY CHOOSE US?</div>
+    <h2 class="section-title mb-4 reveal">لماذا تختار <span style="color:var(--gold)">بيت الأمان</span>؟</h2>
+    <div class="gold-divider mx-auto mb-12 reveal"></div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass-card p-7 text-center reveal">
+        <div class="w-14 h-14 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
+          <i class="fas fa-earth-africa text-xl" style="color:var(--gold)"></i>
+        </div>
+        <h3 class="font-bold text-base mb-3">تغطية إقليمية ودولية</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.8">خيارات استثمارية متنوعة تجمع بين الأسواق الواعدة في مصر والخليج وأوروبا</p>
+      </div>
+      <div class="glass-card p-7 text-center reveal reveal-delay-1">
+        <div class="w-14 h-14 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)">
+          <i class="fas fa-shield-halved text-xl" style="color:var(--emerald)"></i>
+        </div>
+        <h3 class="font-bold text-base mb-3">أمان واستقرار الاستثمار</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.8">دراسات جدوى دقيقة واستشارات قانونية وعقارية لحماية رأس المال وضمان أعلى العوائد</p>
+      </div>
+      <div class="glass-card p-7 text-center reveal reveal-delay-2">
+        <div class="w-14 h-14 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.2)">
+          <i class="fas fa-layer-group text-xl" style="color:var(--blue)"></i>
+        </div>
+        <h3 class="font-bold text-base mb-3">تنوع المشاريع</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.8">خيارات متعددة تناسب الأغراض السكنية والتجارية والسياحية على حد سواء</p>
+      </div>
+      <div class="glass-card p-7 text-center reveal reveal-delay-3">
+        <div class="w-14 h-14 rounded-2xl mx-auto mb-5 flex items-center justify-center" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
+          <i class="fas fa-handshake-angle text-xl" style="color:var(--gold)"></i>
+        </div>
+        <h3 class="font-bold text-base mb-3">خدمات متكاملة</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.8">متابعة وإدارة الأملاك العقارية والسياحية قبل وبعد البيع على مدار الساعة</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== المشاريع ===== -->
+<section id="projects" class="py-24 relative z-10">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-14">
+      <div class="section-label reveal">PROJECTS</div>
+      <h2 class="section-title mb-4 reveal">وجهات <span style="color:var(--gold)">استثمارية</span> استثنائية</h2>
+      <div class="gold-divider mx-auto mb-4 reveal"></div>
+      <p class="section-desc mx-auto reveal">محفظة متنوعة من المشاريع السكنية والتجارية والمنتجعات في مصر والخليج وأوروبا</p>
+    </div>
+    <!-- فلاتر -->
+    <div class="flex flex-wrap justify-center gap-3 mb-10 reveal">
+      <button class="filter-btn active btn-glass text-sm" data-filter="all">الكل</button>
+      <button class="filter-btn btn-glass text-sm" data-filter="residential">سكني</button>
+      <button class="filter-btn btn-glass text-sm" data-filter="commercial">تجاري</button>
+      <button class="filter-btn btn-glass text-sm" data-filter="resort">منتجعات سياحية</button>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7" id="projectsGrid">
+      <!-- المشاريع تُولّد بالجافاسكربت -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== التواجد الجغرافي ===== -->
+<section id="reach" class="py-24 relative z-10" style="background:var(--bg2)">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-14">
+      <div class="section-label reveal">GLOBAL REACH</div>
+      <h2 class="section-title mb-4 reveal">التواجد <span style="color:var(--gold)">الجغرافي</span></h2>
+      <div class="gold-divider mx-auto mb-4 reveal"></div>
+      <p class="section-desc mx-auto reveal">استثمارك الآمن.. عبر الحدود — حضور يمتد من قلب مصر إلى الخليج وأوروبا</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-7">
+      <div class="glass-card p-8 text-center reveal">
+        <div class="w-16 h-16 rounded-full mx-auto mb-5 flex items-center justify-center" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25)">
+          <i class="fas fa-landmark-marked text-2xl" style="color:var(--gold)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-3">داخل مصر</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">تغطية شاملة للمدن الجديدة، العاصمة الإدارية، المناطق الساحلية، والمناطق السياحية الرئيسية.</p>
+      </div>
+      <div class="glass-card p-8 text-center reveal reveal-delay-1">
+        <div class="w-16 h-16 rounded-full mx-auto mb-5 flex items-center justify-center" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.25)">
+          <i class="fas fa-mosque text-2xl" style="color:var(--blue)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-3">دول الخليج العربي</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">استشارات وفرص استثمارية تناسب المستثمر الخليجي والباحثين عن التوسع العقاري والسياحي في المنطقة.</p>
+      </div>
+      <div class="glass-card p-8 text-center reveal reveal-delay-2">
+        <div class="w-16 h-16 rounded-full mx-auto mb-5 flex items-center justify-center" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25)">
+          <i class="fas fa-earth-europe text-2xl" style="color:var(--emerald)"></i>
+        </div>
+        <h3 class="font-bold text-lg mb-3">الدول الأوروبية</h3>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">إتاحة فرص استثمار عقاري دولية وإدارة أملاك سياحية وفق المعايير العالمية.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== للمستثمرين الدوليين ===== -->
+<section id="investors" class="py-24 relative z-10">
+  <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-14 items-center">
+    <div class="reveal">
+      <div class="section-label">INTERNATIONAL INVESTORS</div>
+      <h2 class="section-title mb-4">المستثمر <span style="color:var(--gold)">الدولي</span> أولاً</h2>
+      <div class="gold-divider mb-6"></div>
+      <p class="section-desc mb-7">قسم مخصص لمستثمري الخليج وأوروبا يشرح التسهيلات والقوانين العقارية المتاحة داخل مصر، ونرافقك خطوة بخطوة حتى تسلم مفاتيح وحدتك.</p>
+      <ul class="flex flex-col gap-4">
+        <li class="flex items-start gap-3"><i class="fas fa-circle-check mt-1" style="color:var(--emerald)"></i><span class="text-sm" style="line-height:1.8">حق ملكية كاملة للأجانب في المناطق المسموح بها قانونياً</span></li>
+        <li class="flex items-start gap-3"><i class="fas fa-circle-check mt-1" style="color:var(--emerald)"></i><span class="text-sm" style="line-height:1.8">إقامة استثمارية عند شراء عقار بقيمة محددة</span></li>
+        <li class="flex items-start gap-3"><i class="fas fa-circle-check mt-1" style="color:var(--emerald)"></i><span class="text-sm" style="line-height:1.8">استشارات قانونية وعقارية وفحص جاهزية المستندات</span></li>
+        <li class="flex items-start gap-3"><i class="fas fa-circle-check mt-1" style="color:var(--emerald)"></i><span class="text-sm" style="line-height:1.8">إدارة الأملاك والتأجير وصيانة الوحدة نيابةً عنك</span></li>
+        <li class="flex items-start gap-3"><i class="fas fa-circle-check mt-1" style="color:var(--emerald)"></i><span class="text-sm" style="line-height:1.8">أسعار بالدولار واليورو وخطط سداد مرنة عبر الحدود</span></li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="glass-card p-8 text-center">
+        <svg width="64" height="64" viewBox="0 0 120 260" fill="none" class="mx-auto mb-4">
+          <circle cx="60" cy="55" r="40" stroke="#C9A84C" stroke-width="6"/>
+          <circle cx="60" cy="55" r="26" stroke="#C9A84C" stroke-width="3.5"/>
+          <rect x="55" y="95" width="10" height="130" rx="3" fill="#C9A84C"/>
+          <rect x="65" y="160" width="22" height="7" rx="2" fill="#C9A84C"/>
+          <rect x="65" y="180" width="17" height="7" rx="2" fill="#C9A84C"/>
+          <rect x="65" y="200" width="12" height="7" rx="2" fill="#C9A84C"/>
+        </svg>
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3" style="background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.35);color:var(--gold)"><i class="fas fa-file-pdf ml-1"></i> PDF مجاني – إصدار 2026</span>
+        <h3 class="font-bold text-xl mb-2">دليل المستثمر الأجنبي للتملك العقاري والاستثماري</h3>
+        <p class="text-sm mb-4" style="color:var(--text2);line-height:1.9">كتيّب تفصيلي صادر عن بيت الأمان يشمل الإطار التشريعي وتسهيلات تملك الأجانب، خطوات التملك خطوة بخطوة، الإقامة الاستثمارية، جدول الضرائب والرسوم، وخدمات ما بعد الشراء.</p>
+        <div class="flex flex-wrap justify-center gap-2 mb-5">
+          <span class="blog-tag">الإطار القانوني</span>
+          <span class="blog-tag">خطوات التملك</span>
+          <span class="blog-tag">الإقامة الاستثمارية</span>
+          <span class="blog-tag">الضرائب والرسوم</span>
+          <span class="blog-tag">إدارة الأملاك</span>
+        </div>
+        <form id="guideForm" class="flex flex-col gap-3 text-right" onsubmit="handleGuide(event)">
+          <input class="form-input text-sm" type="text" placeholder="الاسم الكامل *" required aria-label="الاسم الكامل">
+          <div class="grid sm:grid-cols-2 gap-3">
+            <input class="form-input text-sm" type="tel" placeholder="رقم الهاتف / واتساب *" required aria-label="الهاتف">
+            <select class="form-input text-sm" required aria-label="بلد الإقامة">
+              <option value="" disabled selected style="color:var(--text2)">بلد إقامتك *</option>
+              <option>مصر</option>
+              <option>دولة خليجية</option>
+              <option>دولة أوروبية</option>
+              <option>دولة أخرى</option>
+            </select>
+          </div>
+          <input class="form-input text-sm" type="email" placeholder="بريدك الإلكتروني لإرسال الدليل *" required aria-label="البريد الإلكتروني">
+          <button type="submit" class="btn-gold text-sm justify-center"><i class="fas fa-download"></i> احصل على النسخة المجانية (PDF)</button>
+        </form>
+        <div class="flex flex-col sm:flex-row gap-3 mt-3">
+          <a href="guide.html" target="_blank" rel="noopener" class="btn-glass text-sm flex-1 justify-center no-underline" style="color:var(--text)"><i class="fas fa-book-open"></i> استعراض الدليل أونلاين</a>
+          <button class="btn-glass text-sm flex-1 justify-center" onclick="scrollToSection('contact')"><i class="fas fa-headset"></i> حدّد موعد استشارة مجانية</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== خدمة المستشار العقاري والقانوني للأجانب ===== -->
+<section id="advisory" class="py-24 relative z-10">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-12">
+      <div class="section-label reveal">CROSS-BORDER LEGAL ADVISORY</div>
+      <h2 class="section-title mb-4 reveal">خدمة <span style="color:var(--gold)">المستشار العقاري والقانوني</span> للأجانب والمستثمرين الدوليين</h2>
+      <div class="gold-divider mx-auto mb-6 reveal"></div>
+      <p class="text-lg font-bold reveal" style="color:var(--gold-l)">تملّك واستثمر بآمان.. أينما كنت وفي أي مكان</p>
+      <p class="section-desc mx-auto mt-4 reveal">نقدم خدمة متكاملة ومخصصة للعملاء والمستثمرين غير المقيمين (الأجانب والمغتربين) الراغبين في امتلاك عقارات سكنية أو تجارية أو استثمارية داخل مصر أو خارجها بالأسلوب القانوني الصحيح. نضمن لك رحلة تملك سلسة وآمنة بنسبة 100%، بدءاً من البحث وحتى التملك الرسمي.</p>
+      <p class="text-sm md:text-base font-bold mt-5 reveal" style="color:var(--text)">أنت تختار العقار (أو نحدده معاً).. ونحن نتولى الفحص والشراء والتسجيل والإدارة والتطوير — حتى خارج قائمة مشاريعنا.</p>
+      <div class="flex flex-wrap justify-center gap-4 mt-6 reveal">
+        <button class="btn-royal" onclick="openForeignModal('find')"><i class="fas fa-magnifying-glass-location"></i> أبحث عن عقار خارج مشاريعكم</button>
+        <button class="btn-glass" onclick="openForeignModal('manage')"><i class="fas fa-screwdriver-wrench"></i> أملك عقاراً أرغب في فحصه أو تطويره</button>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7 mb-10">
+      <div class="glass-card p-7 reveal">
+        <span class="step-num">01</span>
+        <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
+          <i class="fas fa-magnifying-glass-location text-lg" style="color:var(--gold)"></i>
+        </div>
+        <h3 class="font-bold mb-1">البحث المخصص</h3>
+        <div class="text-xs mb-3 font-orbitron" style="color:var(--text2);letter-spacing:1px">PROPERTY MATCHMAKING</div>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">نتحقق من أي وحدة سكنية أو تجارية أو ساحلية يختارها العميل في أي منطقة — حتى خارج قائمة مشاريعنا — أو نجد له البديل الأنسب لمتطلباته.</p>
+      </div>
+      <div class="glass-card p-7 reveal reveal-delay-1">
+        <span class="step-num">02</span>
+        <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)">
+          <i class="fas fa-file-shield text-lg" style="color:var(--emerald)"></i>
+        </div>
+        <h3 class="font-bold mb-1">الفحص القانوني الشامل</h3>
+        <div class="text-xs mb-3 font-orbitron" style="color:var(--text2);letter-spacing:1px">LEGAL DUE DILIGENCE</div>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">مراجعة كافة أوراق العقار وتسلسل الملكية وتراخيص البناء، وتأكيد خلو العقار من أي نزاعات أو رهونات قبل دفع أي مبلغ.</p>
+      </div>
+      <div class="glass-card p-7 reveal reveal-delay-2">
+        <span class="step-num">03</span>
+        <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.2)">
+          <i class="fas fa-stamp text-lg" style="color:var(--blue)"></i>
+        </div>
+        <h3 class="font-bold mb-1">التملك وفق قوانين الأجانب</h3>
+        <div class="text-xs mb-3 font-orbitron" style="color:var(--text2);letter-spacing:1px">FOREIGNER COMPLIANCE</div>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">إنهاء كافة إجراءات التسجيل العقاري والتوثيق، وتسهيل إجراءات الإقامة الاستثمارية بالتنسيق مع متخصصين معتمدين.</p>
+      </div>
+      <div class="glass-card p-7 reveal">
+        <span class="step-num">04</span>
+        <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.2)">
+          <i class="fas fa-money-bill-transfer text-lg" style="color:var(--blue)"></i>
+        </div>
+        <h3 class="font-bold mb-1">إدارة المعاملات المالية</h3>
+        <div class="text-xs mb-3 font-orbitron" style="color:var(--text2);letter-spacing:1px">SECURE TRANSACTIONS</div>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">التوجيه لفتح الحسابات البنكية وتحويل المبالغ بالطرق الرسمية والمعتمدة قانوناً لحفظ حقوق الطرفين بالكامل.</p>
+      </div>
+      <div class="glass-card p-7 reveal reveal-delay-1">
+        <span class="step-num">05</span>
+        <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)">
+          <i class="fas fa-building-circle-check text-lg" style="color:var(--emerald)"></i>
+        </div>
+        <h3 class="font-bold mb-1">التشغيل والإدارة بعد الشراء</h3>
+        <div class="text-xs mb-3 font-orbitron" style="color:var(--text2);letter-spacing:1px">TURNKEY MANAGEMENT</div>
+        <p class="text-sm" style="color:var(--text2);line-height:1.9">خيارات تأجير وإدارة كاملة لوحدتك لضمان أفضل عائد استثماري دون الحاجة لتواجدك المباشر في الدولة.</p>
+      </div>
+      <!-- بطاقة الدعوة -->
+      <div class="p-7 rounded-[20px] flex flex-col items-center justify-center text-center reveal reveal-delay-2" style="background:linear-gradient(135deg,var(--gold-d),var(--gold),var(--gold-l));box-shadow:0 12px 40px var(--gold-glow)">
+        <svg width="52" height="52" viewBox="0 0 120 260" fill="none" class="mb-3">
+          <circle cx="60" cy="55" r="40" stroke="#050508" stroke-width="7"/>
+          <circle cx="60" cy="55" r="26" stroke="#050508" stroke-width="4"/>
+          <rect x="55" y="95" width="10" height="130" rx="3" fill="#050508"/>
+          <rect x="65" y="160" width="22" height="7" rx="2" fill="#050508"/>
+          <rect x="65" y="180" width="17" height="7" rx="2" fill="#050508"/>
+          <rect x="65" y="200" width="12" height="7" rx="2" fill="#050508"/>
+        </svg>
+        <h3 class="font-black text-lg mb-2" style="color:#050508">ابدأ رحلة تملّكك الآن</h3>
+        <p class="text-xs mb-5 font-semibold" style="color:#050508;opacity:.75">استشارة أولية مجانية مع مستشار مخصص لبلدك</p>
+        <button class="btn-royal w-full justify-center" style="animation:none;background:#050508;color:var(--gold-l)" onclick="openForeignModal()">
+          <i class="fas fa-passport"></i> طلب تملك للمستثمرين الأجانب
+        </button>
+        <a href="https://wa.me/201122324831?text=%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D8%A7%D9%84%D9%82%D8%A7%D9%86%D9%88%D9%86%D9%8A%D8%A9%20%D9%84%D8%AA%D9%85%D9%84%D9%83%20%D8%B9%D9%82%D8%A7%D8%B1" target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-2 text-sm font-bold no-underline" style="color:#050508"><i class="fab fa-whatsapp"></i> أو تحدث مع مستشار عبر واتساب</a>
+      </div>
+    </div>
+
+    <!-- الشعار الترويجي -->
+    <div class="glass-card p-8 text-center relative reveal" style="border-color:rgba(201,168,76,0.35)">
+      <i class="fas fa-quote-right absolute top-5 right-6 text-2xl" style="color:var(--gold);opacity:.35"></i>
+      <p class="text-base md:text-lg font-bold leading-relaxed mx-auto max-w-3xl" style="color:var(--gold-l)">«لا تدع الحدود تعيق استثمارك.. نحن ذراعك الموثوقة وحمايتك القانونية لتملك عقارك الصحيح.»</p>
+    </div>
+
+    <!-- رحلة عملنا معك -->
+    <div class="mt-16">
+      <div class="text-center mb-12 reveal">
+        <div class="section-label">HOW WE WORK</div>
+        <h3 class="section-title">رحلة عملنا <span style="color:var(--gold)">معك في أي عقار بالسوق</span></h3>
+        <div class="gold-divider mx-auto mt-4"></div>
+      </div>
+      <div class="relative">
+        <div class="hidden lg:block absolute top-7 right-[10%] left-[10%] h-[2px]" style="background:linear-gradient(90deg,var(--emerald),var(--blue),var(--gold-l),var(--gold),var(--gold-d));opacity:.45"></div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 relative">
+          <div class="text-center reveal">
+            <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center font-orbitron font-bold text-sm relative z-10" style="background:var(--bg);border:2px solid var(--gold);color:var(--gold)">01</div>
+            <h4 class="font-bold text-sm mb-2">البحث والتفاوض</h4>
+            <p class="text-xs" style="color:var(--text2);line-height:1.8">التفتيش عن العقار المطلوب وسيطاً محايداً، والتفاوض للوصول إلى أفضل سعر عادل في السوق.</p>
+          </div>
+          <div class="text-center reveal reveal-delay-1">
+            <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center font-orbitron font-bold text-sm relative z-10" style="background:var(--bg);border:2px solid var(--emerald);color:var(--emerald)">02</div>
+            <h4 class="font-bold text-sm mb-2">التدقيق القانوني</h4>
+            <p class="text-xs" style="color:var(--text2);line-height:1.8">فحص أوراق الملكية والتراخيص والوضع القانوني بنسبة 100% لحماية أموالك قبل دفع أي عربون.</p>
+          </div>
+          <div class="text-center reveal reveal-delay-2">
+            <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center font-orbitron font-bold text-sm relative z-10" style="background:var(--bg);border:2px solid var(--blue);color:var(--blue)">03</div>
+            <h4 class="font-bold text-sm mb-2">الشراء والتسجيل للأجانب</h4>
+            <p class="text-xs" style="color:var(--text2);line-height:1.8">إنهاء المعاملات المالية الرسمية وتوثيق الملكية وفق قوانين تملك الأجانب والمغتربين.</p>
+          </div>
+          <div class="text-center reveal reveal-delay-3">
+            <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center font-orbitron font-bold text-sm relative z-10" style="background:var(--bg);border:2px solid var(--gold-l);color:var(--gold-l)">04</div>
+            <h4 class="font-bold text-sm mb-2">التطوير والرفع المالي</h4>
+            <p class="text-xs" style="color:var(--text2);line-height:1.8">إعادة التصميم والتجهيز ورفع كفاءة العقار (سكني، تجاري، منتجع) لمضاعفة قيمته السوقية.</p>
+          </div>
+          <div class="text-center reveal reveal-delay-4">
+            <div class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center font-orbitron font-bold text-sm relative z-10" style="background:var(--bg);border:2px solid var(--emerald);color:var(--emerald)">05</div>
+            <h4 class="font-bold text-sm mb-2">الإدارة والتشغيل</h4>
+            <p class="text-xs" style="color:var(--text2);line-height:1.8">التأجير والصيانة وتحصيل العوائد وإرسالها إليك أينما كنت، ليبقى عقارك أصلاً مستداماً.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- لماذا لسنا مجرد مطوّر؟ -->
+    <div class="mt-16">
+      <div class="text-center mb-12 reveal">
+        <div class="section-label">MORE THAN A DEVELOPER</div>
+        <h3 class="section-title">لماذا بيت الأمان <span style="color:var(--gold)">وليس مجرد مطوّر؟</span></h3>
+        <div class="gold-divider mx-auto mt-4"></div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-7">
+        <div class="glass-card p-7 reveal">
+          <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
+            <i class="fas fa-scale-balanced text-lg" style="color:var(--gold)"></i>
+          </div>
+          <h4 class="font-bold mb-2">حيادية مطلقة</h4>
+          <p class="text-sm" style="color:var(--text2);line-height:1.9">هدفنا مصلحتك الاستثمارية أولاً، سواء كان العقار من تطويرنا أو مملوكاً للغير في السوق المفتوح.</p>
+        </div>
+        <div class="glass-card p-7 reveal reveal-delay-1">
+          <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.2)">
+            <i class="fas fa-user-shield text-lg" style="color:var(--blue)"></i>
+          </div>
+          <h4 class="font-bold mb-2">ذراعك القانوني والميداني</h4>
+          <p class="text-sm" style="color:var(--text2);line-height:1.9">نُمثّلك قانونياً وميدانياً في البلد الموجود به العقار وكأنك حاضر بنفسك — من المعاينة حتى التسجيل.</p>
+        </div>
+        <div class="glass-card p-7 reveal reveal-delay-2">
+          <div class="w-12 h-12 rounded-xl mb-4 flex items-center justify-center" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)">
+            <i class="fas fa-arrow-trend-up text-lg" style="color:var(--emerald)"></i>
+          </div>
+          <h4 class="font-bold mb-2">تعظيم قيمة العقار</h4>
+          <p class="text-sm" style="color:var(--text2);line-height:1.9">لا نتوقف عند مرحلة تسليم المفتاح، بل نطوّر العقار ونديره لضمان تشغيله بأعلى عائد استثماري ممكن.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- منظومة الأمان 360 -->
+    <div class="mt-14">
+      <div class="text-center mb-10 reveal">
+        <div class="section-label">AMAN 360° ASSET MANAGEMENT</div>
+        <h3 class="section-title">منظومة الأمان <span style="color:var(--gold)">لإدارة وعوائد العقار</span></h3>
+      </div>
+      <div class="grid md:grid-cols-2 gap-7">
+        <div class="glass-card p-8 reveal">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25)">
+              <i class="fas fa-earth-africa text-xl" style="color:var(--emerald)"></i>
+            </div>
+            <h4 class="font-bold text-base">العناية المتكاملة بأملاكك عبر الحدود</h4>
+          </div>
+          <p class="text-sm mb-4" style="color:var(--text2);line-height:1.9">لا تشتري مجرد "جدران".. تشتري أماناً استثمارياً وحلولاً تشغيلية متكاملة: نتولى التشغيل والتأجير والصيانة ونحوّل عوائدك إليك أينما كنت في الخليج أو أوروبا.</p>
+          <p class="text-sm font-bold italic" style="color:var(--emerald)">«استثمر وأنت في بلدك.. ونحن ندير أمان عقارك عبر الحدود.»</p>
+        </div>
+        <div class="glass-card p-8 reveal reveal-delay-1">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.25)">
+              <i class="fas fa-hotel text-xl" style="color:var(--blue)"></i>
+            </div>
+            <h4 class="font-bold text-base">عقارك.. مصدر دخل سياحي مستمر</h4>
+          </div>
+          <p class="text-sm mb-4" style="color:var(--text2);line-height:1.9">أدرِج عقارك ضمن منظومة بيت الأمان الفندقية ليُؤجَّر كوحدة عطلات فاخرة (Holiday Home) لسياح الخليج وأوروبا خلال الأوقات التي لا تستخدمه فيها.</p>
+          <p class="text-sm font-bold italic" style="color:var(--blue)">«عقارك ليس مجرد مساحة.. بل مصدر دخل سياحي مستمر.»</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== المنصة الإعلامية ===== -->
+<section id="media" class="py-24 relative z-10" style="background:var(--bg2)">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-14">
+      <div class="section-label reveal">MEDIA PLATFORM</div>
+      <h2 class="section-title mb-4 reveal">رؤية <span style="color:var(--gold)">عقارية</span></h2>
+      <div class="gold-divider mx-auto mb-4 reveal"></div>
+      <p class="section-desc mx-auto reveal">برنامج إعلامي تفاعلي يسلط الضوء على أحدث تطورات السوق العقاري</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-7">
+      <div class="glass-card overflow-hidden reveal group cursor-pointer">
+        <div class="relative">
+           <img src="img/media-1.webp" alt="الحلقة الأولى" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+          <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:var(--gold)">
+              <i class="fas fa-play text-black text-lg mr-[-2px]"></i>
+            </div>
+          </div>
+          <div class="absolute bottom-3 right-3 px-2 py-1 rounded text-xs font-bold" style="background:var(--gold);color:#000">45:20</div>
+        </div>
+        <div class="p-5">
+          <span class="blog-tag mb-2">الحلقة 12</span>
+          <h3 class="font-bold mt-2 mb-2">مستقبل العقارات في العاصمة الإدارية 2030</h3>
+          <p class="text-xs" style="color:var(--text2)">ضيفنا: د. أحمد المنصور – خبير اقتصادي</p>
+        </div>
+      </div>
+      <div class="glass-card overflow-hidden reveal reveal-delay-1 group cursor-pointer">
+        <div class="relative">
+           <img src="img/media-2.webp" alt="الحلقة الثانية" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+          <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:var(--gold)">
+              <i class="fas fa-play text-black text-lg mr-[-2px]"></i>
+            </div>
+          </div>
+          <div class="absolute bottom-3 right-3 px-2 py-1 rounded text-xs font-bold" style="background:var(--gold);color:#000">38:15</div>
+        </div>
+        <div class="p-5">
+          <span class="blog-tag mb-2">الحلقة 11</span>
+          <h3 class="font-bold mt-2 mb-2">لماذا دبي تبقى الوجهة الأولى للمستثمر العربي</h3>
+          <p class="text-xs" style="color:var(--text2)">ضيفنا: م. خالد الراشد – مستشار عقاري بدبي</p>
+        </div>
+      </div>
+      <div class="glass-card overflow-hidden reveal reveal-delay-2 group cursor-pointer">
+        <div class="relative">
+           <img src="img/media-3.webp" alt="الحلقة الثالثة" class="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+          <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background:var(--gold)">
+              <i class="fas fa-play text-black text-lg mr-[-2px]"></i>
+            </div>
+          </div>
+          <div class="absolute bottom-3 right-3 px-2 py-1 rounded text-xs font-bold" style="background:var(--gold);color:#000">52:40</div>
+        </div>
+        <div class="p-5">
+          <span class="blog-tag mb-2">بث مباشر</span>
+          <h3 class="font-bold mt-2 mb-2">الساحل الشمالي: فرصة ذهبية أم فقاعة؟</h3>
+          <p class="text-xs" style="color:var(--text2)">ندوة مفتوحة مع نخبة من الخبراء</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== الشهادات ===== -->
+<section class="py-24 relative z-10">
+  <div class="max-w-4xl mx-auto px-5 text-center">
+    <div class="section-label reveal">TESTIMONIALS</div>
+    <h2 class="section-title mb-4 reveal">تجارب <span style="color:var(--gold)">المستثمرين</span> العالميين</h2>
+    <div class="gold-divider mx-auto mb-14 reveal"></div>
+    <div id="testimonialSlider" class="relative overflow-hidden">
+      <div class="testimonial-slide glass-card testimonial-card" id="currentTestimonial">
+        <!-- يُملأ بالجافاسكربت -->
+      </div>
+      <div class="flex justify-center gap-3 mt-8">
+        <button onclick="prevTestimonial()" class="w-10 h-10 rounded-full glass-card flex items-center justify-center" style="border-color:var(--border)" aria-label="السابق"><i class="fas fa-chevron-right text-sm" style="color:var(--gold)"></i></button>
+        <div id="testimonialDots" class="flex items-center gap-2"></div>
+        <button onclick="nextTestimonial()" class="w-10 h-10 rounded-full glass-card flex items-center justify-center" style="border-color:var(--border)" aria-label="التالي"><i class="fas fa-chevron-left text-sm" style="color:var(--gold)"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== المدونة ===== -->
+<section id="blog" class="py-24 relative z-10" style="background:var(--bg2)">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="text-center mb-14">
+      <div class="section-label reveal">BLOG & INSIGHTS</div>
+      <h2 class="section-title mb-4 reveal">رؤى وتحليلات <span style="color:var(--gold)">السوق</span></h2>
+      <div class="gold-divider mx-auto mb-4 reveal"></div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-7">
+      <article class="glass-card blog-card overflow-hidden reveal group cursor-pointer">
+         <div class="overflow-hidden"><img src="img/blog-market.webp" alt="توقعات السوق" loading="lazy"></div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="blog-tag">توقعات</span>
+            <span class="text-xs" style="color:var(--text2)"><i class="far fa-calendar-alt ml-1"></i> 15 يناير 2025</span>
+          </div>
+          <h3 class="font-bold mb-2 group-hover:text-[var(--gold)] transition-colors">توقعات سوق العقارات المصري في النصف الثاني من 2025</h3>
+          <p class="text-sm" style="color:var(--text2);line-height:1.7">تحليل معمق يستند إلى بيانات السوق والاتجاهات الاقتصادية الكبرى...</p>
+        </div>
+      </article>
+      <article class="glass-card blog-card overflow-hidden reveal reveal-delay-1 group cursor-pointer">
+         <div class="overflow-hidden"><img src="img/project-finance.webp" alt="دليل المستثمر" loading="lazy"></div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="blog-tag">دليل</span>
+            <span class="text-xs" style="color:var(--text2)"><i class="far fa-calendar-alt ml-1"></i> 8 يناير 2025</span>
+          </div>
+          <h3 class="font-bold mb-2 group-hover:text-[var(--gold)] transition-colors">الدليل الشامل للمستثمر الأجنبي في مصر 2025</h3>
+          <p class="text-sm" style="color:var(--text2);line-height:1.7">كل ما تحتاج معرفته عن القوانين والإجراءات وفرص الاستثمار...</p>
+        </div>
+      </article>
+      <article class="glass-card blog-card overflow-hidden reveal reveal-delay-2 group cursor-pointer">
+         <div class="overflow-hidden"><img src="img/project-tower.webp" alt="مقارنة العوائد" loading="lazy"></div>
+        <div class="p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="blog-tag">تحليل</span>
+            <span class="text-xs" style="color:var(--text2)"><i class="far fa-calendar-alt ml-1"></i> 2 يناير 2025</span>
+          </div>
+          <h3 class="font-bold mb-2 group-hover:text-[var(--gold)] transition-colors">مقارنة عوائد العقارات: دبي مقابل القاهرة الجديدة</h3>
+          <p class="text-sm" style="color:var(--text2);line-height:1.7">دراسة مقارنة شاملة للعوائد الاستثمارية ومخاطر كل سوق...</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== تواصل معنا ===== -->
+<section id="contact" class="py-24 relative z-10">
+  <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-16">
+    <div class="reveal">
+      <div class="section-label">CONTACT US</div>
+      <h2 class="section-title mb-4">افتح باب <span style="color:var(--gold)">الفرصة</span></h2>
+      <div class="gold-divider mb-6"></div>
+      <p class="section-desc mb-8">فريقنا جاهز لمساعدتك في اتخاذ القرار الاستثماري الأنسب. تواصل معنا الآن ودعنا نرشدك إلى فرصتك التالية.</p>
+      <div class="flex flex-col gap-5">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2)">
+            <i class="fas fa-map-marker-alt" style="color:var(--gold)"></i>
+          </div>
+          <div>
+            <div class="font-semibold text-sm">العنوان</div>
+            <div class="text-xs" style="color:var(--text2)">القاهرة الجديدة – العاصمة الإدارية – برج بيت الأمان</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(26,140,255,0.1);border:1px solid rgba(26,140,255,0.2)">
+            <i class="fas fa-phone" style="color:var(--blue)"></i>
+          </div>
+          <div>
+            <div class="font-semibold text-sm">الهاتف</div>
+            <div class="text-xs" style="color:var(--text2)" dir="ltr">+20 11 22324831</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)">
+            <i class="fas fa-envelope" style="color:var(--emerald)"></i>
+          </div>
+          <div>
+            <div class="font-semibold text-sm">البريد الإلكتروني</div>
+            <div class="text-xs" style="color:var(--text2)">invest@bytelaman.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <form class="glass-card p-8 flex flex-col gap-5" id="contactForm" onsubmit="handleContact(event)">
+        <div class="grid sm:grid-cols-2 gap-5">
+          <input class="form-input" type="text" placeholder="الاسم الكامل" required aria-label="الاسم">
+          <input class="form-input" type="tel" placeholder="رقم الهاتف" required aria-label="الهاتف">
+        </div>
+        <input class="form-input" type="email" placeholder="البريد الإلكتروني" required aria-label="البريد">
+        <select class="form-input" required aria-label="الدولة">
+          <option value="" disabled selected style="color:var(--text2)">الدولة المستهدفة للاستثمار</option>
+          <option>مصر</option>
+          <option>دول الخليج العربي</option>
+          <option>دول أوروبا</option>
+        </select>
+        <select class="form-input" required aria-label="نوع العقار">
+          <option value="" disabled selected style="color:var(--text2)">نوع العقار المطلوب</option>
+          <option>سكني</option>
+          <option>تجاري</option>
+          <option>منتجع سياحي</option>
+          <option>متعدد الأغراض</option>
+        </select>
+        <textarea class="form-input" rows="4" placeholder="رسالتك أو استفسارك..." aria-label="الرسالة"></textarea>
+        <button type="submit" class="btn-gold justify-center text-sm"><i class="fas fa-paper-plane"></i> أرسل استفسارك</button>
+      </form>
+      <div id="contactSuccess" class="hidden glass-card p-6 text-center mt-4" style="border-color:var(--emerald)">
+        <i class="fas fa-check-circle text-3xl mb-3" style="color:var(--emerald)"></i>
+        <p class="font-bold" style="color:var(--emerald)">تم إرسال استفسارك بنجاح</p>
+        <p class="text-sm mt-1" style="color:var(--text2)">سيتواصل معك فريقنا خلال 24 ساعة</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== التذييل ===== -->
+<footer class="py-16 relative z-10">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+      <div>
+        <div class="footer-brand mb-4">BYTELAMAN</div>
+        <p class="text-sm mb-5" style="color:var(--text2);line-height:1.8">بيت الأمان.. مفتاحك لثروة الغد. نحن نبني جسور الثقة بين المستثمرين وفرص العقار الاستثنائية.</p>
+        <div class="flex gap-3">
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text2)" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text2)" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text2)" aria-label="يوتيوب"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text2)" aria-label="لينكدإن"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all hover:scale-110" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text2)" aria-label="إكس"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="font-bold mb-5 text-sm" style="color:var(--gold)">روابط سريعة</h4>
+        <ul class="flex flex-col gap-3">
+          <li><a href="#about" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">من نحن</a></li>
+          <li><a href="#projects" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">المشاريع</a></li>
+          <li><a href="#media" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">المنصة الإعلامية</a></li>
+          <li><a href="#investors" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">المستثمر الدولي</a></li>
+          <li><a href="#advisory" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">خدمة المستشار القانوني للأجانب</a></li>
+          <li><a href="#blog" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">المدونة</a></li>
+          <li><a href="#contact" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">تواصل معنا</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-5 text-sm" style="color:var(--gold)">المواقع</h4>
+        <ul class="flex flex-col gap-3">
+          <li><span class="text-sm" style="color:var(--text2)"><i class="fas fa-location-dot ml-1" style="color:var(--gold)"></i>مصر: العاصمة الإدارية والمدن الجديدة والساحل</span></li>
+          <li><span class="text-sm" style="color:var(--text2)"><i class="fas fa-location-dot ml-1" style="color:var(--blue)"></i>الخليج العربي: دبي – الرياض</span></li>
+          <li><span class="text-sm" style="color:var(--text2)"><i class="fas fa-location-dot ml-1" style="color:var(--emerald)"></i>أوروبا: اليونان وإسبانيا</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-bold mb-5 text-sm" style="color:var(--gold)">النشرة البريدية</h4>
+        <p class="text-sm mb-4" style="color:var(--text2);line-height:1.7">احصل على أحدث العروض وتحليلات السوق مباشرة في بريدك</p>
+        <form class="flex gap-2" onsubmit="event.preventDefault();this.querySelector('input').value='';tt('sub')">
+          <input class="form-input flex-1 text-sm" type="email" placeholder="بريدك الإلكتروني" required aria-label="البريد الإلكتروني">
+          <button type="submit" class="btn-gold px-4 text-sm" aria-label="اشتراك"><i class="fas fa-arrow-left"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4" style="border-top:1px solid var(--border)">
+      <p class="text-xs" style="color:var(--text2)">&copy; 2025 BYTELAMAN – بيت الأمان. جميع الحقوق محفوظة.</p>
+      <p class="text-xs font-orbitron" style="color:var(--gold);opacity:.5">BYTELAMAN – Your Key to Tomorrow's Wealth</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== المفتاح العائم ===== -->
+<div id="floating-key" aria-label="قائمة المفتاح السريعة">
+  <svg width="48" height="48" viewBox="0 0 120 260" fill="none">
+    <circle cx="60" cy="55" r="40" stroke="#C9A84C" stroke-width="6"/>
+    <circle cx="60" cy="55" r="26" stroke="#C9A84C" stroke-width="3.5"/>
+    <rect x="55" y="95" width="10" height="130" rx="3" fill="#C9A84C"/>
+    <rect x="65" y="160" width="22" height="7" rx="2" fill="#C9A84C"/>
+    <rect x="65" y="180" width="17" height="7" rx="2" fill="#C9A84C"/>
+    <rect x="65" y="200" width="12" height="7" rx="2" fill="#C9A84C"/>
+  </svg>
+  <div class="key-menu" id="keyMenu">
+    <div class="key-menu-item" onclick="scrollToSection('projects');closeKeyMenu()"><i class="fas fa-building"></i> أبرز العروض</div>
+    <div class="key-menu-item" onclick="openChatbot();closeKeyMenu()"><i class="fas fa-robot"></i> تحدث مع أمان</div>
+    <div class="key-menu-item" onclick="scrollToSection('media');closeKeyMenu()"><i class="fas fa-play-circle"></i> رؤية عقارية</div>
+    <div class="key-menu-item" onclick="scrollToSection('contact');closeKeyMenu()"><i class="fas fa-calendar-check"></i> احجز موعد</div>
+  </div>
+</div>
+
+<!-- ===== زر واتساب ===== -->
+<div id="whatsapp-btn" onclick="window.open('https://wa.me/201122324831?text='+encodeURIComponent('مرحباً، أريد الاستفسار عن فرص الاستثمار في بيت الأمان'),'_blank')" aria-label="تواصل عبر واتساب">
+  <div class="ripple"></div>
+  <i class="fab fa-whatsapp relative z-10"></i>
+</div>
+
+<!-- ===== روبوت أمان ===== -->
+<button id="chatbot-btn" onclick="toggleChatbot()" aria-label="مستشار أمان الذكي">
+  <i class="fas fa-key"></i>
+</button>
+<div id="chatbot-popup" role="dialog" aria-label="محادثة مع أمان">
+  <div class="chat-header">
+    <div class="w-9 h-9 rounded-full bg-black/20 flex items-center justify-center">
+      <i class="fas fa-key text-sm"></i>
+    </div>
+    <div>
+      <h3>أمان – المستشار الذكي</h3>
+      <span>متصل الآن <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#10B981;margin-right:4px"></span></span>
+    </div>
+    <button onclick="toggleChatbot()" style="margin-right:auto;background:none;border:none;color:#000;cursor:pointer;font-size:16px" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">مرحباً بك في بيت الأمان – BYTELAMAN. أنا أمان، مستشارك الذكي. مفتاحك إلى مستقبل استثماري آمن. كيف يمكنني مساعدتك؟</div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chatInput" placeholder="اكتب رسالتك..." onkeydown="if(event.key==='Enter')sendChat()" aria-label="رسالتك">
+    <button onclick="sendChat()" aria-label="إرسال"><i class="fas fa-paper-plane text-sm"></i></button>
+  </div>
+</div>
+
+<!-- ===== زر العودة للأعلى ===== -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="العودة للأعلى">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- ===== نافذة طلب تملك الأجانب ===== -->
+<div id="foreignModal" class="hidden fixed inset-0 z-[300] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="طلب تملك للمستثمرين الأجانب">
+  <div class="absolute inset-0" style="background:rgba(5,5,8,0.78);backdrop-filter:blur(6px)" onclick="closeForeignModal()"></div>
+  <div class="modal-card glass-card relative w-full max-w-lg p-7 max-h-[92vh] overflow-y-auto" style="border-color:rgba(201,168,76,0.45)">
+    <button onclick="closeForeignModal()" class="absolute top-4 left-4 w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text2)" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+    <div id="foreignForm">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,var(--gold-d),var(--gold-l))">
+          <i class="fas fa-passport text-lg" style="color:#050508"></i>
+        </div>
+        <div>
+          <h3 class="font-black text-lg leading-tight">طلب تملك للمستثمرين الأجانب</h3>
+          <div class="text-xs font-orbitron" style="color:var(--gold);letter-spacing:1px">FOREIGN OWNERSHIP REQUEST</div>
+        </div>
+      </div>
+      <p class="text-sm mb-5 mt-3 p-3 rounded-xl text-center font-semibold" style="color:var(--gold-l);background:rgba(201,168,76,0.08);border:1px dashed rgba(201,168,76,0.35)">لا تقتصر خدمتنا على مشاريعنا فقط — نساعدك في شراء وتدقيق أي عقار أعجبك في السوق، ونتولى الوساطة القانونية لحماية أموالك.</p>
+      <form class="flex flex-col gap-4" onsubmit="handleForeign(event)">
+        <select class="form-input" id="foreignIntent" required aria-label="نوع الطلب">
+          <option value="" disabled selected style="color:var(--text2)">ما الذي تحتاجه؟ *</option>
+          <option value="find">أبحث عن عقار يناسبني — خارج مشاريعكم</option>
+          <option value="inspect">عندي عقار محدد أعجبني في السوق — أريد تدقيقه قانونياً والمضي في الشراء</option>
+          <option value="manage">أملك عقاراً — أريد فحصه أو تطويره أو إدارته</option>
+        </select>
+        <input class="form-input" type="text" placeholder="الاسم الكامل *" required aria-label="الاسم">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <input class="form-input" type="email" placeholder="البريد الإلكتروني *" required aria-label="البريد">
+          <input class="form-input" type="tel" placeholder="واتساب / هاتف *" required aria-label="الهاتف">
+        </div>
+        <select class="form-input" required aria-label="بلد الإقامة">
+          <option value="" disabled selected style="color:var(--text2)">بلد إقامتك الحالي *</option>
+          <option>السعودية</option>
+          <option>الإمارات</option>
+          <option>الكويت</option>
+          <option>قطر</option>
+          <option>البحرين أو عمان</option>
+          <option>دولة أوروبية</option>
+          <option>دولة أخرى</option>
+        </select>
+        <select class="form-input" required aria-label="دولة الشراء">
+          <option value="" disabled selected style="color:var(--text2)">دولة الشراء المستهدفة *</option>
+          <option>مصر</option>
+          <option>دول الخليج العربي</option>
+          <option>دول أوروبا</option>
+        </select>
+        <select class="form-input" required aria-label="نوع العقار">
+          <option value="" disabled selected style="color:var(--text2)">نوع العقار المطلوب *</option>
+          <option>سكني (شقة / فيلا / شاليه)</option>
+          <option>تجاري (مكتب / محل)</option>
+          <option>منتجع أو استثمار سياحي</option>
+        </select>
+        <select class="form-input" required aria-label="الميزانية">
+          <option value="" disabled selected style="color:var(--text2)">الميزانية التقريبية *</option>
+          <option>أقل من 100 ألف دولار</option>
+          <option>100 – 300 ألف دولار</option>
+          <option>300 – 700 ألف دولار</option>
+          <option>أكثر من 700 ألف دولار</option>
+        </select>
+        <textarea class="form-input" rows="3" placeholder="تفاصيل إضافية (اختياري): موقع العقار، منطقة مفضلة، عدد الغرف، توقيت مناسب للتواصل..." aria-label="تفاصيل"></textarea>
+        <button type="submit" class="btn-gold justify-center"><i class="fas fa-key"></i> أرسل طلب التملك</button>
+        <p class="text-xs text-center" style="color:var(--text2)"><i class="fas fa-lock mr-1" style="color:var(--emerald)"></i> بياناتك مشفرة بالكامل ولا تُشارك مع أي طرف ثالث</p>
+      </form>
+    </div>
+    <div id="foreignSuccess" class="hidden text-center py-10">
+      <div class="w-16 h-16 rounded-full mx-auto mb-5 flex items-center justify-center" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.4)">
+        <i class="fas fa-check-circle text-3xl" style="color:var(--emerald)"></i>
+      </div>
+      <h4 class="font-black text-lg mb-2" style="color:var(--emerald)">تم استلام طلب تملّكك بنجاح</h4>
+      <p class="text-sm mb-4" style="color:var(--text2);line-height:1.9">سيتواصل معك مستشارك العقاري والقانوني المخصص خلال 24 ساعة<br>مع دليل المستثمر المناسب لبلد إقامتك.</p>
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold" style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);color:var(--gold)">
+        <i class="fas fa-shield-halved"></i> طلبك محمي باتفاقية السرية الخاصة بنا
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== إشعار Toast ===== -->
+<div id="toast" style="position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);z-index:200;padding:12px 28px;border-radius:12px;background:var(--bg-card);backdrop-filter:blur(20px);border:1px solid var(--emerald);color:var(--emerald);font-size:14px;font-weight:600;opacity:0;visibility:hidden;transition:all .4s;pointer-events:none"></div>
+
+<script>
+/* ===== بيانات المشاريع (متعددة اللغات: [ar,en,fr,de]) ===== */
+var LANG = 'ar';
+try { LANG = localStorage.getItem('bl_lang') || 'ar'; } catch(e) {}
+var IDX = {ar:0, en:1, fr:2, de:3};
+let projFilter = 'all';
+
+const projects = [
+  {id:1,name:['برج النيل الذهبي','Golden Nile Tower','Tour Golden Nile','Goldener-Nil-Turm'],location:['العاصمة الإدارية – مصر','New Administrative Capital – Egypt','Capitale administrative – Égypte','Neue Verwaltungshauptstadt – Ägypten'],filter:'commercial',price:['3,200,000 ج.م','EGP 3,200,000','3 200 000 EGP','3.200.000 EGP'],roi:'32%',img:'project-tower',tag:['مراكز أعمال','Business Hub','Hub d\'affaires','Business-Zentrum']},
+  {id:2,name:['واحة الخليج','Gulf Oasis','Oasis du Golfe','Golf-Oase'],location:['دبي مارينا – الإمارات','Dubai Marina – UAE','Dubai Marina – EAU','Dubai Marina – VAE'],filter:'residential',price:['4,500,000 درهم','AED 4,500,000','4 500 000 AED','4.500.000 AED'],roi:'28%',img:'project-oasis',tag:['سكني فاخر','Luxury Residential','Résidentiel de luxe','Wohnen der Luxusklasse']},
+  {id:3,name:['أبراج الساحل','Coast Towers','Tours de la Côte','Küsten-Türme'],location:['الساحل الشمالي – مصر','North Coast – Egypt','Côte Nord – Égypte','Nordküste – Ägypten'],filter:'resort',price:['2,800,000 ج.م','EGP 2,800,000','2 800 000 EGP','2.800.000 EGP'],roi:'35%',img:'project-coast',tag:['منتجع سياحي','Tourist Resort','Resort touristique','Ferienresort']},
+  {id:4,name:['مركز المال العالمي','Global Finance Center','Centre Financier Mondial','Internationales Finanzzentrum'],location:['القاهرة الجديدة – مصر','New Cairo – Egypt','Nouvelle Le Caire – Égypte','Neu-Kairo – Ägypten'],filter:'commercial',price:['5,100,000 ج.م','EGP 5,100,000','5 100 000 EGP','5.100.000 EGP'],roi:'30%',img:'project-finance',tag:['تجاري','Commercial','Commercial','Gewerbe']},
+  {id:5,name:['فيلات الأفق','Horizon Villas','Villas Horizon','Horizon-Villen'],location:['مرسى علم – البحر الأحمر','Marsa Alam – Red Sea','Marsa Alam – Mer Rouge','Marsa Alam – Rotes Meer'],filter:'resort',price:['8,500,000 ج.م','EGP 8,500,000','8 500 000 EGP','8.500.000 EGP'],roi:'34%',img:'project-villa',tag:['فيلات فاخرة','Luxury Villas','Villas de luxe','Luxusvillen']},
+  {id:6,name:['أثينا ريفييرا','Athina Riviera','Athènes Riviera','Athen Riviera'],location:['أثينا – اليونان','Athens – Greece','Athènes – Grèce','Athen – Griechenland'],filter:'residential',price:['€310,000','€310,000','310 000 €','310.000 €'],roi:'24%',img:'project-riviera',tag:['سكني أوروبي','European Residential','Résidentiel européen','Europäisches Wohnen']},
+];
+
+/* ===== بيانات الشهادات (متعددة اللغات) ===== */
+const testimonials = [
+  {name:['ماركو روسي','Marco Rossi','Marco Rossi','Marco Rossi'],role:['مستثمر إيطالي','Italian Investor','Investisseur italien','Investor aus Italien'],text:['بيت الأمان قدّم لي تجربة استثمارية استثنائية. من التحليل الذكي إلى الجولة الافتراضية، كل شيء كان احترافياً بمعنى الكلمة. أنصح أي مستثمر أوروبي بالتعامل معهم.','Bayt Al-Aman delivered an exceptional investment experience. From smart analysis to the virtual tour, everything was truly professional. I recommend them to any European investor.','Bayt Al-Aman m\'a offert une expérience d\'investissement exceptionnelle. De l\'analyse intelligente à la visite virtuelle, tout était professionnel. Je recommande à tout investisseur européen.','Bayt Al-Aman hat mir ein außergewöhnliches Investmenterlebnis geboten. Von der intelligenten Analyse bis zur Virtual Tour war alles absolut professionell. Ich empfehle sie jedem europäischen Investor.'],avatar:'avatar-marco'},
+  {name:['سارة المنصوري','Sara Al-Mansouri','Sara Al-Mansouri','Sara Al-Mansouri'],role:['مستثمرة إماراتية','Emirati Investor','Investisseuse émiratie','Investorin aus den VAE'],text:['استثمرت في 3 مشاريع عبر بيت الأمان والعوائد فاقت توقعاتي. الروبوت الذكي أمان ساعدني في اتخاذ القرار الصحيح بسرعة.','I invested in 3 projects through Bayt Al-Aman and returns exceeded my expectations. The smart advisor Aman helped me make the right decision quickly.','J\'ai investi dans 3 projets via Bayt Al-Aman et les rendements ont dépassé mes attentes. Le conseiller intelligent Aman m\'a aidée à décider vite et juste.','Ich habe über Bayt Al-Aman in 3 Projekte investiert, die Renditen übertrafen meine Erwartungen. Der digitale Berater Aman half mir, schnell die richtige Entscheidung zu treffen.'],avatar:'avatar-sara'},
+  {name:['جون كارتر','John Carter','John Carter','John Carter'],role:['مستثمر بريطاني','British Investor','Investisseur britannique','Investor aus Großbritannien'],text:['الشفافية في التعامل والبيانات الدقيقة جعلتني أثق بهم تماماً. شهادة الضمان الاستثماري أعطتني راحة بال لا تُقدّر بثمن.','Their transparency and accurate data earned my full trust. The investment guarantee certificate gave me priceless peace of mind.','Leur transparence et leurs données précises m\'ont entièrement convaincu. Le certificat de garantie d\'investissement m\'a donné une tranquillité inestimable.','Transparenz und präzise Daten haben mein volles Vertrauen gewonnen. Das Investitionszertifikat gab mir unbezahlbare Sicherheit.'],avatar:'avatar-john'},
+  {name:['أحمد الشمري','Ahmed Al-Shamri','Ahmed Al-Shamri','Ahmed Al-Shamri'],role:['مستثمر سعودي','Saudi Investor','Investisseur saoudien','Investor aus Saudi-Arabien'],text:['تعاملت مع شركات عقارية كثيرة لكن بيت الأمان مختلف فعلاً. التكنولوجيا المستخدمة والخدمة الشخصية جعلت التجربة مميزة.','I have dealt with many real estate companies, but Bayt Al-Aman is truly different. The technology and personal service made the experience outstanding.','J\'ai traité avec beaucoup de sociétés immobilières, mais Bayt Al-Aman est vraiment différente. La technologie et le service personnalisé ont fait la différence.','Ich habe mit vielen Immobilienfirmen gearbeitet, aber Bayt Al-Aman ist wirklich anders. Technologie und persönlicher Service machten den Unterschied.'],avatar:'avatar-ahmed'},
+];
+
+/* ===== متغيرات عامة ===== */
+let currentTestimonial = 0;
+let chatbotOpen = false;
+let keyMenuOpen = false;
+
+/* ===== نظام الجزيئات ===== */
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouse = {x: -1000, y: -1000};
+let isLight = false;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+/* إنشاء الجزيئات */
+function createParticles() {
+  const count = window.innerWidth < 768 ? 45 : 100;
+  particles = [];
+  const colors = isLight
+    ? ['rgba(160,124,42,0.5)','rgba(26,140,255,0.3)','rgba(16,185,129,0.3)']
+    : ['rgba(201,168,76,0.6)','rgba(232,212,139,0.4)','rgba(26,140,255,0.3)','rgba(16,185,129,0.3)','rgba(255,255,255,0.2)'];
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      size: Math.max(0.5, Math.random() * 2.5),
+      color: colors[Math.floor(Math.random() * colors.length)],
+      baseOpacity: Math.random() * 0.5 + 0.2,
+      opacity: 0,
+    });
+  }
+}
+createParticles();
+
+/* تحريك ورسم الجزيئات */
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const lineColor = isLight ? '160,124,42' : '201,168,76';
+
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+    /* تفاعل الماوس */
+    const dx = mouse.x - p.x;
+    const dy = mouse.y - p.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 160) {
+      p.x -= dx * 0.008;
+      p.y -= dy * 0.008;
+    }
+    /* ظهور تدريجي */
+    if (p.opacity < p.baseOpacity) p.opacity += 0.005;
+  });
+
+  /* خطوط الربط */
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 110) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = 'rgba(' + lineColor + ',' + (0.08 * (1 - dist / 110)).toFixed(3) + ')';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+
+  /* رسم الجزيئات */
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, Math.max(0.3, p.size), 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = Math.max(0, p.opacity);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+/* ===== تتبع الماوس ===== */
+const mouseGlow = document.getElementById('mouse-glow');
+document.addEventListener('mousemove', e => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+  mouseGlow.style.left = e.clientX + 'px';
+  mouseGlow.style.top = e.clientY + 'px';
+});
+document.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
+
+/* ===== مشهد الافتتاح – المنزل والمفتاح ===== */
+const introEl = document.getElementById('intro');
+let introDone = false;
+const introTimers = [];
+
+/* نغمة فتح القفل الفاخرة */
+function playUnlockChime() {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const ac = playUnlockChime.ctx || (playUnlockChime.ctx = new AC());
+    if (ac.state === 'suspended') ac.resume().catch(() => {});
+    const t = ac.currentTime;
+    [[660, 0], [880, 0.09], [1320, 0.18]].forEach(([f, d]) => {
+      const o = ac.createOscillator();
+      const g = ac.createGain();
+      o.type = 'triangle';
+      o.frequency.value = f;
+      g.gain.setValueAtTime(0, t + d);
+      g.gain.linearRampToValueAtTime(0.12, t + d + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + d + 0.6);
+      o.connect(g).connect(ac.destination);
+      o.start(t + d);
+      o.stop(t + d + 0.65);
+    });
+  } catch (e) { /* الصوت اختياري */ }
+}
+
+function finishIntro() {
+  if (introDone) return;
+  introDone = true;
+  introTimers.forEach(clearTimeout);
+  document.body.classList.add('ready');
+  document.body.classList.remove('no-scroll');
+  introEl.classList.add('done');
+  setTimeout(() => introEl.remove(), 1000);
+}
+
+document.body.classList.add('no-scroll');
+requestAnimationFrame(() => introEl.classList.add('play'));
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  finishIntro();
+} else {
+  introTimers.push(setTimeout(playUnlockChime, 5650));
+  introTimers.push(setTimeout(finishIntro, 8600));
+}
+document.getElementById('skipIntro').addEventListener('click', () => {
+  playUnlockChime();
+  finishIntro();
+});
+
+/* ===== تبديل الوضع ===== */
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+  isLight = !isLight;
+  document.body.classList.toggle('light-mode', isLight);
+  themeToggle.innerHTML = isLight ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  /* تحديث ألوان الجزيئات */
+  createParticles();
+});
+
+/* ===== قائمة الموبايل ===== */
+document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('hidden');
+});
+/* إغلاق قائمة الموبايل عند النقر على رابط */
+document.querySelectorAll('#mobileMenu .nav-link').forEach(link => {
+  link.addEventListener('click', () => document.getElementById('mobileMenu').classList.add('hidden'));
+});
+
+/* ===== التنقل عند التمرير ===== */
+const navbar = document.getElementById('navbar');
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section[id]');
+
+window.addEventListener('scroll', () => {
+  /* ظل التنقل */
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+  /* زر العودة للأعلى */
+  document.getElementById('back-top').classList.toggle('show', window.scrollY > 500);
+  /* تحديث الرابط النشط */
+  let current = '';
+  sections.forEach(sec => {
+    const top = sec.offsetTop - 120;
+    if (window.scrollY >= top) current = sec.getAttribute('id');
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+});
+
+/* ===== التمرير السلس ===== */
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ===== انيميشن الظهور عند التمرير ===== */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {threshold: 0.1, rootMargin: '0px 0px -40px 0px'});
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ===== عداد الأرقام ===== */
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.counted) {
+      entry.target.dataset.counted = 'true';
+      const target = parseInt(entry.target.dataset.target);
+      let current = 0;
+      const step = Math.max(1, Math.floor(target / 60));
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        entry.target.textContent = current.toLocaleString(LANG === 'ar' ? 'ar-EG' : 'en-US');
+      }, 30);
+    }
+  });
+}, {threshold: 0.5});
+
+document.querySelectorAll('.stat-num').forEach(el => counterObserver.observe(el));
+
+/* ===== توليد بطاقات المشاريع ===== */
+function renderProjects(filter = 'all') {
+  projFilter = filter;
+  const grid = document.getElementById('projectsGrid');
+  const idx = IDX[LANG];
+  const roiLabel = {ar:'عائد ', en:'ROI ', fr:'Rendement ', de:'Rendite '}[LANG];
+  const filtered = filter === 'all' ? projects : projects.filter(p => p.filter === filter);
+  grid.innerHTML = '';
+  filtered.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'project-card glass-card reveal' + (i > 0 ? ' reveal-delay-' + Math.min(i, 4) : '');
+    card.innerHTML = `
+      <img src="img/${p.img}.webp" alt="${p.name[idx]}" loading="lazy">
+      <div class="project-badge"><i class="fas fa-chart-line ml-1"></i> ${roiLabel}${p.roi}</div>
+      <div class="project-tag">${p.tag[idx]}</div>
+      <div class="project-overlay">
+        <h3 class="font-bold text-lg mb-1">${p.name[idx]}</h3>
+        <p class="text-xs mb-2" style="color:var(--text2)"><i class="fas fa-map-marker-alt ml-1" style="color:var(--gold)"></i>${p.location[idx]}</p>
+        <p class="text-sm font-bold mb-3" style="color:var(--gold)">${p.price[idx]}</p>
+        <button class="btn-gold text-xs w-full justify-center py-2" onclick="tt('interest')"><i class="fas fa-key"></i> ${({ar:'استثمر الآن',en:'Invest Now',fr:'Investir',de:'Jetzt investieren'})[LANG]}</button>
+      </div>
+    `;
+    grid.appendChild(card);
+    /* إعادة مراقبة العنصر الجديد */
+    revealObserver.observe(card);
+    /* تأخير الظهور */
+    setTimeout(() => card.classList.add('visible'), 100 + i * 120);
+  });
+}
+renderProjects();
+
+/* فلاتر المشاريع */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    btn.style.borderColor = 'var(--gold)';
+    btn.style.color = 'var(--gold)';
+    document.querySelectorAll('.filter-btn:not(.active)').forEach(b => {
+      b.style.borderColor = '';
+      b.style.color = '';
+    });
+    renderProjects(btn.dataset.filter);
+  });
+});
+
+/* ===== الشهادات ===== */
+function renderTestimonial() {
+  const idx = IDX[LANG];
+  const t = testimonials[currentTestimonial];
+  const el = document.getElementById('currentTestimonial');
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(10px)';
+  setTimeout(() => {
+    el.innerHTML = `
+      <p class="text-sm leading-8 mb-6" style="color:var(--text);line-height:2">"${t.text[idx]}"</p>
+      <div class="flex items-center justify-center gap-4">
+        <img src="img/${t.avatar}.webp" alt="${t.name[idx]}" class="w-12 h-12 rounded-full object-cover" style="border:2px solid var(--gold)">
+        <div class="${document.documentElement.dir === 'rtl' ? 'text-right' : 'text-left'}">
+          <div class="font-bold text-sm">${t.name[idx]}</div>
+          <div class="text-xs" style="color:var(--gold)">${t.role[idx]}</div>
+        </div>
+      </div>
+    `;
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+  }, 300);
+  /* نقاط */
+  const dots = document.getElementById('testimonialDots');
+  dots.innerHTML = '';
+  testimonials.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.style.cssText = `width:${i===currentTestimonial?'24px':'8px'};height:8px;border-radius:4px;background:${i===currentTestimonial?'var(--gold)':'var(--border)'};transition:all .3s;cursor:pointer`;
+    dot.onclick = () => { currentTestimonial = i; renderTestimonial(); };
+    dots.appendChild(dot);
+  });
+}
+renderTestimonial();
+function nextTestimonial() { currentTestimonial = (currentTestimonial + 1) % testimonials.length; renderTestimonial(); }
+function prevTestimonial() { currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length; renderTestimonial(); }
+/* تبديل تلقائي */
+setInterval(nextTestimonial, 6000);
+
+/* ===== المفتاح العائم ===== */
+document.getElementById('floating-key').addEventListener('click', (e) => {
+  e.stopPropagation();
+  keyMenuOpen = !keyMenuOpen;
+  document.getElementById('keyMenu').classList.toggle('open', keyMenuOpen);
+});
+function closeKeyMenu() {
+  keyMenuOpen = false;
+  document.getElementById('keyMenu').classList.remove('open');
+}
+document.addEventListener('click', closeKeyMenu);
+
+/* ===== روبوت أمان ===== */
+function toggleChatbot() {
+  chatbotOpen = !chatbotOpen;
+  document.getElementById('chatbot-popup').classList.toggle('open', chatbotOpen);
+  if (chatbotOpen) document.getElementById('chatInput').focus();
+}
+function openChatbot() {
+  if (!chatbotOpen) toggleChatbot();
+}
+
+/* ردود أمان الذكية (متعددة اللغات) */
+const AMAN = {
+  ar: {
+    greeting: 'أهلاً وسهلاً بك! كيف يمكنني مساعدتك في رحلتك الاستثمارية؟',
+    advisory: 'خدمتنا كمستشارين عقاريين وقانونيين لا تقتصر على مشاريعنا: نبحث ونتفاوض نيابة عنك في أي عقار بالسوق، ندقق أوراقه قانونياً، ننهي التسجيل وفق قوانين الأجانب، ثم نطوّره ونديره ونؤجّره لضمان أعلى عائد. اضغط زر «طلب تملك للأجانب» أعلى الصفحة لنبدأ فوراً.',
+    invest: 'نوفر لك أكثر من 50 مشروعاً استثمارياً في القاهرة الجديدة والعاصمة الإدارية ودبي والساحل والرياض. ما هي المنطقة التي تهمك؟',
+    roi: 'عوائدنا الاستثمارية تتراوح بين 26% و35% سنوياً حسب المشروع والموقع. هل تريد تفاصيل عن مشروع محدد؟',
+    dubai: 'في دبي نوفر مشاريع سكنية فاخرة في مارينا وبرج خليفة ودبي لاند. العائد يبدأ من 28% سنوياً. هل تريد حجز جولة افتراضية؟',
+    cairo: 'القاهرة الجديدة والعاصمة الإدارية من أقوى الأسواق حالياً. لدينا برج النيل الذهبي ومركز المال العالمي بعوائد تصل إلى 32%.',
+    coast: 'الساحل الشمالي يقدم فرصاً استثنائية هذا الموسم. أبراج الساحل وفيلات الأفق بعوائد تصل إلى 35%.',
+    contact: 'يمكنك التواصل معنا عبر الهاتف أو واتساب: 01122324831 أو البريد: invest@bytelaman.com أو حجز موعد مباشرة من صفحة التواصل.',
+    tour: 'بالتأكيد! يمكنني ترتيب جولة افتراضية 360° لأي مشروع يهمك. ما هو المشروع الذي تريد زيارته؟',
+    foreign: 'نقدم دليلاً شاملاً للمستثمر الأجنبي يشمل الإجراءات القانونية والتمويل الدولي وشهادات الضمان. هل تريد إرساله لبريدك؟',
+    safe: 'الأمان هو أساس عملنا. نقدم شهادات ضمان استثماري رسمية، تقارير دورية، وتشفير كامل لبياناتك. استثمارك محمي 100%.',
+    europe: 'في أوروبا نوفر فرصاً عقارية وسياحية وفق المعايير العالمية — مثل مشروع أثينا ريفييرا في اليونان بإمكانيات إقامة استثمارية. هل تريد دليل المستثمر الدولي؟',
+    vision: 'رؤيتنا أن نكون الجسر العقاري والسياحي الأكثر أماناً وموثوقية بين مصر والخليج وأوروبا، ورسالتنا حلول متكاملة عابرة للحدود بأعلى معايير الشفافية.',
+    default: 'شكراً لرسالتك! يمكنني مساعدتك في: المشاريع السكنية والتجارية والمنتجعات، العوائد الاستثمارية، الاستثمار في مصر أو الخليج أو أوروبا، الجولات الافتراضية، أو حجز استشارة. ما الذي يهمك؟'
+  },
+  en: {
+    greeting: 'Welcome! How can I help you on your investment journey?',
+    advisory: 'Our real estate & legal advisory service is not limited to our own projects: we search and negotiate any property in the market on your behalf, run full legal due diligence, complete registration under foreigner laws, then develop, manage and rent it for maximum return. Tap "Foreign Ownership Request" at the top to start now.',
+    invest: 'We offer 50+ investment projects across New Cairo, the Administrative Capital, Dubai, the North Coast and Riyadh. Which area interests you?',
+    roi: 'Our returns range from 26% to 35% annually depending on project and location. Would you like details on a specific project?',
+    dubai: 'In Dubai we offer luxury residential projects in Marina, Burj Khalifa area and Dubai Land. Returns start at 28% annually. Shall I book you a virtual tour?',
+    cairo: 'New Cairo and the Administrative Capital are among the strongest markets right now — Golden Nile Tower and Global Finance Center with returns up to 32%.',
+    coast: 'The North Coast offers exceptional opportunities this season. Coast Towers and Horizon Villas with returns up to 35%.',
+    contact: 'You can reach us at +20 11 22324831 (phone/WhatsApp) or invest@bytelaman.com, or book an appointment directly from the contact section.',
+    tour: 'Absolutely! I can arrange a 360° virtual tour of any project. Which one would you like to visit?',
+    foreign: 'We provide a comprehensive Foreign Investor Guide covering legal procedures, international funding and guarantee certificates. Want it sent to your email?',
+    safe: 'Safety is the foundation of our work: official investment guarantee certificates, periodic reports and full data encryption. Your investment is 100% protected.',
+    europe: 'In Europe we offer property and tourism opportunities to global standards — like Athina Riviera in Greece with investor-residency potential. Would you like the International Investor Guide?',
+    vision: 'Our vision is to be the safest, most trusted real estate & tourism bridge between Egypt, the Gulf and Europe — delivering integrated cross-border solutions with maximum transparency.',
+    default: 'Thanks for your message! I can help with: residential/commercial/resort projects, ROI, investing in Egypt, the Gulf or Europe, virtual tours, or booking a consultation. What interests you?'
+  },
+  fr: {
+    greeting: 'Bienvenue ! Comment puis-je vous aider dans votre parcours d\'investissement ?',
+    advisory: 'Notre service de conseil immobilier et juridique ne se limite pas à nos projets : nous recherchons et négocions tout bien du marché en votre nom, effectuons un audit juridique complet, finalisons l\'enregistrement selon les lois sur les étrangers, puis développons, gérons et louons pour un rendement maximal. Cliquez sur « Demande d\'acquisition » en haut pour commencer.',
+    invest: 'Nous proposons plus de 50 projets d\'investissement au Nouveau Caire, dans la Capitale administrative, à Dubaï, sur la Côte Nord et à Riyad. Quelle région vous intéresse ?',
+    roi: 'Nos rendements varient entre 26% et 35% par an selon le projet et l\'emplacement. Souhaitez-vous des détails sur un projet précis ?',
+    dubai: 'À Dubaï, nous proposons des projets résidentiels de luxe à Marina, Burj Khalifa et Dubai Land. Rendements dès 28% par an. Réserver une visite virtuelle ?',
+    cairo: 'Le Nouveau Caire et la Capitale administrative sont parmi les marchés les plus solides — Golden Nile Tower et Global Finance Center avec des rendements jusqu\'à 32%.',
+    coast: 'La Côte Nord offre des opportunités exceptionnelles cette saison : Coast Towers et Villas Horizon avec des rendements jusqu\'à 35%.',
+    contact: 'Contactez-nous au +20 11 22324831 (téléphone/WhatsApp) ou invest@bytelaman.com, ou réservez directement depuis la section contact.',
+    tour: 'Bien sûr ! Je peux organiser une visite virtuelle 360° de tout projet. Lequel souhaitez-vous visiter ?',
+    foreign: 'Nous offrons un Guide Complet de l\'Investisseur Étranger : procédures légales, financement international et certificats de garantie. Voulez-vous le recevoir par e-mail ?',
+    safe: 'La sécurité est notre fondement : certificats de garantie officiels, rapports réguliers et chiffrement intégral. Votre investissement est protégé à 100%.',
+    europe: 'En Europe, nous proposons des opportunités aux standards mondiaux — comme Athènes Riviera en Grèce avec possibilité de résidence investisseur. Voulez-vous le guide ?',
+    vision: 'Notre vision : être le pont immobilier et touristique le plus sûr entre l\'Égypte, le Golfe et l\'Europe — des solutions transfrontalières intégrées, en toute transparence.',
+    default: 'Merci pour votre message ! Je peux vous aider : projets résidentiels/commerciaux/resorts, rendements, investir en Égypte ou en Europe, visites virtuelles, consultation. Qu\'est-ce qui vous intéresse ?'
+  },
+  de: {
+    greeting: 'Willkommen! Wie kann ich Ihnen auf Ihrer Investmentreise helfen?',
+    advisory: 'Unser Immobilien- und Rechtsberatung beschränkt sich nicht auf eigene Projekte: Wir suchen und verhandeln jede Immobilie am Markt für Sie, prüfen die Unterlagen rechtlich vollständig, erledigen die Registrierung nach Ausländerrecht und entwickeln, verwalten und vermieten für maximalen Ertrag. Klicken Sie oben auf „Immobilienerwerb für Ausländer", um zu starten.',
+    invest: 'Wir bieten über 50 Anlageprojekte in Neu-Kairo, der Verwaltungshauptstadt, Dubai, an der Nordküste und in Riad. Welche Region interessiert Sie?',
+    roi: 'Unsere Renditen liegen je nach Projekt und Lage zwischen 26% und 35% jährlich. Möchten Sie Details zu einem bestimmten Projekt?',
+    dubai: 'In Dubai bieten wir Luxuswohnprojekte in Marina, am Burj Khalifa und in Dubai Land. Renditen ab 28% jährlich. Soll ich eine Virtual Tour buchen?',
+    cairo: 'Neu-Kairo und die Verwaltungshauptstadt gehören zu den stärksten Märkten — Golden Nile Tower und Global Finance Center mit Renditen bis 32%.',
+    coast: 'Die Nordküste bietet diese Saison außergewöhnliche Chancen: Coast Towers und Horizon-Villen mit Renditen bis 35%.',
+    contact: 'Erreichen Sie uns unter +20 11 22324831 (Telefon/WhatsApp) oder invest@bytelaman.com, oder buchen Sie direkt im Kontaktbereich.',
+    tour: 'Gerne! Ich kann eine 360°-Virtual Tour für jedes Projekt arrangieren. Welches möchten Sie besichtigen?',
+    foreign: 'Wir bieten einen umfassenden Auslandsinvestoren-Guide: rechtliche Verfahren, internationale Finanzierung und Garantiezertifikate. Soll wir ihn Ihnen per E-Mail senden?',
+    safe: 'Sicherheit ist unsere Grundlage: offizielle Garantiezertifikate, regelmäßige Berichte und vollständige Verschlüsselung. Ihre Investition ist 100% geschützt.',
+    europe: 'In Europa bieten wir Chancen nach globalen Standards — wie Athinai Riviera in Griechenland mit Möglichkeit eines Investor-Visums. Möchten Sie den Guide?',
+    vision: 'Unsere Vision: die sicherste und vertrauenswürdigste Immobilien- und Tourismusbrücke zwischen Ägypten, Golf und Europa — integrierte grenzüberschreitende Lösungen mit maximaler Transparenz.',
+    default: 'Danke für Ihre Nachricht! Ich helfe bei: Wohn-/Gewerbe-/Resort-Projekten, Renditen, Investitionen in Ägypten oder Europa, Virtual Tours oder Beratungsterminen. Was interessiert Sie?'
+  }
+};
+
+function getAmanResponse(msg) {
+  const m = msg.toLowerCase();
+  const S = AMAN[LANG] || AMAN.ar;
+  if (/مرحب|هلا|أهلا|سلام|هاي|hello|hi|bonjour|salut|hallo|guten/.test(m)) return S.greeting;
+  if (/فحص|تدقيق|due diligence|تطوير|رفع قيمة|إدارة أملاك|إدارة عقار|خارج مشاريع|أي عقار|اي عقار|وسيط|prüfen|entwicklung|verwalten|gestion|développer|rénov/.test(m)) return S.advisory;
+  if (/استثم|فرص|مشروع|invest|projet|opportunit|anlage|projekt/.test(m)) return S.invest;
+  if (/عائد|ربح|roi|نسبة|return|rendement|rendite/.test(m)) return S.roi;
+  if (/دبي|امارات|dubai|émirat|emirat/.test(m)) return S.dubai;
+  if (/قاهرة|عاصم|مصر|cairo|egypt|égypte|ägypten/.test(m)) return S.cairo;
+  if (/ساحل|بحر|شاطئ|coast|plage|küste/.test(m)) return S.coast;
+  if (/تواصل|اتصل|هاتف|phone|contact|téléphone|kontakt|telefon/.test(m)) return S.contact;
+  if (/جول|افتراض|tour|vr|زيار|visite|rundgang/.test(m)) return S.tour;
+  if (/أجنبي|دليل|foreign|guide|étranger|ausländ/.test(m)) return S.foreign;
+  if (/أمان|ضمان|حماي|safe|secure|garantie|sicher/.test(m)) return S.safe;
+  if (/أوروب|europe|يونان|إسبان|greece|grèce|spanien|espagne/.test(m)) return S.europe;
+  if (/رؤية|رسالة|vision|mission/.test(m)) return S.vision;
+  return S.default;
+}
+
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  const messages = document.getElementById('chatMessages');
+
+  /* رسالة المستخدم */
+  const userDiv = document.createElement('div');
+  userDiv.className = 'chat-msg user';
+  userDiv.textContent = msg;
+  messages.appendChild(userDiv);
+
+  /* مؤشر الكتابة */
+  const typing = document.createElement('div');
+  typing.className = 'typing-indicator';
+  typing.innerHTML = '<span></span><span></span><span></span>';
+  messages.appendChild(typing);
+  messages.scrollTop = messages.scrollHeight;
+
+  /* رد أمان */
+  setTimeout(() => {
+    typing.remove();
+    const botDiv = document.createElement('div');
+    botDiv.className = 'chat-msg bot';
+    botDiv.textContent = getAmanResponse(msg);
+    messages.appendChild(botDiv);
+    messages.scrollTop = messages.scrollHeight;
+  }, 1200 + Math.random() * 800);
+}
+
+/* ===== إرسال الاستمارات إلى البريد (FormSubmit) ===== */
+const MAIL_ENDPOINT = 'https://formsubmit.co/ajax/bytelaman257@gmail.com';
+function sendMail(subject, form) {
+  const data = { _subject: subject, _template: 'table', _captcha: 'false' };
+  form.querySelectorAll('input:not([type=hidden]),select,textarea').forEach(function(el){
+    const key = el.getAttribute('aria-label') || el.placeholder || el.type;
+    if (el.value) data[key] = el.value;
+  });
+  return fetch(MAIL_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(data)
+  }).then(r => r.json()).catch(() => {});
+}
+
+/* ===== نموذج التواصل ===== */
+function handleContact(e) {
+  e.preventDefault();
+  const f = document.getElementById('contactForm');
+  sendMail('رسالة جديدة من نموذج التواصل – بيت الأمان', f);
+  f.style.display = 'none';
+  document.getElementById('contactSuccess').classList.remove('hidden');
+  setTimeout(() => {
+    f.style.display = '';
+    f.reset();
+    document.getElementById('contactSuccess').classList.add('hidden');
+  }, 5000);
+}
+
+/* ===== نموذج طلب دليل المستثمر ===== */
+function handleGuide(e) {
+  e.preventDefault();
+  const f = e.target;
+  sendMail('طلب جديد لدليل المستثمر الأجنبي', f);
+  f.reset();
+  showToast(tt('guide'));
+  window.open('guide.html', '_blank');
+}
+
+/* ===== إشعار Toast ===== */
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.style.opacity = '1';
+  toast.style.visibility = 'visible';
+  toast.style.transform = 'translateX(-50%) translateY(0)';
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.visibility = 'hidden';
+    toast.style.transform = 'translateX(-50%) translateY(-20px)';
+  }, 3000);
+}
+
+/* ===== نافذة طلب تملك الأجانب ===== */
+const foreignModal = document.getElementById('foreignModal');
+function openForeignModal(intent) {
+  foreignModal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  const sel = document.getElementById('foreignIntent');
+  if (sel && intent) sel.value = intent;
+}
+function closeForeignModal() {
+  foreignModal.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !foreignModal.classList.contains('hidden')) closeForeignModal();
+});
+function handleForeign(e) {
+  e.preventDefault();
+  const f = document.getElementById('foreignForm');
+  sendMail('طلب تملك / استشارة من مستثمر أجنبي', f);
+  f.classList.add('hidden');
+  document.getElementById('foreignSuccess').classList.remove('hidden');
+  showToast(tt('foreign'));
+  setTimeout(() => {
+    f.classList.remove('hidden');
+    f.reset();
+    document.getElementById('foreignSuccess').classList.add('hidden');
+    closeForeignModal();
+  }, 4500);
+}
+
+/* ================================================================
+   نظام تعدد اللغات — العربية / English / Français / Deutsch
+   الفكرة: كل نص عربي في الصفحة مفتاح؛ عند تغيير اللغة يتم استبداله
+   تلقائياً (نصوص، خيارات القوائم، Placeholders، العنوان، البوت...)
+   ================================================================ */
+var LANGS = {ar:{dir:'rtl'},en:{dir:'ltr'},fr:{dir:'ltr'},de:{dir:'ltr'}};
+var TITLES = {
+  ar:'BYTELAMAN – بيت الأمان',
+  en:'BYTELAMAN – Bayt Al-Aman | Real Estate & Tourism Investment',
+  fr:'BYTELAMAN – Bayt Al-Aman | Investissement immobilier & touristique',
+  de:'BYTELAMAN – Bayt Al-Aman | Immobilien- & Tourismusinvestitionen'
+};
+
+/* رسائل الإشعارات الديناميكية */
+var TT = {
+  interest:{ar:'تم تسجيل اهتمامك – سيتواصل معك فريقنا قريباً',en:'Interest registered – our team will contact you soon',fr:'Intérêt enregistré – notre équipe vous contactera bientôt',de:'Interesse registriert – unser Team meldet sich in Kürze'},
+  sub:{ar:'تم الاشتراك بنجاح',en:'Subscribed successfully',fr:'Abonnement réussi',de:'Erfolgreich abonniert'},
+  guide:{ar:'تم إرسال دليل المستثمر الأجنبي إلى بريدك الإلكتروني',en:'The Foreign Investor Guide has been sent to your email',fr:'Le Guide de l\'investisseur étranger a été envoyé à votre e-mail',de:'Der Auslandsinvestoren-Guide wurde an Ihre E-Mail gesendet'},
+  foreign:{ar:'تم استلام طلب التملك بنجاح',en:'Your ownership request was received successfully',fr:'Votre demande d\'acquisition a bien été reçue',de:'Ihre Eigentumsanfrage wurde erfolgreich erhalten'}
+};
+function tt(k){ return (TT[k] && TT[k][LANG]) || TT[k].ar || ''; }
+
+/* قاموس النصوص: [English, Français, Deutsch] */
+var D = {
+/* تنقل */
+'الرئيسية':['Home','Accueil','Startseite'],
+'من نحن':['About Us','À propos','Über uns'],
+'المشاريع':['Projects','Projets','Projekte'],
+'المنصة الإعلامية':['Media Platform','Plateforme médias','Medienplattform'],
+'المستثمر الدولي':['International Investor','Investisseur international','Internationaler Investor'],
+'المدونة':['Blog','Blog','Blog'],
+'تواصل معنا':['Contact Us','Nous contacter','Kontakt'],
+'طلب تملك للأجانب':['Foreign Ownership Request','Demande d\'acquisition étrangère','Immobilienerwerb für Ausländer'],
+'طلب تملك للمستثمرين الأجانب':['Foreign Investors Ownership Request','Demande d\'acquisition pour investisseurs étrangers','Eigentumserwerb für ausländische Investoren'],
+/* مشهد الافتتاح */
+'بيت الأمان..':['Bayt Al-Aman..','Bayt Al-Aman..','Bayt Al-Aman..'],
+'حيث يبدأ المستقبل':['Where the Future Begins','Là où commence l\'avenir','Wo die Zukunft beginnt'],
+'BYTELAMAN – مفتاحك لعالم الاستثمار الآمن':['BYTELAMAN – Your Key to Safe Investment','BYTELAMAN – Votre clé vers un investissement sûr','BYTELAMAN – Ihr Schlüssel zu sicherer Investition'],
+'تخطي المشهد':['Skip Scene','Passer la scène','Szene überspringen'],
+'بيت الأمان':['Bayt Al-Aman','Bayt Al-Aman','Bayt Al-Aman'],
+/* البطل */
+'للاستثمار العقاري والسياحي':['Real Estate & Tourism Investment','Investissement immobilier & touristique','Immobilien- & Tourismusinvestitionen'],
+'استثمارك الآمن.. عبر الحدود':['Your Safe Investment.. Across Borders','Votre investissement sûr.. au-delà des frontières','Ihre sichere Investition.. über Grenzen hinweg'],
+'فرص عقارية وسياحية آمنة في مصر ودول الخليج وأوروبا':['Safe real estate & tourism opportunities in Egypt, the Gulf and Europe','Opportunités immobilières et touristiques sûres en Égypte, dans le Golfe et en Europe','Sichere Immobilien- und Tourismuschancen in Ägypten, am Golf und in Europa'],
+'أبحث عن عقار خارج مشاريعكم':['Looking for a Property Outside Your Projects','Je cherche un bien hors de vos projets','Ich suche eine Immobilie außerhalb Ihrer Projekte'],
+'أملك عقاراً أرغب في فحصه أو تطويره':['I Own a Property I Want Inspected or Developed','Je possède un bien à expertiser ou développer','Ich besitze eine Immobilie zum Prüfen oder Entwickeln'],
+'استثمر الآن':['Invest Now','Investir maintenant','Jetzt investieren'],
+'دليل المستثمر الأجنبي مجاناً':['Free Foreign Investor Guide','Guide gratuit de l\'investisseur étranger','Kostenloser Auslandsinvestoren-Guide'],
+'«لا نبيعك المتاح فقط.. بل نجلب لك العقار الذي تحلم به في أي مكان، نضمن أمانه القانوني، ونطوّره ليعمل لحسابك.»':['"We don\'t just sell what\'s available.. we bring you the property you dream of anywhere, secure its legality, and develop it to work for you."','« Nous ne vendons pas seulement ce qui est disponible.. nous vous apportons le bien dont vous rêvez où qu\'il soit, sécurisons sa légalité et le développons pour qu\'il travaille pour vous. »','„Wir verkaufen nicht nur, was verfügbar ist.. wir bringen Ihnen die Trauminmobilie wohin auch immer, sichern sie rechtlich ab und entwickeln sie, damit sie für Sie arbeitet."'],
+/* الإحصائيات */
+'+ مشروع عقاري':['+ Real Estate Projects','+ Projets immobiliers','+ Immobilienprojekte'],
+'+ مستثمر راضٍ':['+ Satisfied Investors','+ Investisseurs satisfaits','+ Zufriedene Investoren'],
+'% عائد سنوي':['% Annual Returns','% Rendement annuel','% Jahresrendite'],
+'+ سنوات خبرة':['+ Years of Experience','+ Années d\'expérience','+ Jahre Erfahrung'],
+/* من نحن */
+'وجهتك الموثوقة عبر الحدود':['Your Trusted Destination Across Borders','Votre destination de confiance au-delà des frontières','Ihr vertrauenswürdiges Ziel über Grenzen hinweg'],
+'تُعد شركة بيت الأمان للاستثمار العقاري والسياحي وجهتك الموثوقة للاستثمار العقاري والتطوير السياحي داخل جمهورية مصر العربية والدول العربية والأوروبية. نتميز بتقديم محفظة عقارية وسياحية متنوعة تشمل العقارات السكنية الحديثة، المراكز التجارية المتميزة، والمنتجعات السياحية الفاخرة.':['Bayt Al-Aman Real Estate & Tourism Investment is your trusted destination for property investment and tourism development across Egypt, Arab countries and Europe. Our diverse portfolio spans modern residences, premium commercial centers and luxury tourist resorts.','Bayt Al-Aman, investissement immobilier et touristique, est votre destination de confiance en Égypte, dans les pays arabes et en Europe. Notre portefeuille varié comprend résidences modernes, centres commerciaux prestigieux et resorts de luxe.','Bayt Al-Aman für Immobilien- und Tourismusinvestitionen ist Ihre vertrauenswürdige Adresse in Ägypten, der arabischen Welt und Europa. Unser Portfolio umfasst moderne Wohnimmobilien, erstklassige Gewerbezentren und luxuriöse Ferienresorts.'],
+'نهدف إلى بناء شراكات طويلة الأجل مع عملائنا في دول الخليج العربي وأوروبا ومصر، من خلال تقديم فرص استثمارية آمنة تحقق أعلى عوائد استثمارية وتلبي تطلعات الحياة العصرية — مدعومة بتحليل السوق الذكي، والجولات الافتراضية ثلاثية الأبعاد، ومستشارنا الرقمي "أمان".':['We build long-term partnerships with clients across the GCC, Europe and Egypt through secure opportunities delivering top returns and modern lifestyles — backed by smart market analysis, 3D virtual tours and our digital advisor "Aman".','Nous construisons des partenariats durables avec nos clients du Golfe, d\'Europe et d\'Égypte grâce à des opportunités sûres aux meilleurs rendements — appuyées par une analyse intelligente du marché, des visites virtuelles 3D et notre conseiller numérique « Aman ».','Wir bauen langfristige Partnerschaften mit Kunden im Golf, in Europa und Ägypten auf — mit sicheren Chancen und höchsten Renditen, gestützt durch intelligente Marktanalysen, 3D-Virtual Tours und unseren digitalen Berater „Aman".'],
+'تصفح المشاريع':['Browse Projects','Voir les projets','Projekte entdecken'],
+'شهادة ضمان':['Guarantee Certificate','Certificat de garantie','Garantiezertifikat'],
+'استثمار آمن 100%':['100% Safe Investment','Investissement 100% sûr','100% sichere Anlage'],
+/* الرؤية والرسالة */
+'رؤيتنا':['Our Vision','Notre vision','Unsere Vision'],
+'ورسالتنا':['& Our Mission','& Notre mission','& Unsere Mission'],
+'رسالتنا':['Our Mission','Notre mission','Unsere Mission'],
+'أن نكون الجسر العقاري والسياحي الأكثر أماناً وموثوقية الذي يربط بين الفرص الاستثمارية الواعدة في مصر ودول الخليج وأوروبا.':['To be the safest, most trusted real estate & tourism bridge connecting promising investment opportunities across Egypt, the Gulf and Europe.','Être le pont immobilier et touristique le plus sûr reliant les opportunités prometteuses en Égypte, au Golfe et en Europe.','Die sicherste und vertrauenswürdigste Immobilien- und Tourismusbrücke zwischen Ägypten, dem Golf und Europa zu sein.'],
+'تقديم حلول عقارية وسياحية متكاملة وعابرة للحدود، تضمن الأمان الاستثماري وتوفر تجارب سكنية وسياحية فريدة، مع الالتزام بأعلى معايير المصداقية والشفافية.':['Delivering integrated cross-border property & tourism solutions guaranteeing investment security and unique living and travel experiences, with uncompromising credibility and transparency.','Offrir des solutions transfrontalières intégrées garantissant la sécurité des investissements et des expériences uniques, avec une crédibilité et une transparence absolues.','Integrierte grenzüberschreitende Lösungen, die Anlagensicherheit und einzigartige Erlebnisse bieten — mit höchsten Ansprüchen an Glaubwürdigkeit und Transparenz.'],
+/* مجالات العمل */
+'مجالات':['Fields','Domaines','Bereiche'],
+'عملنا':['of Work','d\'activité','unserer Arbeit'],
+'تغطي خدماتنا ومشاريعنا ثلاثة قطاعات رئيسية داخل مصر وخارجها':['Our services and projects cover three key sectors inside Egypt and beyond','Nos services et projets couvrent trois secteurs clés en Égypte et au-delà','Unsere Leistungen und Projekte decken drei Kernsektoren in Ägypten und darüber hinaus ab'],
+'العقارات السكنية':['Residential Properties','Immobilier résidentiel','Wohnimmobilien'],
+'وحدات وشقق فاخرة، شاليهات، وفيلل مصممة لتلائم أنماط الحياة العصرية وتوفر الراحة والأمان للعائلات والمستثمرين.':['Luxury units, chalets and villas designed for modern lifestyles, offering comfort and security for families and investors.','Unités de luxe, chalets et villas pensés pour la vie moderne, offrant confort et sécurité aux familles et aux investisseurs.','Luxuriöse Einheiten, Chalets und Villen für moderne Lebensstile — Komfort und Sicherheit für Familien und Investoren.'],
+'العقارات التجارية':['Commercial Properties','Immobilier commercial','Gewerbeimmobilien'],
+'مكاتب إدارية، ومحلات تجارية، ومراكز أعمال في مواقع استراتيجية حيوية تضمن أعلى عائد على الاستثمار واستدامة الأعمال.':['Administrative offices, retail shops and business centers in strategic locations ensuring maximum ROI and business sustainability.','Bureaux, commerces et centres d\'affaires dans des emplacements stratégiques assurant rentabilité maximale et durabilité.','Büros, Geschäfte und Businesszentren in strategischen Lagen — maximaler Ertrag und nachhaltiger Erfolg.'],
+'المنتجعات والمشاريع السياحية':['Resorts & Tourism Projects','Resorts & projets touristiques','Resorts & Tourismusprojekte'],
+'إدارة وتطوير وتسويق الفنادق والمنتجعات السياحية الفاخرة التي توفر تجارب استجمام استثنائية وفرصاً استثمارية سياحية واعدة.':['Managing, developing and marketing luxury hotels and resorts offering exceptional experiences and promising tourism investments.','Gestion, développement et commercialisation d\'hôtels et resorts de luxe offrant des expériences exceptionnelles et des investissements prometteurs.','Management, Entwicklung und Vermarktung luxuriöser Hotels und Resorts — außergewöhnliche Erlebnisse und vielversprechende Anlagen.'],
+/* لماذا نحن */
+'لماذا تختار':['Why Choose','Pourquoi choisir','Warum wählen Sie'],
+'بيت الأمان؟':['Bayt Al-Aman?','Bayt Al-Aman ?','Bayt Al-Aman?'],
+'؟':['?',' ?','?'],
+'تغطية إقليمية ودولية':['Regional & Global Coverage','Couverture régionale et mondiale','Regionale & globale Abdeckung'],
+'خيارات استثمارية متنوعة تجمع بين الأسواق الواعدة في مصر والخليج وأوروبا':['Diverse options combining promising markets across Egypt, the Gulf and Europe','Options variées combinant les marchés prometteurs d\'Égypte, du Golfe et d\'Europe','Vielfältige Optionen aus den Zukunftsmärkten Ägyptens, des Golfs und Europas'],
+'أمان واستقرار الاستثمار':['Investment Safety & Stability','Sécurité et stabilité des investissements','Sicherheit & Stabilität der Anlage'],
+'دراسات جدوى دقيقة واستشارات قانونية وعقارية لحماية رأس المال وضمان أعلى العوائد':['Accurate feasibility studies and legal & property consultancy protecting capital and securing top returns','Études de faisabilité précises et conseils juridiques protégeant le capital et garantissant les meilleurs rendements','Genaue Machbarkeitsstudien sowie Rechts- und Immobilienberatung schützen Ihr Kapital und sichern Top-Renditen'],
+'تنوع المشاريع':['Project Diversity','Diversité des projets','Projektvielfalt'],
+'خيارات متعددة تناسب الأغراض السكنية والتجارية والسياحية على حد سواء':['Multiple options for residential, commercial and tourism purposes alike','Multiples options résidentielles, commerciales et touristiques','Vielfältige Optionen für Wohn-, Gewerbe- und Tourismuszwecke'],
+'خدمات متكاملة':['Integrated Services','Services intégrés','Integrierte Services'],
+'متابعة وإدارة الأملاك العقارية والسياحية قبل وبعد البيع على مدار الساعة':['24/7 follow-up and management of real estate and tourism assets before and after purchase','Suivi et gestion des actifs immobiliers et touristiques avant et après vente, 24h/24','Rund-um-die-Uhr-Betreuung und Verwaltung vor und nach dem Kauf'],
+/* المشاريع */
+'وجهات':['Exceptional','Destinations','Außergewöhnliche'],
+'استثمارية':['Investment','d\'investissement','Investitions'],
+'استثنائية':['Destinations','exceptionnelles','ziele'],
+'محفظة متنوعة من المشاريع السكنية والتجارية والمنتجعات في مصر والخليج وأوروبا':['A diverse portfolio of residential, commercial and resort projects across Egypt, the Gulf and Europe','Un portefeuille varié de projets résidentiels, commerciaux et resorts en Égypte, au Golfe et en Europe','Ein vielfältiges Portfolio von Wohn-, Gewerbe- und Resortprojekten in Ägypten, am Golf und in Europa'],
+'الكل':['All','Tous','Alle'],
+'سكني':['Residential','Résidentiel','Wohnen'],
+'تجاري':['Commercial','Commercial','Gewerbe'],
+'منتجعات سياحية':['Tourist Resorts','Resorts touristiques','Ferienresorts'],
+/* التواجد الجغرافي */
+'التواجد':['Global','Présence','Geografische'],
+'الجغرافي':['Presence','géographique','Präsenz'],
+'استثمارك الآمن.. عبر الحدود — حضور يمتد من قلب مصر إلى الخليج وأوروبا':['Your safe investment.. across borders — presence stretching from the heart of Egypt to the Gulf and Europe','Votre investissement sûr.. au-delà des frontières — une présence du cœur de l\'Égypte au Golfe et en Europe','Ihre sichere Investition.. über Grenzen hinweg — präsent vom Herzen Ägyptens bis zum Golf und Europa'],
+'داخل مصر':['Inside Egypt','En Égypte','In Ägypten'],
+'تغطية شاملة للمدن الجديدة، العاصمة الإدارية، المناطق الساحلية، والمناطق السياحية الرئيسية.':['Full coverage of new cities, the Administrative Capital, coastal areas and key tourism zones.','Couverture complète des villes nouvelles, de la Capitale administrative, des zones côtières et des pôles touristiques majeurs.','Volle Abdeckung der neuen Städte, der Verwaltungshauptstadt, der Küstenregionen und der wichtigsten Tourismusgebiete.'],
+'دول الخليج العربي':['GCC Countries','Pays du Golfe','Golfstaaten'],
+'استشارات وفرص استثمارية تناسب المستثمر الخليجي والباحثين عن التوسع العقاري والسياحي في المنطقة.':['Advisory and investment opportunities tailored to Gulf investors seeking property and tourism expansion in the region.','Conseils et opportunités adaptés aux investisseurs du Golfe en quête d\'expansion immobilière et touristique.','Beratung und Chancen für Golf-Investoren mit Ambitionen in Immobilie und Tourismus.'],
+'الدول الأوروبية':['European Countries','Pays européens','Europäische Länder'],
+'إتاحة فرص استثمار عقاري دولية وإدارة أملاك سياحية وفق المعايير العالمية.':['International property investment opportunities and tourism asset management to global standards.','Opportunités d\'investissement international et gestion d\'actifs touristiques aux normes mondiales.','Internationale Anlagechancen und Verwaltung von Tourismusvermögen nach weltweiten Standards.'],
+/* المستثمر الدولي + الدليل */
+'المستثمر':['The ','L\'investisseur ','Der '],
+'الدولي':['International','international','Internationale'],
+'أولاً':['Comes First','d\'abord','steht an erster Stelle'],
+'بلد إقامتك *':['Your Country of Residence *','Votre pays de résidence *','Ihr Wohnsitzland *'],
+'قسم مخصص لمستثمري الخليج وأوروبا يشرح التسهيلات والقوانين العقارية المتاحة داخل مصر، ونرافقك خطوة بخطوة حتى تسلم مفاتيح وحدتك.':['A dedicated section for Gulf and European investors explaining the facilities and property laws available in Egypt — we walk with you step by step until you receive your unit keys.','Une section dédiée aux investisseurs du Golfe et d\'Europe expliquant les facilités et lois immobilières en Égypte — nous vous accompagnons jusqu\'à la remise des clés.','Ein eigener Bereich für Golf- und Europa-Investoren: Erleichterungen und Immobilienrecht in Ägypten — wir begleiten Sie Schritt für Schritt bis zur Schlüsselübergabe.'],
+'حق ملكية كاملة للأجانب في المناطق المسموح بها قانونياً':['Full foreign ownership rights in legally permitted zones','Pleine propriété pour les étrangers dans les zones autorisées','Volle Ausländereigentumsrechte in gesetzlich zugelassenen Zonen'],
+'إقامة استثمارية عند شراء عقار بقيمة محددة':['Investor residency when purchasing property of a set value','Résidence investisseur dès l\'achat d\'un bien d\'une valeur définie','Investorenresidenz beim Kauf einer Immobilie ab bestimmtem Wert'],
+'استشارات قانونية وعقارية وفحص جاهزية المستندات':['Legal & property consultancy plus document readiness checks','Conseils juridiques et immobiliers avec vérification des documents','Rechts- und Immobilienberatung inkl. Dokumentenprüfung'],
+'إدارة الأملاك والتأجير وصيانة الوحدة نيابةً عنك':['Asset management, rental and unit maintenance on your behalf','Gestion des actifs, location et entretien en votre nom','Verwaltung, Vermietung und Wartung in Ihrem Namen'],
+'أسعار بالدولار واليورو وخطط سداد مرنة عبر الحدود':['USD & EUR pricing with flexible cross-border payment plans','Tarification en USD/EUR et plans de paiement flexibles','USD-/EUR-Preise und flexible grenzüberschreitende Zahlungspläne'],
+'PDF مجاني – إصدار 2026':['Free PDF – 2026 Edition','PDF gratuit – Édition 2026','Kostenloses PDF – Ausgabe 2026'],
+'دليل المستثمر الأجنبي للتملك العقاري والاستثماري':['Foreign Investor Guide to Property Ownership & Investment','Guide de l\'investisseur étranger pour l\'acquisition et l\'investissement immobilier','Auslandsinvestoren-Guide für Immobilienerwerb & Kapitalanlage'],
+'كتيّب تفصيلي صادر عن بيت الأمان يشمل الإطار التشريعي وتسهيلات تملك الأجانب، خطوات التملك خطوة بخطوة، الإقامة الاستثمارية، جدول الضرائب والرسوم، وخدمات ما بعد الشراء.':['A detailed booklet by Bayt Al-Aman covering legal frameworks and foreign ownership facilities, step-by-step ownership procedures, investor residency, taxes & fees schedule, and post-purchase services.','Un livret détaillé de Bayt Al-Aman : cadre légal, facilités d\'acquisition pour étrangers, procédures pas à pas, résidence investisseur, impôts & frais et services après-vente.','Ein ausführliches Heft von Bayt Al-Aman: Rechtsrahmen, Erwerbserleichterungen für Ausländer, Schritt-für-Schritt-Prozeduren, Investor enresidenz, Steuern & Gebühren und After-Sales-Services.'],
+'الإطار القانوني':['Legal Framework','Cadre juridique','Rechtsrahmen'],
+'خطوات التملك':['Ownership Steps','Étapes d\'acquisition','Eigentumsschritte'],
+'الإقامة الاستثمارية':['Investor Residency','Résidence investisseur','Investorenresidenz'],
+'الضرائب والرسوم':['Taxes & Fees','Impôts & frais','Steuern & Gebühren'],
+'إدارة الأملاك':['Asset Management','Gestion d\'actifs','Vermögensverwaltung'],
+'مصر':['Egypt','Égypte','Ägypten'],
+'دولة خليجية':['A GCC Country','Un pays du Golfe','Ein Golfstaat'],
+'دولة أوروبية':['A European Country','Un pays européen','Ein europäisches Land'],
+'دولة أخرى':['Another Country','Autre pays','Ein anderes Land'],
+'احصل على النسخة المجانية (PDF)':['Get Your Free Copy (PDF)','Obtenez votre copie gratuite (PDF)','Kostenlose Kopie sichern (PDF)'],
+'استعراض الدليل أونلاين':['Read the Guide Online','Lire le guide en ligne','Guide online lesen'],
+'حدّد موعد استشارة مجانية':['Book a Free Consultation','Réserver une consultation gratuite','Kostenlose Beratung buchen'],
+/* خدمة المستشار */
+'خدمة':['Service: ','Le service ','Der Bereich '],
+'المستشار العقاري والقانوني':['Real Estate & Legal Advisor','conseiller immobilier & juridique','Immobilien- & Rechtsberater'],
+'للأجانب والمستثمرين الدوليين':['for Foreigners & International Investors','pour étrangers & investisseurs internationaux','für Ausländer & internationale Investoren'],
+'تملّك واستثمر بآمان.. أينما كنت وفي أي مكان':['Own & Invest Securely.. Wherever You Are, Anywhere','Acquérez et investissez en toute sécurité.. où que vous soyez','Kaufen & investieren Sie sicher.. wo auch immer Sie sind'],
+'نقدم خدمة متكاملة ومخصصة للعملاء والمستثمرين غير المقيمين (الأجانب والمغتربين) الراغبين في امتلاك عقارات سكنية أو تجارية أو استثمارية داخل مصر أو خارجها بالأسلوب القانوني الصحيح. نضمن لك رحلة تملك سلسة وآمنة بنسبة 100%، بدءاً من البحث وحتى التملك الرسمي.':['A fully tailored service for non-resident clients and investors (foreigners and expatriates) seeking residential, commercial or investment properties inside or outside Egypt via the correct legal path — a smooth, 100% secure journey from search to official title.','Un service complet pour les clients non-résidents (étrangers et expatriés) souhaitant acquérir des biens en Égypte ou ailleurs en toute légalité — un parcours fluide et 100% sécurisé, de la recherche au titre officiel.','Ein maßgeschneiderter Service für nicht ansässige Kunden (Ausländer und Expats), die Wohn-, Gewerbe- oder Kapitalanlagen rechtssicher erwerben möchten — ein glatter, 100% sicherer Weg bis zum offiziellen Eigentum.'],
+'أنت تختار العقار (أو نحدده معاً).. ونحن نتولى الفحص والشراء والتسجيل والإدارة والتطوير — حتى خارج قائمة مشاريعنا.':['You choose the property (or we shortlist it together).. we handle inspection, purchase, registration, management and development — even beyond our own projects list.','Vous choisissez le bien (ou nous le définissons ensemble).. nous gérons expertise, achat, enregistrement, gestion et développement — même hors de nos projets.','Sie wählen die Immobilie (oder gemeinsam).. wir übernehmen Prüfung, Kauf, Registrierung, Verwaltung und Entwicklung — auch außerhalb unserer Projektliste.'],
+'البحث المخصص':['Tailored Search','Recherche sur mesure','Maßgeschneiderte Suche'],
+'نتحقق من أي وحدة سكنية أو تجارية أو ساحلية يختارها العميل في أي منطقة — حتى خارج قائمة مشاريعنا — أو نجد له البديل الأنسب لمتطلباته.':['We verify any residential, commercial or coastal unit you choose anywhere — even beyond our projects list — or find the best-matching alternative.','Nous vérifions tout bien choisi par le client partout — même hors de nos projets — ou trouvons la meilleure alternative.','Wir prüfen jede von Ihnen gewählte Einheit überall — auch außerhalb unserer Liste — oder finden die passendste Alternative.'],
+'الفحص القانوني الشامل':['Comprehensive Legal Due Diligence','Due diligence juridique complète','Umfassende rechtliche Prüfung'],
+'مراجعة كافة أوراق العقار وتسلسل الملكية وتراخيص البناء، وتأكيد خلو العقار من أي نزاعات أو رهونات قبل دفع أي مبلغ.':['Reviewing all documents, ownership chain and building permits, confirming the property is dispute- and lien-free before any payment.','Examen de tous les documents, de la chaîne de propriété et des permis — bien sans litiges ni hypothèques avant tout paiement.','Prüfung aller Unterlagen, Eigentumskette und Baugenehmigungen — frei von Streit und Belastungen vor jeder Zahlung.'],
+'التملك وفق قوانين الأجانب':['Ownership Under Foreigner Laws','Propriété selon les lois sur les étrangers','Eigentum nach Ausländerrecht'],
+'إنهاء كافة إجراءات التسجيل العقاري والتوثيق، وتسهيل إجراءات الإقامة الاستثمارية بالتنسيق مع متخصصين معتمدين.':['Completing all registration and notarization procedures and facilitating investor residency with accredited specialists.','Finalisation de l\'enregistrement et du notariat, facilitation de la résidence investisseur avec des spécialistes agréés.','Abschluss aller Registrierungs- und Notarverfahren sowie Vermittlung der Investorenresidenz mit zertifizierten Fachleuten.'],
+'إدارة المعاملات المالية':['Financial Transaction Management','Gestion des transactions financières','Verwaltung der Finanztransaktionen'],
+'التوجيه لفتح الحسابات البنكية وتحويل المبالغ بالطرق الرسمية والمعتمدة قانوناً لحفظ حقوق الطرفين بالكامل.':['Guidance on opening bank accounts and transferring funds through official, legally recognized channels protecting both parties fully.','Orientation pour l\'ouverture de comptes bancaires et les transferts officiels protégant pleinement les deux parties.','Begleitung bei Kontoeröffnung und Transfer offizieller, gesetzlich anerkannter Kanäle — voller Schutz beider Seiten.'],
+'التشغيل والإدارة بعد الشراء':['Post-Purchase Operation & Management','Exploitation et gestion après achat','Betrieb & Verwaltung nach dem Kauf'],
+'خيارات تأجير وإدارة كاملة لوحدتك لضمان أفضل عائد استثماري دون الحاجة لتواجدك المباشر في الدولة.':['Full rental and management options for your unit ensuring optimal returns without requiring your presence in the country.','Location et gestion complètes de votre bien pour un rendement optimal sans présence sur place.','Komplette Vermietung und Verwaltung Ihrer Einheit für optimale Rendite ohne Anwesenheit im Land.'],
+'ابدأ رحلة تملّكك الآن':['Start Your Ownership Journey Now','Commencez votre parcours d\'acquisition','Beginnen Sie jetzt Ihren Weg zum Eigentum'],
+'استشارة أولية مجانية مع مستشار مخصص لبلدك':['Free initial consultation with an advisor dedicated to your country','Consultation initiale gratuite avec un conseiller dédié à votre pays','Kostenloses Erstgespräch mit einem Berater für Ihr Land'],
+'أو تحدث مع مستشار عبر واتساب':['Or chat with an advisor on WhatsApp','Ou discutez avec un conseiller sur WhatsApp','Oder chatten Sie per WhatsApp mit einem Berater'],
+'«لا تدع الحدود تعيق استثمارك.. نحن ذراعك الموثوقة وحمايتك القانونية لتملك عقارك الصحيح.»':['"Don\'t let borders hold back your investment.. we are your trusted arm and legal protection to own the right property."','« Ne laissez pas les frontières freiner votre investissement.. nous sommes votre bras de confiance et votre protection juridique pour acquérir le bon bien. »','„Lassen Sie Grenzen Ihre Investition nicht bremsen.. wir sind Ihr verlässlicher Arm und Ihr rechtlicher Schutz beim Erwerb der richtigen Immobilie."'],
+/* منظومة الأمان 360 */
+'منظومة الأمان':['Aman 360°','Le système Aman','Das Aman-System'],
+'لإدارة وعوائد العقار':['for Asset Management & Returns','pour la gestion et les rendements','für Verwaltung & Renditen'],
+'العناية المتكاملة بأملاكك عبر الحدود':['Complete Cross-Border Asset Care','Soins complets de vos actifs across frontières','Komplette grenzüberschreitende Vermögensbetreuung'],
+'لا تشتري مجرد "جدران".. تشتري أماناً استثمارياً وحلولاً تشغيلية متكاملة: نتولى التشغيل والتأجير والصيانة ونحوّل عوائدك إليك أينما كنت في الخليج أو أوروبا.':['You don\'t buy mere "walls".. you buy investment security and integrated operational solutions: we operate, rent, maintain, and remit your returns wherever you are in the Gulf or Europe.','Vous n\'achetez pas que des « murs ».. mais une sécurité d\'investissement et des solutions opérationnelles : exploitation, location, entretien et versement de vos revenus au Golfe ou en Europe.','Sie kaufen nicht nur „Wände".. sondern Anlagensicherheit und operative Gesamtlösungen: Betrieb, Vermietung, Wartung und Auszahlung Ihrer Erträge — im Golf oder in Europa.'],
+'«استثمر وأنت في بلدك.. ونحن ندير أمان عقارك عبر الحدود.»':['"Invest from home.. we manage your property\'s security across borders."','« Investissez depuis chez vous.. nous gérons la sécurité de votre bien au-delà des frontières. »','„Investieren Sie von zuhause.. wir managen die Sicherheit Ihrer Immobilie über Grenzen hinweg."'],
+'عقارك.. مصدر دخل سياحي مستمر':['Your Property.. A Continuous Tourism Income','Votre bien.. une source de revenus touristiques continue','Ihre Immobilie.. eine kontinuierliche Tourisme-Einnahmequelle'],
+'أدرِج عقارك ضمن منظومة بيت الأمان الفندقية ليُؤجَّر كوحدة عطلات فاخرة (Holiday Home) لسياح الخليج وأوروبا خلال الأوقات التي لا تستخدمه فيها.':['List your property within Bayt Al-Aman\'s hospitality system to be rented as a luxury holiday home to Gulf and European tourists whenever you\'re not using it.','Intégrez votre bien au système hôtelier Bayt Al-Aman pour le louer comme maison de vacances de luxe aux touristes du Golfe et d\'Europe quand vous ne l\'utilisez pas.','Binden Sie Ihre Immobilie in das Bayt-Al-Aman-Hotelsystem ein — vermietet als Luxus-Ferienhaus an Golf- und Europa-Touristen, wann immer Sie sie nicht nutzen.'],
+'«عقارك ليس مجرد مساحة.. بل مصدر دخل سياحي مستمر.»':['"Your property isn\'t just a space.. it\'s a continuous tourism income source."','« Votre bien n\'est pas qu\'un espace.. c\'est une source de revenus touristiques continue. »','„Ihre Immobilie ist nicht nur Fläche.. sondern eine kontinuierliche Einnahmequelle."'],
+/* رحلة العمل */
+'رحلة عملنا':['Our Working Journey','Notre parcours avec vous','Unser gemeinsamer Weg'],
+'معك في أي عقار بالسوق':['With You on Any Market Property','sur tout bien du marché','bei jeder Marktimobilie'],
+'البحث والتفاوض':['Search & Negotiation','Recherche & négociation','Suche & Verhandlung'],
+'التفتيش عن العقار المطلوب وسيطاً محايداً، والتفاوض للوصول إلى أفضل سعر عادل في السوق.':['Scouting the target property as a neutral broker and negotiating the best fair price in the market.','Repérage du bien en intermédiaire neutre et négociation du meilleur prix juste.','Aufspüren der Zielimmobilie als neutraler Makler und Verhandeln des besten fairen Preises.'],
+'التدقيق القانوني':['Legal Due Diligence','Audit juridique','Rechtliche Prüfung'],
+'فحص أوراق الملكية والتراخيص والوضع القانوني بنسبة 100% لحماية أموالك قبل دفع أي عربون.':['Checking ownership papers, licenses and legal status 100% to protect your money before any deposit.','Vérification des titres, licences et statut légal à 100% avant tout acompte.','Prüfung von Titeln, Lizenzen und Rechtsstatus zu 100% vor jeder Anzahlung.'],
+'الشراء والتسجيل للأجانب':['Purchase & Foreigner Registration','Achat et enregistrement étrangers','Kauf & Ausländerregistrierung'],
+'إنهاء المعاملات المالية الرسمية وتوثيق الملكية وفق قوانين تملك الأجانب والمغتربين.':['Completing official financial transactions and documenting ownership under foreigner & expatriate laws.','Finalisation des transactions officielles et documentation de la propriété selon les lois sur les étrangers.','Abschluss der offiziellen Finanztransaktionen und Dokumentation nach Ausländerrecht.'],
+'التطوير والرفع المالي':['Development & Value Addition','Développement et valorisation','Entwicklung & Wertsteigerung'],
+'إعادة التصميم والتجهيز ورفع كفاءة العقار (سكني، تجاري، منتجع) لمضاعفة قيمته السوقية.':['Redesigning, fitting-out and upgrading the property (residential, commercial, resort) to multiply its market value.','Redesign, équipement et mise à niveau du bien (résidentiel, commercial, resort) pour multiplier sa valeur de marché.','Neugestaltung, Ausstattung und Aufwertung der Immobilie (Wohnen, Gewerbe, Resort) zur Vervielfachung ihres Marktwerts.'],
+'الإدارة والتشغيل':['Management & Operation','Gestion et exploitation','Verwaltung & Betrieb'],
+'التأجير والصيانة وتحصيل العوائد وإرسالها إليك أينما كنت، ليبقى عقارك أصلاً مستداماً.':['Renting, maintenance, collecting returns and remitting them wherever you are — keeping your property a sustainable asset.','Location, entretien, collecte des revenus et versement où que vous soyez — un actif durable.','Vermietung, Wartung, Einzug der Erträge und Überweisung an Sie — Ihre Immobilie bleibt nachhaltiges Asset.'],
+/* ليس مجرد مطوّر */
+'لماذا بيت الأمان':['Why Bayt Al-Aman','Pourquoi Bayt Al-Aman','Warum Bayt Al-Aman'],
+'وليس مجرد مطوّر؟':['Not Just a Developer?','et pas qu\'un simple promoteur ?','und kein reiner Entwickler?'],
+'حيادية مطلقة':['Absolute Neutrality','Neutralité absolue','Absolute Neutralität'],
+'هدفنا مصلحتك الاستثمارية أولاً، سواء كان العقار من تطويرنا أو مملوكاً للغير في السوق المفتوح.':['Your investment interest comes first — whether the property is ours or owned by others in the open market.','Votre intérêt d\'investisseur d\'abord — que le bien soit le nôtre ou appartienne à des tiers sur le marché ouvert.','Ihr Anlageinteresse zuerst — ob aus unserer Entwicklung oder vom freien Markt.'],
+'ذراعك القانوني والميداني':['Your Legal & On-Ground Arm','Votre bras juridique et terrain','Ihr rechtlicher & Vor-Ort-Arm'],
+'نُمثّلك قانونياً وميدانياً في البلد الموجود به العقار وكأنك حاضر بنفسك — من المعاينة حتى التسجيل.':['We represent you legally and on-site in the country of the property as if you were present yourself — from viewing to registration.','Nous vous représentons juridiquement et sur place comme si vous étiez présent — de la visite à l\'enregistrement.','Wir vertreten Sie rechtlich und vor Ort, als wären Sie persönlich da — von der Besichtigung bis zur Registrierung.'],
+'تعظيم قيمة العقار':['Maximizing Asset Value','Maximiser la valeur de l\'actif','Maximierung des Immobilienwerts'],
+'لا نتوقف عند مرحلة تسليم المفتاح، بل نطوّر العقار ونديره لضمان تشغيله بأعلى عائد استثماري ممكن.':['We don\'t stop at handover — we develop and manage the property to run at the highest possible return.','Nous ne nous arrêtons pas à la remise des clés — nous développons et gérons pour le meilleur rendement possible.','Wir stoppen nicht bei der Schlüsselübergabe — wir entwickeln und verwalten für maximal mögliche Rendite.'],
+/* المنصة الإعلامية */
+'رؤية':['Property','Vision','Ein Blick auf die'],
+'عقارية':['Vision','immobilière','Immobilienwelt'],
+'برنامج إعلامي تفاعلي يسلط الضوء على أحدث تطورات السوق العقاري':['An interactive media program spotlighting the latest real estate market developments','Un programme média interactif sur les dernières évolutions du marché immobilier','Ein interaktives Medienprogramm zu den neuesten Immobilienmarktentwicklungen'],
+'الحلقة 12':['Episode 12','Épisode 12','Folge 12'],
+'الحلقة 11':['Episode 11','Épisode 11','Folge 11'],
+'بث مباشر':['Live Broadcast','Direct','Livestream'],
+'مستقبل العقارات في العاصمة الإدارية 2030':['The Future of Real Estate in the Administrative Capital 2030','Le futur de l\'immobilier dans la Capitale administrative 2030','Die Zukunft der Immobilien in der Verwaltungshauptstadt 2030'],
+'ضيفنا: د. أحمد المنصور – خبير اقتصادي':['Guest: Dr. Ahmed El-Mansour – Economist','Invité : Dr Ahmed El-Mansour – économiste','Gast: Dr. Ahmed El-Mansour – Wirtschaftsexperte'],
+'لماذا دبي تبقى الوجهة الأولى للمستثمر العربي':['Why Dubai Remains the Arab Investor\'s First Destination','Pourquoi Dubaï reste la première destination de l\'investisseur arabe','Warum Dubaï das erste Ziel arabischer Investoren bleibt'],
+'ضيفنا: م. خالد الراشد – مستشار عقاري بدبي':['Guest: Eng. Khaled Al-Rashid – Dubai Property Consultant','Invité : Ing. Khaled Al-Rashid – consultant immobilier à Dubaï','Gast: Ing. Khaled Al-Rashid – Immobilienberater in Dubaï'],
+'الساحل الشمالي: فرصة ذهبية أم فقاعة؟':['North Coast: Golden Opportunity or Bubble?','Côte Nord : opportunité en or ou bulle ?','Nordküste: goldene Gelegenheit oder Blase?'],
+'ندوة مفتوحة مع نخبة من الخبراء':['Open seminar with a select group of experts','Séminaire ouvert avec un panel d\'experts','Offenes Seminar mit ausgewiesenen Experten'],
+/* الشهادات */
+'تجارب':['Experiences of','Expériences des','Erfahrungen'],
+'المستثمرين':['Investors\'','investisseurs','der Investoren'],
+'العالميين':['Global','mondiaux','weltweit'],
+/* المدونة */
+'رؤى وتحليلات':['Insights & Analysis of','Analyses et perspectives','Einblicke und Analysen zum'],
+'السوق':['the Market','du marché','Markt'],
+'توقعات':['Forecast','Prévisions','Prognose'],
+'15 يناير 2025':['Jan 15, 2025','15 janvier 2025','15. Januar 2025'],
+'توقعات سوق العقارات المصري في النصف الثاني من 2025':['Egyptian Real Estate Market Outlook for H2 2025','Perspectives du marché immobilier égyptien pour le S2 2025','Ausblick auf den ägyptischen Immobilienmarkt im 2. Halbjahr 2025'],
+'تحليل معمق يستند إلى بيانات السوق والاتجاهات الاقتصادية الكبرى...':['In-depth analysis based on market data and major economic trends...','Analyse approfondie fondée sur les données du marché et les grandes tendances économiques...','Tiefgehende Analyse basierend auf Marktdaten und großen Wirtschaftstrends...'],
+'دليل':['Guide','Guide','Guide'],
+'8 يناير 2025':['Jan 8, 2025','8 janvier 2025','8. Januar 2025'],
+'الدليل الشامل للمستثمر الأجنبي في مصر 2025':['The Complete Foreign Investor Guide in Egypt 2025','Le guide complet de l\'investisseur étranger en Égypte 2025','Der komplette Auslandsinvestoren-Guide für Ägypten 2025'],
+'كل ما تحتاج معرفته عن القوانين والإجراءات وفرص الاستثمار...':['Everything you need to know about laws, procedures and investment opportunities...','Tout ce qu\'il faut savoir sur les lois, procédures et opportunités d\'investissement...','Alles Wichtige zu Gesetzen, Verfahren und Investitionschancen...'],
+'تحليل':['Analysis','Analyse','Analyse'],
+'2 يناير 2025':['Jan 2, 2025','2 janvier 2025','2. Januar 2025'],
+'مقارنة عوائد العقارات: دبي مقابل القاهرة الجديدة':['Property Returns Compared: Dubai vs New Cairo','Comparaison des rendements : Dubaï vs Nouveau Caire','Renditevergleich: Dubaï vs. Neu-Kairo'],
+'دراسة مقارنة شاملة للعوائد الاستثمارية ومخاطر كل سوق...':['A comprehensive comparative study of returns and risks in each market...','Une étude comparative complète des rendements et risques de chaque marché...','Eine umfassende vergleichende Studie zu Renditen und Risiken jedes Marktes...'],
+/* تواصل معنا */
+'افتح باب':['Open the Door','Ouvrez la porte','Öffnen Sie die Tür'],
+'الفرصة':['of Opportunity','vers l\'opportunité','zur Chance'],
+'فريقنا جاهز لمساعدتك في اتخاذ القرار الاستثماري الأنسب. تواصل معنا الآن ودعنا نرشدك إلى فرصتك التالية.':['Our team is ready to help you make the right investment decision. Contact us now and let us guide you to your next opportunity.','Notre équipe est prête à vous aider à prendre la bonne décision. Contactez-nous et laissez-nous vous guider vers votre prochaine opportunité.','Unser Team hilft Ihnen bei der richtigen Anlageentscheidung. Kontaktieren Sie uns — wir führen Sie zu Ihrer nächsten Gelegenheit.'],
+'العنوان':['Address','Adresse','Adresse'],
+'الهاتف':['Phone','Téléphone','Telefon'],
+'البريد الإلكتروني':['Email','E-mail','E-Mail'],
+'القاهرة الجديدة – العاصمة الإدارية – برج بيت الأمان':['New Cairo – Administrative Capital – Bayt Al-Aman Tower','Nouveau Caire – Capitale administrative – Tour Bayt Al-Aman','Neu-Kairo – Verwaltungshauptstadt – Bayt-Al-Aman-Turm'],
+'الدولة المستهدفة للاستثمار':['Target Investment Country','Pays d\'investissement visé','Zielland der Investition'],
+'نوع العقار المطلوب':['Required Property Type','Type de bien recherché','Gesuchter Immobilientyp'],
+'دول الخليج العربي':['GCC Countries','Pays du Golfe','Golfstaaten'],
+'دول أوروبا':['European Countries','Pays européens','Europäische Länder'],
+'منتجع سياحي':['Tourist Resort','Resort touristique','Ferienresort'],
+'متعدد الأغراض':['Multi-purpose','Multi-usage','Mehrzweck'],
+'أرسل استفسارك':['Send Your Inquiry','Envoyer votre demande','Anfrage senden'],
+'تم إرسال استفسارك بنجاح':['Your inquiry sent successfully','Votre demande envoyée avec succès','Ihre Anfrage erfolgreich gesendet'],
+'سيتواصل معك فريقنا خلال 24 ساعة':['Our team will contact you within 24 hours','Notre équipe vous contactera sous 24 heures','Unser Team meldet sich innerhalb von 24 Stunden'],
+/* التذييل */
+'بيت الأمان.. مفتاحك لثروة الغد. نحن نبني جسور الثقة بين المستثمرين وفرص العقار الاستثنائية.':['Bayt Al-Aman.. your key to tomorrow\'s wealth. We build bridges of trust between investors and exceptional property opportunities.','Bayt Al-Aman.. votre clé vers la richesse de demain. Nous bâtissons des ponts de confiance entre investisseurs et opportunités immobilières exceptionnelles.','Bayt Al-Aman.. Ihr Schlüssel zum Reichtum von morgen. Wir bauen Vertrauensbrücken zwischen Investoren und außergewöhnlichen Immobilienchancen.'],
+'روابط سريعة':['Quick Links','Liens rapides','Schnelllinks'],
+'خدمة المستشار القانوني للأجانب':['Legal Advisory for Foreigners','Conseil juridique pour étrangers','Rechtsberatung für Ausländer'],
+'المواقع':['Locations','Implantations','Standorte'],
+'مصر: العاصمة الإدارية والمدن الجديدة والساحل':['Egypt: Administrative Capital, New Cities & the Coast','Égypte : Capitale administrative, villes nouvelles et littoral','Ägypten: Verwaltungshauptstadt, neue Städte & Küste'],
+'الخليج العربي: دبي – الرياض':['Arabian Gulf: Dubai – Riyadh','Golfe arabique : Dubaï – Riyad','Arabischer Golf: Dubaï – Riad'],
+'أوروبا: اليونان وإسبانيا':['Europe: Greece & Spain','Europe : Grèce et Espagne','Europa: Griechenland & Spanien'],
+'النشرة البريدية':['Newsletter','Bulletin','Newsletter'],
+'احصل على أحدث العروض وتحليلات السوق مباشرة في بريدك':['Get the latest offers and market analysis straight to your inbox','Recevez offres récentes et analyses de marché directement par e-mail','Aktuelle Angebote und Marktanalysen direkt in Ihr Postfach'],
+'© 2025 BYTELAMAN – بيت الأمان. جميع الحقوق محفوظة.':['© 2025 BYTELAMAN – Bayt Al-Aman. All rights reserved.','© 2025 BYTELAMAN – Bayt Al-Aman. Tous droits réservés.','© 2025 BYTELAMAN – Bayt Al-Aman. Alle Rechte vorbehalten.'],
+/* المفتاح العائم */
+'أبرز العروض':['Top Offers','Meilleures offres','Top-Angebote'],
+'تحدث مع أمان':['Talk to Aman','Parler à Aman','Mit Aman sprechen'],
+'رؤية عقارية':['Media Platform','Plateforme médias','Medienplattform'],
+'احجز موعد':['Book Appointment','Réserver un rendez-vous','Termin buchen'],
+/* الروبوت */
+'أمان – المستشار الذكي':['Aman – Smart Advisor','Aman – Conseiller intelligent','Aman – Smarter Berater'],
+'متصل الآن':['Online Now','En ligne','Jetzt online'],
+'مرحباً بك في بيت الأمان – BYTELAMAN. أنا أمان، مستشارك الذكي. مفتاحك إلى مستقبل استثماري آمن. كيف يمكنني مساعدتك؟':['Welcome to Bayt Al-Aman – BYTELAMAN. I\'m Aman, your smart advisor and key to a secure investment future. How can I help you?','Bienvenue chez Bayt Al-Aman – BYTELAMAN. Je suis Aman, votre conseiller intelligent et clé d\'un avenir d\'investissement sûr. Comment puis-je vous aider ?','Willkommen bei Bayt Al-Aman – BYTELAMAN. Ich bin Aman, Ihr smarter Berater und Schlüssel zu einer sicheren Anlagezukunft. Wie kann ich helfen?'],
+'اكتب رسالتك...':['Type your message...','Écrivez votre message...','Nachricht schreiben...'],
+/* النافذة المنبثقة */
+'لا تقتصر خدمتنا على مشاريعنا فقط — نساعدك في شراء وتدقيق أي عقار أعجبك في السوق، ونتولى الوساطة القانونية لحماية أموالك.':['Our service isn\'t limited to our own projects — we help you buy and vet any property you like in the market, handling legal brokerage to protect your money.','Notre service ne se limite pas à nos projets — nous vous aidons à acheter et auditer tout bien du marché, avec une médiation juridique protectrice.','Unser Service beschränkt sich nicht auf eigene Projekte — wir helfen beim Kauf und bei der Prüfung jeder Marktimobilie mit rechtlicher Schutzvertretung.'],
+'ما الذي تحتاجه؟ *':['What do you need? *','De quoi avez-vous besoin ? *','Was benötigen Sie? *'],
+'أبحث عن عقار يناسبني — خارج مشاريعكم':['I\'m looking for a suitable property — outside your projects','Je cherche un bien adapté — hors de vos projets','Ich suche eine passende Immobilie — außerhalb Ihrer Projekte'],
+'عندي عقار محدد أعجبني في السوق — أريد تدقيقه قانونياً والمضي في الشراء':['I have a specific property I like in the market — inspect it legally and proceed with purchase','J\'ai un bien précis qui me plaît — auditez-le légalement et poursuivez l\'achat','Ich habe eine bestimmte gefundene Immobilie — rechtlich prüfen und Kauf fortsetzen'],
+'أملك عقاراً — أريد فحصه أو تطويره أو إدارته':['I own a property — I want it inspected, developed or managed','Je possède un bien — à expertiser, développer ou gérer','Ich besitze eine Immobilie — prüfen, entwickeln oder verwalten'],
+'بلد إقامتك الحالي *':['Your Current Country of Residence *','Votre pays de résidence actuel *','Ihr aktuelles Wohnsitzland *'],
+'السعودية':['Saudi Arabia','Arabie saoudite','Saudi-Arabien'],
+'الإمارات':['UAE','Émirats','VAE'],
+'الكويت':['Kuwait','Koweït','Kuwait'],
+'قطر':['Qatar','Qatar','Katar'],
+'البحرين أو عمان':['Bahrain or Oman','Bahreïn ou Oman','Bahrain oder Oman'],
+'دولة الشراء المستهدفة *':['Target Purchase Country *','Pays d\'achat visé *','Zielland des Kaufs *'],
+'نوع العقار المطلوب *':['Required Property Type *','Type de bien recherché *','Gesuchter Immobilientyp *'],
+'سكني (شقة / فيلا / شاليه)':['Residential (Apartment / Villa / Chalet)','Résidentiel (appartement / villa / chalet)','Wohnen (Wohnung / Villa / Chalet)'],
+'تجاري (مكتب / محل)':['Commercial (Office / Shop)','Commercial (bureau / boutique)','Gewerbe (Büro / Laden)'],
+'منتجع أو استثمار سياحي':['Resort or Tourism Investment','Resort ou investissement touristique','Resort oder Tourismusinvestition'],
+'الميزانية التقريبية *':['Approximate Budget *','Budget approximatif *','Ungefähres Budget *'],
+'أقل من 100 ألف دولار':['Under $100K','Moins de 100 000 $','Unter 100.000 $'],
+'100 – 300 ألف دولار':['$100K – $300K','100 000 – 300 000 $','100.000 – 300.000 $'],
+'300 – 700 ألف دولار':['$300K – $700K','300 000 – 700 000 $','300.000 – 700.000 $'],
+'أكثر من 700 ألف دولار':['Over $700K','Plus de 700 000 $','Über 700.000 $'],
+'أرسل طلب التملك':['Send Ownership Request','Envoyer la demande','Eigentumsanfrage senden'],
+'بياناتك مشفرة بالكامل ولا تُشارك مع أي طرف ثالث':['Your data is fully encrypted and never shared with third parties','Vos données sont entièrement chiffrées et jamais partagées','Ihre Daten sind vollständig verschlüsselt und werden nie weitergegeben'],
+'تم استلام طلب تملّكك بنجاح':['Your Ownership Request Received Successfully','Votre demande d\'acquisition a été reçue','Ihre Eigentumsanfrage wurde erfolgreich erhalten'],
+'سيتواصل معك مستشارك العقاري والقانوني المخصص خلال 24 ساعة':['Your dedicated real estate & legal advisor will contact you within 24 hours','Votre conseiller immobilier et juridique dédié vous contactera sous 24 heures','Ihr persönlicher Immobilien- und Rechtsberater meldet sich innerhalb von 24 Stunden'],
+'مع دليل المستثمر المناسب لبلد إقامتك.':['along with the investor guide suited to your country of residence.','avec le guide investisseur adapté à votre pays de résidence.','zusammen mit dem passenden Investorenguide für Ihr Land.'],
+'طلبك محمي باتفاقية السرية الخاصة بنا':['Your request is protected by our confidentiality agreement','Votre demande est protégée par notre accord de confidentialité','Ihre Anfrage ist durch unsere Vertraulichkeitsvereinbarung geschützt']
+};
+
+/* قاموس الـ Placeholders */
+var P = {
+'بريدك الإلكتروني':['your@email.com','votre@email.com','ihre@email.de'],
+'بريدك الإلكتروني لإرسال الدليل *':['Email to receive the guide *','E-mail pour recevoir le guide *','E-Mail für den Guide *'],
+'الاسم الكامل':['Full Name','Nom complet','Vollständiger Name'],
+'الاسم الكامل *':['Full Name *','Nom complet *','Vollständiger Name *'],
+'رقم الهاتف':['Phone Number','Numéro de téléphone','Telefonnummer'],
+'رقم الهاتف / واتساب *':['Phone / WhatsApp *','Téléphone / WhatsApp *','Telefon / WhatsApp *'],
+'واتساب / هاتف *':['WhatsApp / Phone *','WhatsApp / Téléphone *','WhatsApp / Telefon *'],
+'رسالتك أو استفسارك...':['Your message or inquiry...','Votre message ou question...','Ihre Nachricht oder Anfrage...'],
+'تفاصيل إضافية (اختياري): موقع العقار، منطقة مفضلة، عدد الغرف، توقيت مناسب للتواصل...':['Extra details (optional): property location, preferred area, rooms count, best time to contact...','Détails supplémentaires (facultatif) : emplacement, quartier préféré, pièces, créneau de contact...','Zusatzdetails (optional): Lage, bevorzugtes Gebiet, Zimmer, beste Kontaktzeit...'],
+'اكتب رسالتك...':['Type your message...','Écrivez votre message...','Nachricht schreiben...']
+};
+
+/* ===== تطبيق اللغة على كامل الصفحة ===== */
+/* ذاكرة النص العربي الأصلي لكل عقدة — لجعل التبديل بين اللغات يعمل في كل الاتجاهات */
+var ORIG = new WeakMap();
+
+function applyLang() {
+  var ti = {en:0, fr:1, de:2}[LANG];
+  document.documentElement.lang = LANG;
+  document.documentElement.dir = LANGS[LANG].dir;
+  document.title = TITLES[LANG] || TITLES.ar;
+
+  /* استبدال النصوص: دائماً من النص العربي الأصلي المخزّن وليس من نص الصفحة الحالي */
+  try {
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    var n;
+    while ((n = walker.nextNode())) {
+      var cur = n.nodeValue;
+      if (!cur || !cur.trim()) continue;
+      var orig = ORIG.get(n);
+      if (orig === undefined) { orig = cur; ORIG.set(n, orig); }
+      var o = orig.trim();
+      if (!o) continue;
+      if (ti === undefined) { /* العربية: استرجاع الأصل */
+        if (cur !== orig) n.nodeValue = orig;
+        continue;
+      }
+      var v = D[o];
+      if (v && v[ti]) n.nodeValue = orig.replace(o, v[ti]);
+    }
+  } catch (err) {}
+
+  /* استبدال الـ placeholders (بنفس آلية التخزين) */
+  document.querySelectorAll('[placeholder]').forEach(function(el){
+    var ph = el.getAttribute('placeholder');
+    if (!ph || !ph.trim()) return;
+    var orig = el.dataset.origPh || ph;
+    el.dataset.origPh = orig;
+    if (ti === undefined) { if (ph !== orig) el.setAttribute('placeholder', orig); return; }
+    var v = P[orig.trim()];
+    var nv = v && v[ti] ? v[ti] : orig;
+    if (ph !== nv) el.setAttribute('placeholder', nv);
+  });
+
+  /* إعادة توليد المحتوى الديناميكي */
+  renderProjects(projFilter);
+  renderTestimonial();
+
+  /* تحديث أرقام الإحصائيات بصيغة اللغة */
+  document.querySelectorAll('.stat-num').forEach(function(el){
+    if (el.dataset.counted) el.textContent = (+el.dataset.target).toLocaleString(LANG === 'ar' ? 'ar-EG' : 'en-US');
+  });
+
+  /* تحديث مؤشرات اختيار اللغة */
+  var lbl = document.getElementById('langBtnLabel');
+  if (lbl) lbl.textContent = {ar:'AR',en:'EN',fr:'FR',de:'DE'}[LANG];
+  document.querySelectorAll('.lang-opt,.lang-chip').forEach(function(el){
+    el.classList.toggle('active', el.dataset.lang === LANG);
+  });
+}
+
+function setLang(l) {
+  if (!LANGS[l]) return;
+  LANG = l;
+  try { localStorage.setItem('bl_lang', l); } catch (e) {}
+  closeLangMenu();
+  applyLang();
+}
+
+function toggleLangMenu(e) {
+  e.stopPropagation();
+  document.getElementById('langMenu').classList.toggle('open');
+}
+function closeLangMenu() {
+  document.getElementById('langMenu').classList.remove('open');
+}
+document.addEventListener('click', function(e){
+  if (!e.target.closest('#langBtn') && !e.target.closest('#langMenu')) closeLangMenu();
+});
+
+/* تطبيق اللغة المحفوظة عند التحميل */
+applyLang();
+</script>
+</body>
+>>>>>>> e9c70ad (Add site)
 </html>
