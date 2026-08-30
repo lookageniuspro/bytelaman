@@ -312,28 +312,6 @@ body.ready .hero-scroll{opacity:1;animation:softBounce 2s ease-in-out .7s infini
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 
-/* ===== بطاقات المشاريع ===== */
-.project-card{position:relative;border-radius:20px;overflow:hidden}
-.project-card img{width:100%;height:240px;object-fit:cover;transition:transform .6s}
-.project-card:hover img{transform:scale(1.08)}
-.project-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(5,5,8,0.95) 0%,rgba(5,5,8,0.3) 50%,transparent 100%);
-  display:flex;flex-direction:column;justify-content:flex-end;padding:24px;
-}
-.project-badge{
-  position:absolute;top:16px;right:16px;padding:4px 14px;
-  background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.4);
-  color:#10B981;font-size:12px;font-weight:700;border-radius:20px;
-  backdrop-filter:blur(8px);
-}
-.project-tag{
-  position:absolute;top:16px;left:16px;padding:4px 14px;
-  background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.3);
-  color:var(--gold);font-size:11px;font-weight:600;border-radius:20px;
-  backdrop-filter:blur(8px);
-}
-
 /* ===== الشهادات ===== */
 .testimonial-card{padding:32px;position:relative}
 .testimonial-card::before{
@@ -815,6 +793,7 @@ html[dir="ltr"] .chat-msg.user{border-bottom-right-radius:4px;border-bottom-left
       <a href="#projects" class="nav-link">المشاريع</a>
       <a href="#media" class="nav-link">المنصة الإعلامية</a>
       <a href="#investors" class="nav-link">المستثمر الدولي</a>
+      <a href="join.html" class="nav-link">انضم إلينا</a>
       <a href="#blog" class="nav-link">المدونة</a>
       <a href="#contact" class="nav-link">تواصل معنا</a>
     </div>
@@ -848,6 +827,7 @@ html[dir="ltr"] .chat-msg.user{border-bottom-right-radius:4px;border-bottom-left
     <a href="#projects" class="nav-link">المشاريع</a>
     <a href="#media" class="nav-link">المنصة الإعلامية</a>
     <a href="#investors" class="nav-link">المستثمر الدولي</a>
+    <a href="join.html" class="nav-link">انضم إلينا</a>
     <a href="#blog" class="nav-link">المدونة</a>
     <a href="#contact" class="nav-link">تواصل معنا</a>
     <div class="flex justify-center gap-2 mt-1">
@@ -1080,24 +1060,15 @@ html[dir="ltr"] .chat-msg.user{border-bottom-right-radius:4px;border-bottom-left
   </div>
 </section>
 
-<!-- ===== المشاريع ===== -->
+<!-- ===== وجهات استثمارية استثنائية ===== -->
 <section id="projects" class="py-24 relative z-10">
-  <div class="max-w-6xl mx-auto px-5">
-    <div class="text-center mb-14">
-      <div class="section-label reveal">PROJECTS</div>
+  <div class="max-w-4xl mx-auto px-5">
+    <div class="text-center">
+      <div class="section-label reveal">DESTINATIONS</div>
       <h2 class="section-title mb-4 reveal">وجهات <span style="color:var(--gold)">استثمارية</span> استثنائية</h2>
-      <div class="gold-divider mx-auto mb-4 reveal"></div>
-      <p class="section-desc mx-auto reveal">محفظة متنوعة من المشاريع السكنية والتجارية والمنتجعات في مصر والخليج وأوروبا</p>
-    </div>
-    <!-- فلاتر -->
-    <div class="flex flex-wrap justify-center gap-3 mb-10 reveal">
-      <button class="filter-btn active btn-glass text-sm" data-filter="all">الكل</button>
-      <button class="filter-btn btn-glass text-sm" data-filter="residential">سكني</button>
-      <button class="filter-btn btn-glass text-sm" data-filter="commercial">تجاري</button>
-      <button class="filter-btn btn-glass text-sm" data-filter="resort">منتجعات سياحية</button>
-    </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7" id="projectsGrid">
-      <!-- المشاريع تُولّد بالجافاسكربت -->
+      <div class="gold-divider mx-auto mb-6 reveal"></div>
+      <p class="section-desc mx-auto reveal mb-2">محفظة متنوعة من المشاريع السكنية والتجارية والمنتجعات في مصر والخليج وأوروبا</p>
+      <p class="section-desc mx-auto reveal">بالتعاون مع الشركات المتاحه بسوق العقارات</p>
     </div>
   </div>
 </section>
@@ -1606,6 +1577,7 @@ html[dir="ltr"] .chat-msg.user{border-bottom-right-radius:4px;border-bottom-left
           <li><a href="#projects" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">المشاريع</a></li>
           <li><a href="#media" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">المنصة الإعلامية</a></li>
           <li><a href="#investors" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">المستثمر الدولي</a></li>
+          <li><a href="join.html" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">انضم إلينا</a></li>
           <li><a href="#advisory" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">خدمة المستشار القانوني للأجانب</a></li>
           <li><a href="#blog" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">المدونة</a></li>
           <li><a href="#contact" class="text-sm transition-colors hover:text-[var(--gold)]" style="color:var(--text2);text-decoration:none">تواصل معنا</a></li>
@@ -1771,16 +1743,6 @@ html[dir="ltr"] .chat-msg.user{border-bottom-right-radius:4px;border-bottom-left
 var LANG = 'ar';
 try { LANG = localStorage.getItem('bl_lang') || 'ar'; } catch(e) {}
 var IDX = {ar:0, en:1, fr:2, de:3};
-let projFilter = 'all';
-
-const projects = [
-  {id:1,name:['برج النيل الذهبي','Golden Nile Tower','Tour Golden Nile','Goldener-Nil-Turm'],location:['العاصمة الإدارية – مصر','New Administrative Capital – Egypt','Capitale administrative – Égypte','Neue Verwaltungshauptstadt – Ägypten'],filter:'commercial',price:['3,200,000 ج.م','EGP 3,200,000','3 200 000 EGP','3.200.000 EGP'],roi:'32%',img:'project-tower',tag:['مراكز أعمال','Business Hub','Hub d\'affaires','Business-Zentrum']},
-  {id:2,name:['واحة الخليج','Gulf Oasis','Oasis du Golfe','Golf-Oase'],location:['دبي مارينا – الإمارات','Dubai Marina – UAE','Dubai Marina – EAU','Dubai Marina – VAE'],filter:'residential',price:['4,500,000 درهم','AED 4,500,000','4 500 000 AED','4.500.000 AED'],roi:'28%',img:'project-oasis',tag:['سكني فاخر','Luxury Residential','Résidentiel de luxe','Wohnen der Luxusklasse']},
-  {id:3,name:['أبراج الساحل','Coast Towers','Tours de la Côte','Küsten-Türme'],location:['الساحل الشمالي – مصر','North Coast – Egypt','Côte Nord – Égypte','Nordküste – Ägypten'],filter:'resort',price:['2,800,000 ج.م','EGP 2,800,000','2 800 000 EGP','2.800.000 EGP'],roi:'35%',img:'project-coast',tag:['منتجع سياحي','Tourist Resort','Resort touristique','Ferienresort']},
-  {id:4,name:['مركز المال العالمي','Global Finance Center','Centre Financier Mondial','Internationales Finanzzentrum'],location:['القاهرة الجديدة – مصر','New Cairo – Egypt','Nouvelle Le Caire – Égypte','Neu-Kairo – Ägypten'],filter:'commercial',price:['5,100,000 ج.م','EGP 5,100,000','5 100 000 EGP','5.100.000 EGP'],roi:'30%',img:'project-finance',tag:['تجاري','Commercial','Commercial','Gewerbe']},
-  {id:5,name:['فيلات الأفق','Horizon Villas','Villas Horizon','Horizon-Villen'],location:['مرسى علم – البحر الأحمر','Marsa Alam – Red Sea','Marsa Alam – Mer Rouge','Marsa Alam – Rotes Meer'],filter:'resort',price:['8,500,000 ج.م','EGP 8,500,000','8 500 000 EGP','8.500.000 EGP'],roi:'34%',img:'project-villa',tag:['فيلات فاخرة','Luxury Villas','Villas de luxe','Luxusvillen']},
-  {id:6,name:['أثينا ريفييرا','Athina Riviera','Athènes Riviera','Athen Riviera'],location:['أثينا – اليونان','Athens – Greece','Athènes – Grèce','Athen – Griechenland'],filter:'residential',price:['€310,000','€310,000','310 000 €','310.000 €'],roi:'24%',img:'project-riviera',tag:['سكني أوروبي','European Residential','Résidentiel européen','Europäisches Wohnen']},
-];
 
 /* ===== بيانات الشهادات (متعددة اللغات) ===== */
 const testimonials = [
@@ -2020,52 +1982,6 @@ const counterObserver = new IntersectionObserver((entries) => {
 }, {threshold: 0.5});
 
 document.querySelectorAll('.stat-num').forEach(el => counterObserver.observe(el));
-
-/* ===== توليد بطاقات المشاريع ===== */
-function renderProjects(filter = 'all') {
-  projFilter = filter;
-  const grid = document.getElementById('projectsGrid');
-  const idx = IDX[LANG];
-  const roiLabel = {ar:'عائد ', en:'ROI ', fr:'Rendement ', de:'Rendite '}[LANG];
-  const filtered = filter === 'all' ? projects : projects.filter(p => p.filter === filter);
-  grid.innerHTML = '';
-  filtered.forEach((p, i) => {
-    const card = document.createElement('div');
-    card.className = 'project-card glass-card reveal' + (i > 0 ? ' reveal-delay-' + Math.min(i, 4) : '');
-    card.innerHTML = `
-      <img src="img/${p.img}.webp" alt="${p.name[idx]}" loading="lazy">
-      <div class="project-badge"><i class="fas fa-chart-line ml-1"></i> ${roiLabel}${p.roi}</div>
-      <div class="project-tag">${p.tag[idx]}</div>
-      <div class="project-overlay">
-        <h3 class="font-bold text-lg mb-1">${p.name[idx]}</h3>
-        <p class="text-xs mb-2" style="color:var(--text2)"><i class="fas fa-map-marker-alt ml-1" style="color:var(--gold)"></i>${p.location[idx]}</p>
-        <p class="text-sm font-bold mb-3" style="color:var(--gold)">${p.price[idx]}</p>
-        <button class="btn-gold text-xs w-full justify-center py-2" onclick="tt('interest')"><i class="fas fa-key"></i> ${({ar:'استثمر الآن',en:'Invest Now',fr:'Investir',de:'Jetzt investieren'})[LANG]}</button>
-      </div>
-    `;
-    grid.appendChild(card);
-    /* إعادة مراقبة العنصر الجديد */
-    revealObserver.observe(card);
-    /* تأخير الظهور */
-    setTimeout(() => card.classList.add('visible'), 100 + i * 120);
-  });
-}
-renderProjects();
-
-/* فلاتر المشاريع */
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    btn.style.borderColor = 'var(--gold)';
-    btn.style.color = 'var(--gold)';
-    document.querySelectorAll('.filter-btn:not(.active)').forEach(b => {
-      b.style.borderColor = '';
-      b.style.color = '';
-    });
-    renderProjects(btn.dataset.filter);
-  });
-});
 
 /* ===== الشهادات ===== */
 function renderTestimonial() {
@@ -2357,6 +2273,7 @@ var D = {
 'المشاريع':['Projects','Projets','Projekte'],
 'المنصة الإعلامية':['Media Platform','Plateforme médias','Medienplattform'],
 'المستثمر الدولي':['International Investor','Investisseur international','Internationaler Investor'],
+'انضم إلينا':['Join Us','Rejoignez-nous','Jetzt beitreten'],
 'المدونة':['Blog','Blog','Blog'],
 'تواصل معنا':['Contact Us','Nous contacter','Kontakt'],
 'طلب تملك للأجانب':['Foreign Ownership Request','Demande d\'acquisition étrangère','Immobilienerwerb für Ausländer'],
@@ -2421,10 +2338,7 @@ var D = {
 'استثمارية':['Investment','d\'investissement','Investitions'],
 'استثنائية':['Destinations','exceptionnelles','ziele'],
 'محفظة متنوعة من المشاريع السكنية والتجارية والمنتجعات في مصر والخليج وأوروبا':['A diverse portfolio of residential, commercial and resort projects across Egypt, the Gulf and Europe','Un portefeuille varié de projets résidentiels, commerciaux et resorts en Égypte, au Golfe et en Europe','Ein vielfältiges Portfolio von Wohn-, Gewerbe- und Resortprojekten in Ägypten, am Golf und in Europa'],
-'الكل':['All','Tous','Alle'],
-'سكني':['Residential','Résidentiel','Wohnen'],
-'تجاري':['Commercial','Commercial','Gewerbe'],
-'منتجعات سياحية':['Tourist Resorts','Resorts touristiques','Ferienresorts'],
+'بالتعاون مع الشركات المتاحه بسوق العقارات':['In cooperation with the companies available in the real estate market','En coopération avec les sociétés présentes sur le marché immobilier','In Zusammenarbeit mit den Unternehmen des Immobilienmarktes'],
 /* التواجد الجغرافي */
 'التواجد':['Global','Présence','Geografische'],
 'الجغرافي':['Presence','géographique','Präsenz'],
@@ -2670,7 +2584,6 @@ function applyLang() {
   });
 
   /* إعادة توليد المحتوى الديناميكي */
-  renderProjects(projFilter);
   renderTestimonial();
 
   /* تحديث أرقام الإحصائيات بصيغة اللغة */
